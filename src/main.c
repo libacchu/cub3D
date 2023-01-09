@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/09 15:59:40 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/09 21:19:14 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,77 @@ int err_path_name(char *path)
 int count_rows(char *path)
 {
 	int fd;
+	char *str;
+	int count;
 
 	fd = open(path, O_RDONLY);
-	
+	str = get_next_line(fd);
+	count = 0;
+	while (str)
+	{
+		if (str[0] != '\n')
+			count++;
+		free(str);
+		str = get_next_line(fd);
+	}
+	count -= 6;
+	free(str);
+	return (count);
+}
+
+int	create_map_arr(char *str, t_cub3D *game, int fd)
+{
+	int i;
+
+	game->x_num = count_rows(game->path);
+	game->arr = ft_calloc(game->x_num + 1, sizeof(char *));
+	if (!game->arr)
+		return (err_message("Failed to allocate memory.\n"));
+	i = 0;
+	while (str)
+	{
+		if (str[0] != '\n')
+		{
+			game->arr[i] = ft_strtrim(str, "\n");
+			if (!game->arr[i++])
+				return (err_message("Failed to allocate memory.\n"));			
+		}
+		free(str);
+		str = get_next_line(fd);
+	}
+	return (0);
 }
 
 int check_map(char *str, t_cub3D *game, int fd)
 {
-	char **arr;
-	
-	(void)str;
-	(void)game;
-	count_rows(game->path);
-	get_next_line(fd);
+	int x;
+	int y;
+	int len;
+
+	if (create_map_arr(str, game, fd))
+		return (1);
+	y = -1;
+	while (game->arr[++y])
+	{
+		x = -1;
+		len = ft_strlen(game->arr[y]);
+		while (game->arr[y][++x])
+		{
+			if (game->arr[y][x] != '1' && game->arr[y][x] > 32)
+			{
+				if ((x == 0 || y == 0 || x == len - 1 || y == game->x_num - 1))
+					return (err_message("Map is not enclosed with walls."));
+				if (game->arr[y][x + 1] != '1' && game->arr[y][x + 1] != '0')
+					return (err_message("Map is not enclosed with walls."));
+				if (game->arr[y][x - 1] != '1' && game->arr[y][x - 1] != '0')
+					return (err_message("Map is not enclosed with walls."));
+				if (game->arr[y + 1][x] != '1' && game->arr[y + 1][x] != '0')
+					return (err_message("Map is not enclosed with walls."));
+				if (game->arr[y - 1][x] != '1' && game->arr[y - 1][x] != '0')
+					return (err_message("Map is not enclosed with walls."));
+			}
+		}
+	}
 	return (0);
 }
 
@@ -114,7 +172,6 @@ int check_rgb(char *str, t_cub3D *game)
 			i++;
 		i++;
 		shift -= 4;
-		ft_printf("n = %d\n", n);
 	}
 	return (0);
 }
@@ -151,6 +208,7 @@ int	err_map(int fd, t_cub3D *game)
 	{
 		if (str[0] == '\n')
 		{
+			free(str);
 			str = get_next_line(fd);
 			continue ;
 		}
@@ -158,6 +216,7 @@ int	err_map(int fd, t_cub3D *game)
 		{
 			if (check_map(str, game, fd))
 				return (1);
+			return (0);
 		}
 		else
 		{
