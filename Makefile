@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obibby <obibby@student.42.fr>              +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/09 13:42:08 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/09 16:01:27 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INC		=
 LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a
 OBJ		=	$(SRC:%.c=$(OBJ_DIR)%.o)
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 GREY	=	\33[1;30m
 BLUE	=	\33[0;34m
 RESET	=	\33[0m
@@ -42,6 +42,7 @@ clean :
 
 fclean : clean
 	@printf "$(GREY)Removing $(BLUE)$(NAME)$(RESET)\n"
+	make fclean -C $(LIBFT)
 	@rm -f $(NAME)
 
 re : fclean all
