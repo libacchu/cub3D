@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/09 21:04:26 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/10 12:19:14 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ typedef struct s_cub3D
 	void *west_wall;
 	void *east_wall;
 	void *south_wall;
+	
+	
 	int ceiling;
 	int floor;
 	char *path;
-	char **arr;
-	int x_num;
+	char **map_arr;
+
+	void *mlx;
 } t_cub3D;
 
 #endif
