@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/10 12:19:14 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:49:13 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,21 @@ enum	e_keystroke
 	KEY_D = 100,
 };
 
+typedef struct s_player
+{
+	char	direct;
+	int		x;
+	int 	y;
+} t_player;
+
 typedef struct s_cub3D
 {
-	void *north_wall;
-	void *west_wall;
-	void *east_wall;
-	void *south_wall;
+	t_player	player;
+	
+	void		*north_wall;
+	void		*west_wall;
+	void		*east_wall;
+	void		*south_wall;
 	
 	
 	int ceiling;
@@ -39,7 +48,9 @@ typedef struct s_cub3D
 	char *path;
 	char **map_arr;
 
+
 	void *mlx;
 } t_cub3D;
+
 
 #endif

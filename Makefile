@@ -6,17 +6,27 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/09 16:01:27 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/10 16:53:26 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3D
 OBJ_DIR =	obj/
 LIBFT	=	./libft/
-SRC		=	src/main.c
+SRC_DIR =	src/
+SRC		=	main.c \
+			key_hooks.c \
+			free.c \
+			exit.c \
+			error_check.c \
+			err_utils.c \
+			err_tex_check.c \
+			err_rgb_check.c \
+			err_map_check.c \
+			err_file_check.c
 INC		=
 LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a
-OBJ		=	$(SRC:%.c=$(OBJ_DIR)%.o)
+OBJ		=	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
 GREY	=	\33[1;30m
@@ -25,12 +35,12 @@ RESET	=	\33[0m
 
 all : $(NAME)
 
-$(OBJ_DIR)%.o : %.c
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(@D)
 	@printf "\r$(GREY)Compiling $(BLUE)$<"
 	@$(CC) $(CFLAGS) -c -g $< -o $@
 
-$(NAME) : $(OBJ) $()
+$(NAME) : $(OBJ)
 	make re -C $(LIBFT)
 	#make -C $(LIBMLX)
 	@printf "\33[2K\r$(GREY)Compiling $(BLUE)$(NAME)$(RESET)\n"
