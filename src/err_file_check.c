@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:43:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 11:11:21 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/11 11:30:56 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	err_map(int fd, t_cub3D *game)
 	str = get_next_line(fd);
 	while (str && i != 6)
 	{
-		if (!not_only_white_space(str))
+		if (only_white_space(str))
 		{
 			free(str);
 			str = get_next_line(fd);

@@ -29,14 +29,14 @@ int	create_map_arr(char *str, t_cub3D *game, int fd)
 	if (!game->map_arr)
 		return (err_message("Failed to allocate memory.\n"));
 	i = 0;
-	while (!not_only_white_space(str))
+	while (only_white_space(str))
 	{
 		free(str);
 		str = get_next_line(fd);
 	}
 	while (str)
 	{
-		if (not_only_white_space(str))
+		if (!only_white_space(str))
 		{
 			game->map_arr[i] = ft_strtrim(str, "\n");
 			if (!game->map_arr[i++])

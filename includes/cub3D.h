@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 10:38:48 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:31:16 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int check_tex(char *str, t_cub3D *game);
 
 int err_message(char *str);
 int err_path_name(char *path);
-int not_only_white_space(char *str);
+int only_white_space(char *str);
 int errorcheck(char **argv, t_cub3D *game);
 
 
