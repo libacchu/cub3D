@@ -6,7 +6,7 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/10 16:53:26 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/11 10:40:25 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,7 @@ OBJ_DIR =	obj/
 LIBFT	=	./libft/
 SRC_DIR =	src/
 SRC		=	main.c \
-			key_hooks.c \
 			free.c \
-			exit.c \
 			error_check.c \
 			err_utils.c \
 			err_tex_check.c \
@@ -26,7 +24,8 @@ SRC		=	main.c \
 			err_file_check.c
 INC		=
 LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a
-OBJ		=	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
+OBJ		=	$(SRCS:%.c=$(OBJ_DIR)%.o)
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
 GREY	=	\33[1;30m
@@ -35,7 +34,7 @@ RESET	=	\33[0m
 
 all : $(NAME)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+$(OBJ_DIR)%.o : %.c
 	@mkdir -p $(@D)
 	@printf "\r$(GREY)Compiling $(BLUE)$<"
 	@$(CC) $(CFLAGS) -c -g $< -o $@

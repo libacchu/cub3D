@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/09 12:35:18 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:40:12 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 int	ft_key(int keycode,  t_cub3D *game)
 {
 	if (keycode == KEY_ESC)
-		ft_exit();
+		ft_exit(NULL, game);
 	if (keycode == KEY_W)
+	
 	if (keycode == KEY_A)
 	if (keycode == KEY_S)
 	if (keycode == KEY_D)
@@ -34,6 +35,7 @@ int	ft_key(int keycode,  t_cub3D *game)
 int	ft_mouse(t_cub3D *game)
 {
 	/* red cross */
-	ft_exit();
+	
+	ft_exit(NULL, game);
 	return (0);
 }

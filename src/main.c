@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/10 16:46:53 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:42:33 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	main(int argc, char **argv)
 	t_cub3D game;
 	
 	init_game(&game);
-	if (argc != 2 || errorcheck(argv, &game))
+	if (argc != 2)
+		return (err_message("Try: ./cub3D map/<map name>"));
+	if (errorcheck(argv, &game))
 		return (1);
 	int i;
 

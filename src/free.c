@@ -6,7 +6,8 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/09 12:39:42 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:37:56 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/cub3D.h"
