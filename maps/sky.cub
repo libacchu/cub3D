@@ -1,7 +1,7 @@
-NO ./texture/sky_1.xpm
-SO ./texture/sky_1.xpm
-WE ./texture/sky_1.xpm
-EA ./texture/sky_1.xpm
+NO ./texture/whiteb.xpm
+SO ./texture/whiteb.xpm
+WE ./texture/whiteb.xpm
+EA ./texture/whiteb.xpm
 
 F 184,113,39
 C 51,198,227

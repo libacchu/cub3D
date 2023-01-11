@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
+#    By: obibby <obibby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/11 12:46:17 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/11 13:40:40 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3D
 OBJ_DIR =	obj/
 LIBFT	=	./libft/
+LIBMLX	=	./minilibx_linux/
 SRC_DIR =	src/
 SRC		=	main.c \
 			free.c \
@@ -22,9 +23,11 @@ SRC		=	main.c \
 			err_rgb_check.c \
 			err_map_check.c \
 			err_map_check2.c \
-			err_file_check.c
+			err_file_check.c \
+			key_hooks.c \
+			exit.c
 INC		=
-LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a
+LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a ./minilibx_linux/libmlx.a
 SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
 OBJ		=	$(SRCS:%.c=$(OBJ_DIR)%.o)
 CC		=	gcc
@@ -42,7 +45,7 @@ $(OBJ_DIR)%.o : %.c
 
 $(NAME) : $(OBJ)
 	make re -C $(LIBFT)
-	#make -C $(LIBMLX)
+	make -C $(LIBMLX)
 	@printf "\33[2K\r$(GREY)Compiling $(BLUE)$(NAME)$(RESET)\n"
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS)
 

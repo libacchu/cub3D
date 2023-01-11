@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 10:42:33 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:54:03 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,48 @@ void init_game(t_cub3D *game)
 	game->player.y = 0;
 }
 
+int	assign_images(t_cub3D *game)
+{
+	char *ptr;
+	int x;
+	int y;
+
+	ptr = game->north_wall;
+	game->north_wall = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
+	free(ptr);
+	ptr = game->east_wall;
+	game->east_wall = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
+	free(ptr);
+	ptr = game->west_wall;
+	game->west_wall = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
+	free(ptr);
+	ptr = game->south_wall;
+	game->south_wall = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
+	free(ptr);
+	game->minimap_wall = mlx_xpm_file_to_image(game->mlx, "./texture/whiteb.xpm", &x, &y);
+	game->minimap_floor = mlx_xpm_file_to_image(game->mlx, "./texture/blackb.xpm", &x, &y);
+	return (0);
+}
+
+void make_minimap(t_cub3D *game)
+{
+	int y;
+	int x;
+
+	y = -1;
+	while (game->map_arr[++y])
+	{
+		x = -1;
+		while (game->map_arr[y][++x])
+		{
+			if (game->map_arr[y][x] == '1' || game->map_arr[y][x] == ' ')
+				mlx_put_image_to_window(game->mlx, game->window, game->minimap_wall, y * 34, x * 34);
+			else
+				mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor, y * 34, x * 34);
+		}
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub3D game;
@@ -72,10 +114,17 @@ int	main(int argc, char **argv)
 	{
 		printf("%s\n", game.map_arr[i]);	
 	}
-	/* init all variables & mlx_init, mlx_new_window */
-	/* mlx_hook */
+	game.mlx = mlx_init();
+	if (!game.mlx)
+		return(err_message("Failed to initialise mlx."));
+	if (assign_images(&game))
+		return (1);
+	game.window = mlx_new_window(game.mlx, 1920, 1080, "cub3D");
+	make_minimap(&game);
+	mlx_hook(game.window, 17, 0, ft_mouse, &game);
+	//mlx_expose_hook(game.window, render_frame, &g);
+	mlx_key_hook(game.window, ft_key, &game);
 	/* mlx_expose_hook */
-	/* mlx_key_hook */
-	/* mlx_loop */
+	mlx_loop(game.mlx);
 	return (0);
 }

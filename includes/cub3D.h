@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 12:45:37 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:41:57 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <unistd.h>
+# include "../minilibx_linux/mlx.h"
 
 // Keyboard
 enum	e_keystroke
@@ -24,6 +25,10 @@ enum	e_keystroke
 	KEY_A = 97,
 	KEY_S = 115,
 	KEY_D = 100,
+	KEY_UP = 65362,
+	KEY_LEFT = 65361,
+	KEY_RIGHT = 65363,
+	KEY_DOWN = 65364,
 };
 
 typedef struct s_player
@@ -41,12 +46,16 @@ typedef struct s_cub3D
 	void		*east_wall;
 	void		*south_wall;
 
+	void	*minimap_wall;
+	void	*minimap_floor;
+
 	int			ceiling;
 	int			floor;
 	char		*path;
 	char		**map_arr;
 
 	void		*mlx;
+	void		*window;
 }	t_cub3D;
 
 void	init_game(t_cub3D *game);

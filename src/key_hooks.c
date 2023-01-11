@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 10:40:12 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:49:11 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int	ft_key(int keycode,  t_cub3D *game)
 {
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
-	if (keycode == KEY_W)
-	
-	if (keycode == KEY_A)
-	if (keycode == KEY_S)
-	if (keycode == KEY_D)
-
+	if (keycode == KEY_W || keycode == KEY_UP)
+		printf("W\n");
+	if (keycode == KEY_A || keycode == KEY_LEFT)
+		printf("A\n");
+	if (keycode == KEY_S || keycode == KEY_DOWN)
+		printf("S\n");
+	if (keycode == KEY_D || keycode == KEY_RIGHT)
+		printf("D\n");
 	return (0);
 }
 
