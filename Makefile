@@ -6,7 +6,7 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/11 10:40:25 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/11 12:46:17 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC		=	main.c \
 			err_tex_check.c \
 			err_rgb_check.c \
 			err_map_check.c \
+			err_map_check2.c \
 			err_file_check.c
 INC		=
 LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a
