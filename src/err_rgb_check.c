@@ -1,19 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   err_rgb_check.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/11 10:59:43 by obibby            #+#    #+#             */
+/*   Updated: 2023/01/11 11:08:18 by obibby           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3D.h"
 
-int check_rgb(char *str, t_cub3D *game)
+int	set_rgb(char *str, int *colour)
 {
-	int n;
-	int *colour;
-	int i;
-	int shift;
+	int	shift;
+	int	n;
+	int	i;
 
-	colour = 0;
-	i = 1;
 	shift = 16;
-	if (str[0] == 'C')
-		colour = &game->ceiling;
-	else
-		colour = &game->floor;
+	i = 1;
 	while (shift >= 8)
 	{
 		while (str[i] && (str[i] <= 32 || str[i] == ','))
@@ -29,6 +35,21 @@ int check_rgb(char *str, t_cub3D *game)
 			i++;
 		i++;
 		shift -= 4;
+	}
+	return (0);
+}
+
+int	check_rgb(char *str, t_cub3D *game)
+{
+	if (str[0] == 'C')
+	{
+		if (set_rgb(str, &game->ceiling))
+			return (1);
+	}
+	else
+	{
+		if (set_rgb(str, &game->floor))
+			return (1);
 	}
 	return (0);
 }
