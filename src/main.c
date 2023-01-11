@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 14:54:03 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/11 15:08:16 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ void make_minimap(t_cub3D *game)
 		while (game->map_arr[y][++x])
 		{
 			if (game->map_arr[y][x] == '1' || game->map_arr[y][x] == ' ')
-				mlx_put_image_to_window(game->mlx, game->window, game->minimap_wall, y * 34, x * 34);
+				mlx_put_image_to_window(game->mlx, game->window, game->minimap_wall, x * 34, y * 34);
 			else
-				mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor, y * 34, x * 34);
+				mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor, x * 34, y * 34);
 		}
 	}
 }
