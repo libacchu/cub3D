@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:43:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 10:58:56 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/11 11:11:21 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	map_checks(t_cub3D *game, char *str, int fd, int i)
 		return (err_message("Empty file."));
 	if (i < 6)
 		return (err_message("Invalid map file."));
+	return (0);
 }
 
 int	premap_check(t_cub3D *game, char *str)
@@ -39,6 +40,7 @@ int	premap_check(t_cub3D *game, char *str)
 	}
 	else
 		return (err_message("Invalid or missing element in map file."));
+	return (0);
 }
 
 int	err_map(int fd, t_cub3D *game)
