@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/12 16:02:00 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:33:54 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,11 @@ int temp_raytracing_func(t_cub3D *game)
 	int	side;
 	
 	x = -1;
-	hit = 0;
 	while (++x < 1920)
 	{
+		hit = 0;
+		game->player.viewX = 0;
+		game->player.viewY = 0.66;
 		game->ray.cameraX = 2 * x / 1920 - 1;
 		game->ray.rayDirX = game->player.dirX + game->player.viewX * game->ray.cameraX;
 		game->ray.rayDirY = game->player.dirY + game->player.viewY * game->ray.cameraX;
@@ -177,9 +179,16 @@ int temp_raytracing_func(t_cub3D *game)
 		if (game->ray.drawEnd >= 1080)
 			game->ray.drawEnd = 1080 - 1;
 		int y;
-		y = game->ray.drawStart;
-		while (y < game->ray.drawEnd)
-			mlx_pixel_put(game->mlx, game->window, x, y++, game->ceiling);
+		y = 0;
+		while (y < 1080)
+		{
+			if (y < game->ray.drawStart)
+				mlx_pixel_put(game->mlx, game->window, x, y++, game->ceiling);
+			else if (y > game->ray.drawEnd)
+				mlx_pixel_put(game->mlx, game->window, x, y++, colourshift(53, 26, 200));
+			else
+				mlx_pixel_put(game->mlx, game->window, x, y++, game->floor);
+		}
 	}
 	return (0);
 }

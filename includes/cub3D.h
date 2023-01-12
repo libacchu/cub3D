@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/12 14:38:09 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:34:16 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,7 @@ void	ft_exit(char *str, t_cub3D *game);
 
 int		ft_key(int keycode, t_cub3D *game);
 int		ft_mouse(t_cub3D *game);
+
+int	colourshift(int r, int g, int b);
 
 #endif

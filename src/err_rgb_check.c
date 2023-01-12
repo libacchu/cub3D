@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   err_rgb_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:59:43 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/12 15:59:02 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:32:51 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	colourshift(int t, int r, int g, int b)
+int	colourshift(int r, int g, int b)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (0 << 24 | r << 16 | g << 8 | b);
 }
 
 int	set_rgb(char *str, int *colour)
@@ -28,7 +28,7 @@ int	set_rgb(char *str, int *colour)
 
 	i = 1;
 	c = 0;
-	while (str[i] && c < 3)
+	while (c < 3)
 	{
 		while (str[i] && (str[i] <= 32 || str[i] == ','))
 			i++;
@@ -46,8 +46,9 @@ int	set_rgb(char *str, int *colour)
 		while (str[i] && str[i] != ',')
 			i++;
 		i++;
+		c++;
 	}
-	*colour = colourshift(0, r, g, b);
+	*colour = colourshift(r, g, b);
 	return (0);
 }
 
@@ -63,7 +64,5 @@ int	check_rgb(char *str, t_cub3D *game)
 		if (set_rgb(str, &game->floor))
 			return (1);
 	}
-	ft_printf("colour = %d\n", game->ceiling);
-	ft_printf("colour = %d\n", game->floor);
 	return (0);
 }

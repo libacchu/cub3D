@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/12 15:29:28 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:24:03 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int	loop_x(t_cub3D *game, int x, int y)
 				game->player.direct = game->map_arr[y][x];
 				game->player.posX = 0.5 + x;
 				game->player.posY = 0.5 + y;
+				if (game->map_arr[y][x] == 'N')
+				{
+					game->player.dirX = 0;
+					game->player.dirY = 1;
+				}
 			}
 			else
 				return \
