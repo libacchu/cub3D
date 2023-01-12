@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obibby <obibby@student.42.fr>              +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/11 13:40:40 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/12 15:00:26 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC		=	main.c \
 			key_hooks.c \
 			exit.c
 INC		=
-LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a ./minilibx_linux/libmlx.a
+# LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a ./minilibx_linux/libmlx.a
+LIBS	=	-Lminilibx_linux -lm -lmlx -lXext -lX11 -Iminilibx_linux $(LIBFT)libft.a
 SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
 OBJ		=	$(SRCS:%.c=$(OBJ_DIR)%.o)
 CC		=	gcc

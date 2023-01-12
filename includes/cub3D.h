@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 14:41:57 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:38:09 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <unistd.h>
 # include "../minilibx_linux/mlx.h"
+# include <math.h>
 
 // Keyboard
 enum	e_keystroke
@@ -31,16 +32,40 @@ enum	e_keystroke
 	KEY_DOWN = 65364,
 };
 
+typedef struct s_ray
+{
+	double	cameraX; // 2 * x / double(w) - 1;
+	double	rayDirX; // dirX + planeX * cameraX
+	double	rayDirY; // dirY + planeY * cameraX;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		stepX;
+	int		stepY;
+	int		mapX;
+	int		mapY;
+} t_ray;
+
 typedef struct s_player
 {
-	char	direct;
-	int		x;
-	int		y;
+	char	direct; // N, S, E, W
+	double	posX;	// //x and y start position
+	double	posY;
+	double	dirX;	//initial direction vector
+	double	dirY;
+	double	viewX;	//the 2d raycaster version of camera plane
+	double	viewY;
 }	t_player;
 
 typedef struct s_cub3D
 {
 	t_player	player;
+	t_ray		ray;
 	void		*north_wall;
 	void		*west_wall;
 	void		*east_wall;
