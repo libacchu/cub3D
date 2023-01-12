@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/12 17:34:16 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:22:52 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,19 @@ typedef struct s_ray
 	int		stepY;
 	int		mapX;
 	int		mapY;
+	int		texX;
+	int		texY;
+	int		moveX;
 } t_ray;
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_size;
+	int		endian;
+} t_image;
 
 typedef struct s_player
 {
@@ -66,13 +78,13 @@ typedef struct s_cub3D
 {
 	t_player	player;
 	t_ray		ray;
-	void		*north_wall;
-	void		*west_wall;
-	void		*east_wall;
-	void		*south_wall;
+	t_image		north_wall;
+	t_image		west_wall;
+	t_image		east_wall;
+	t_image		south_wall;
 
-	void	*minimap_wall;
-	void	*minimap_floor;
+	t_image		minimap_wall;
+	t_image		minimap_floor;
 
 	int			ceiling;
 	int			floor;
