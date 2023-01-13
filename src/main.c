@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/12 21:03:46 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:50:03 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,20 @@ void init_game(t_cub3D *game)
 	game->south_wall.img = NULL;
 	game->west_wall.img = NULL;
 	game->east_wall.img = NULL;
+
 	game->ceiling = 0;
 	game->floor = 0;
 	game->path = NULL;
 	game->map_arr = NULL;
-	
+
 	game->player.direct = 0;
 	game->player.posX = 0;
 	game->player.posY = 0;
 
-	game->ray.moveX = 0;
+	game->tab = 0;
+
+	game->win_L = 1920;
+	game->win_H = 1080;
 }
 
 int	assign_images(t_cub3D *game)
@@ -104,6 +108,15 @@ void make_minimap(t_cub3D *game)
 				mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor.img, x * 34, y * 34);
 		}
 	}
+	mlx_pixel_put(game->mlx, game->window, (game->player.posX) * 34, (game->player.posY) * 34, game->ceiling);
+}
+
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_size + x * (data->bpp / 8));
+	*(unsigned int*)dst = color;
 }
 
 double ft_abs(double x)
@@ -118,111 +131,121 @@ int temp_raytracing_func(t_cub3D *game)
 	int x;
 	int hit;
 	int	side;
-	
+
 	x = -1;
-	while (++x < 1920)
+	// while (game->tab)
+	// {
+	// 	make_minimap(game);
+	// }
+	if (!game->tab)
 	{
-		hit = 0;
-		game->player.viewX = 0;
-		game->player.viewY = 0.66;
-		game->ray.cameraX = 2 * x / (double)1920 - 1;
-		game->ray.rayDirX = game->player.dirX + game->player.viewX * game->ray.cameraX;
-		game->ray.rayDirY = game->player.dirY + game->player.viewY * game->ray.cameraX;
-		game->ray.mapX = (int)game->player.posX;
-		game->ray.mapY = (int)game->player.posY;
-		if (!game->ray.rayDirY)
-			game->ray.deltaDistY = 1e30;
-		else
-			game->ray.deltaDistY = ft_abs(1 / game->ray.rayDirY);
-		if (!game->ray.rayDirX)
-			game->ray.deltaDistX = 1e30;
-		else
-			game->ray.deltaDistX = ft_abs(1 / game->ray.rayDirX);
-		if (game->ray.rayDirX < 0)
+		while (++x < game->win_L)
 		{
-			game->ray.stepX = -1;
-			game->ray.sideDistX = (game->player.posX - game->ray.mapX) * game->ray.deltaDistX;
-		}
-		else
-		{
-			game->ray.stepX = 1;
-			game->ray.sideDistX = (game->ray.mapX + 1.0 - game->player.posX) * game->ray.deltaDistX;
-		}
-		if (game->ray.rayDirY < 0)
-		{
-			game->ray.stepY = -1;
-			game->ray.sideDistY = (game->player.posY - game->ray.mapY) * game->ray.deltaDistY;
-		}
-		else
-		{
-			game->ray.stepY = 1;
-			game->ray.sideDistY = (game->ray.mapY + 1.0 - game->player.posY) * game->ray.deltaDistY;
-		}
-		while (!hit)
-		{
-			if (game->ray.sideDistX < game->ray.sideDistY)
+			hit = 0;
+			game->ray.cameraX = 2 * x / (double)game->win_L - 1;
+			game->ray.rayDirX = game->player.dirX + game->player.viewX * game->ray.cameraX;
+			game->ray.rayDirY = game->player.dirY + game->player.viewY * game->ray.cameraX;
+			game->ray.mapX = (int)game->player.posX;
+			game->ray.mapY = (int)game->player.posY;
+			if (!game->ray.rayDirY)
+				game->ray.deltaDistY = 1e30;
+			else
+				game->ray.deltaDistY = ft_abs(1 / game->ray.rayDirY);
+			if (!game->ray.rayDirX)
+				game->ray.deltaDistX = 1e30;
+			else
+				game->ray.deltaDistX = ft_abs(1 / game->ray.rayDirX);
+			if (game->ray.rayDirX < 0)
 			{
-				game->ray.sideDistX += game->ray.deltaDistX;
-				game->ray.mapX += game->ray.stepX;
-				side = 0;
+				game->ray.stepX = -1;
+				game->ray.sideDistX = (game->player.posX - game->ray.mapX) * game->ray.deltaDistX;
 			}
 			else
 			{
-				game->ray.sideDistY += game->ray.deltaDistY;
-				game->ray.mapY += game->ray.stepY;
-				side = 1;
+				game->ray.stepX = 1;
+				game->ray.sideDistX = (game->ray.mapX + 1.0 - game->player.posX) * game->ray.deltaDistX;
 			}
-			if (game->map_arr[game->ray.mapY][game->ray.mapX] == '1')
-				hit = 1;
-		}
-		if (!side)
-			game->ray.perpWallDist = (game->ray.sideDistX - game->ray.deltaDistX);
-		else
-			game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
-		game->ray.lineHeight = 1080 / game->ray.perpWallDist;
-		game->ray.drawStart = -game->ray.lineHeight / 2 + 1080 / 2;
-		if (game->ray.drawStart < 0)
-			game->ray.drawStart = 0;
-		game->ray.drawEnd = game->ray.lineHeight / 2 + 1080 / 2;
-		if (game->ray.drawEnd >= 1080)
-			game->ray.drawEnd = 1080 - 1;
-		int y;
-		y = 0;
-		double wallX;
-		if (!side)
-			wallX = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
-		else
-			wallX = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
-		printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
-		wallX -= floor(wallX);
-		printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
-		game->ray.texX = (int)(wallX * (double)64);
-		if (side == 0 && game->ray.rayDirX > 0)
-			game->ray.texX = 64 - game->ray.texX - 1;
-		else if (side == 1 && game->ray.rayDirY < 0)
-			game->ray.texX = 64 - game->ray.texX - 1;
-		double step;
-		step = 1.0 * 64.0 / game->ray.lineHeight;
-		double texPos;
-		texPos = (game->ray.drawStart - 1080 / 2 + game->ray.lineHeight / 2) * step;
-		while (y < 1080)
-		{
-			if (y < game->ray.drawStart)
-				mlx_pixel_put(game->mlx, game->window, x, y++, game->ceiling);
-			else if (y > game->ray.drawEnd)
-				mlx_pixel_put(game->mlx, game->window, x, y++, game->floor);
+			if (game->ray.rayDirY < 0)
+			{
+				game->ray.stepY = -1;
+				game->ray.sideDistY = (game->player.posY - game->ray.mapY) * game->ray.deltaDistY;
+			}
 			else
 			{
-				game->ray.texY = (int)texPos & (64 - 1);
-				texPos += step;
-				int colour;
-				colour = *(int *)(game->east_wall.addr + game->ray.texY % 64 * game->east_wall.line_size + game->ray.texX % 64 * (game->east_wall.bpp / 8));
-				mlx_pixel_put(game->mlx, game->window, x, y++, colour);
+				game->ray.stepY = 1;
+				game->ray.sideDistY = (game->ray.mapY + 1.0 - game->player.posY) * game->ray.deltaDistY;
+			}
+			while (!hit)
+			{
+				if (game->ray.sideDistX < game->ray.sideDistY)
+				{
+					game->ray.sideDistX += game->ray.deltaDistX;
+					game->ray.mapX += game->ray.stepX;
+					side = 0;
+				}
+				else
+				{
+					game->ray.sideDistY += game->ray.deltaDistY;
+					game->ray.mapY += game->ray.stepY;
+					side = 1;
+				}
+				if (game->map_arr[game->ray.mapY][game->ray.mapX] == '1')
+					hit = 1;
+			}
+			if (!side)
+				game->ray.perpWallDist = (game->ray.sideDistX - game->ray.deltaDistX);
+			else
+				game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
+			game->ray.lineHeight = game->win_H / game->ray.perpWallDist;
+			game->ray.drawStart = -game->ray.lineHeight / 2 + game->win_H / 2;
+			if (game->ray.drawStart < 0)
+				game->ray.drawStart = 0;
+			game->ray.drawEnd = game->ray.lineHeight / 2 + game->win_H / 2;
+			if (game->ray.drawEnd >= game->win_H)
+				game->ray.drawEnd = game->win_H - 1;
+			int y;
+			y = 0;
+			double wallX;
+			if (!side)
+				wallX = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
+			else
+				wallX = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
+			printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
+			wallX -= floor(wallX);
+			printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
+			game->ray.texX = (int)(wallX * (double)64);
+			if (side == 0 && game->ray.rayDirX > 0)
+				game->ray.texX = 64 - game->ray.texX - 1;
+			else if (side == 1 && game->ray.rayDirY < 0)
+				game->ray.texX = 64 - game->ray.texX - 1;
+			double step;
+			step = 1.0 * 64.0 / game->ray.lineHeight;
+			double texPos;
+			texPos = (game->ray.drawStart - game->win_H / 2 + game->ray.lineHeight / 2) * step;
+			while (y < game->win_H)
+			{
+				if (y < game->ray.drawStart)
+					my_mlx_pixel_put(&game->img, x, y++, game->ceiling);
+				else if (y > game->ray.drawEnd)
+					my_mlx_pixel_put(&game->img, x, y++, game->floor);
+				else
+				{
+					game->ray.texY = (int)texPos & (64 - 1);
+					texPos += step;
+					int colour;
+					colour = *(int *)(game->east_wall.addr + game->ray.texY % 64 * game->east_wall.line_size + game->ray.texX % 64 * (game->east_wall.bpp / 8));
+					my_mlx_pixel_put(&game->img, x, y++, colour);
+				}
 			}
 		}
+		mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
 	}
+	else
+		make_minimap(game);
+	usleep(2000);
 	return (0);
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -249,14 +272,17 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		return(err_message("Failed to initialise mlx."));
+	game.img.img = mlx_new_image(game.mlx, game.win_L, game.win_H);
+	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.line_size, &game.img.endian);
 	if (assign_images(&game))
 		return (1);
-	game.window = mlx_new_window(game.mlx, 1920, 1080, "cub3D");
-	temp_raytracing_func(&game);
+	game.window = mlx_new_window(game.mlx, game.win_L, game.win_H, "cub3D");
+	//temp_raytracing_func(&game);
 	//make_minimap(&game);
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
 	mlx_expose_hook(game.window, temp_raytracing_func, &game);
 	mlx_key_hook(game.window, ft_key, &game);
+	mlx_loop_hook(game.mlx, temp_raytracing_func, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

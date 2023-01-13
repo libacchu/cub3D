@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/12 19:22:52 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 15:36:32 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include "../minilibx_linux/mlx.h"
 # include <math.h>
+
+# define ROTATE_SPEED 0.05
 
 // Keyboard
 enum	e_keystroke
@@ -30,6 +32,7 @@ enum	e_keystroke
 	KEY_LEFT = 65361,
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364,
+	KEY_TAB = 65289,
 };
 
 typedef struct s_ray
@@ -51,7 +54,6 @@ typedef struct s_ray
 	int		mapY;
 	int		texX;
 	int		texY;
-	int		moveX;
 } t_ray;
 
 typedef struct s_image
@@ -91,8 +93,16 @@ typedef struct s_cub3D
 	char		*path;
 	char		**map_arr;
 
+	int			win_H;
+	int			win_L;
+
+	int			tab;
+
 	void		*mlx;
 	void		*window;
+
+	t_image		img;
+
 }	t_cub3D;
 
 void	init_game(t_cub3D *game);
@@ -120,5 +130,6 @@ int		ft_key(int keycode, t_cub3D *game);
 int		ft_mouse(t_cub3D *game);
 
 int	colourshift(int r, int g, int b);
+void make_minimap(t_cub3D *game);
 
 #endif

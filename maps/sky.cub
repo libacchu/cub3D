@@ -3,8 +3,8 @@ SO ./texture/whiteb.xpm
 WE ./texture/whiteb.xpm
 EA ./texture/brick.xpm
 
-F 184,113,39
-C 227,10,90
+F 100,100,100
+C 10,100,200
 
 11111111111111111111111111111
 10000000001100000000000000001

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 13:49:11 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:44:32 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,65 @@
 		- red cross: close the window and quit the program cleanly.
  */
 
-int	ft_key(int keycode,  t_cub3D *game)
+int	ft_key(int keycode, t_cub3D *game)
 {
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
-	if (keycode == KEY_W || keycode == KEY_UP)
-		printf("W\n");
-	if (keycode == KEY_A || keycode == KEY_LEFT)
-		printf("A\n");
-	if (keycode == KEY_S || keycode == KEY_DOWN)
-		printf("S\n");
-	if (keycode == KEY_D || keycode == KEY_RIGHT)
-		printf("D\n");
+	if (keycode == KEY_W)
+	{
+		game->player.posY += game->player.dirY;
+		game->player.posX += game->player.dirX;
+	}
+	if (keycode == KEY_A)
+	{
+		game->player.posY -= game->player.viewY;
+		game->player.posX -= game->player.viewX;
+	}
+	if (keycode == KEY_S)
+	{
+		game->player.posY -= game->player.dirY;
+		game->player.posX -= game->player.dirX;
+	}
+	if (keycode == KEY_D)
+	{
+		game->player.posY += game->player.viewY;
+		game->player.posX += game->player.viewX;
+	}
+	if (keycode == KEY_LEFT)
+	{
+		double	old_X;
+		old_X = game->player.dirX;
+		game->player.dirX = old_X * cos(-ROTATE_SPEED) - game->player.dirY * sin(-ROTATE_SPEED);
+		game->player.dirY = old_X * sin(-ROTATE_SPEED) + game->player.dirY * cos(-ROTATE_SPEED);
+		old_X = game->player.viewX;
+		game->player.viewX = old_X * cos(-ROTATE_SPEED) - game->player.viewY * sin(-ROTATE_SPEED);
+		game->player.viewY = old_X * sin(-ROTATE_SPEED) + game->player.viewY * cos(-ROTATE_SPEED);
+	}
+		//rotation matrix
+	if (keycode == KEY_RIGHT)
+	{
+		double	old_X;
+		old_X = game->player.dirX;
+		game->player.dirX = old_X * cos(ROTATE_SPEED) - game->player.dirY * sin(ROTATE_SPEED);
+		game->player.dirY = old_X * sin(ROTATE_SPEED) + game->player.dirY * cos(ROTATE_SPEED);
+		old_X = game->player.viewX;
+		game->player.viewX = old_X * cos(ROTATE_SPEED) - game->player.viewY * sin(ROTATE_SPEED);
+		game->player.viewY = old_X * sin(ROTATE_SPEED) + game->player.viewY * cos(ROTATE_SPEED);
+	}
+	if (keycode == KEY_TAB)
+	{
+		if (game->tab)
+			game->tab = 0;
+		else
+			game->tab = 1;
+	}
 	return (0);
 }
 
 int	ft_mouse(t_cub3D *game)
 {
 	/* red cross */
-	
+
 	ft_exit(NULL, game);
 	return (0);
 }
