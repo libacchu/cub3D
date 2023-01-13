@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 16:44:32 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:09:26 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,48 @@
 
 int	ft_key(int keycode, t_cub3D *game)
 {
+	double speed;
+
+	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
-	if (keycode == KEY_W)
+	else if (keycode == KEY_W)
 	{
-		game->player.posY += game->player.dirY;
-		game->player.posX += game->player.dirX;
+		if (game->shift)
+			speed = RUN_SPEED;
+		else
+			speed = WALK_SPEED;
+		game->player.posY += speed * game->player.dirY;
+		game->player.posX += speed * game->player.dirX;
 	}
-	if (keycode == KEY_A)
+	else if (keycode == KEY_A)
 	{
-		game->player.posY -= game->player.viewY;
-		game->player.posX -= game->player.viewX;
+		if (game->shift)
+			speed = RUN_SPEED;
+		else
+			speed = WALK_SPEED;
+		game->player.posY -= speed * game->player.viewY;
+		game->player.posX -= speed * game->player.viewX;
 	}
-	if (keycode == KEY_S)
+	else if (keycode == KEY_S)
 	{
-		game->player.posY -= game->player.dirY;
-		game->player.posX -= game->player.dirX;
+		if (game->shift)
+			speed = RUN_SPEED;
+		else
+			speed = WALK_SPEED;
+		game->player.posY -= speed * game->player.dirY;
+		game->player.posX -= speed * game->player.dirX;
 	}
-	if (keycode == KEY_D)
+	else if (keycode == KEY_D)
 	{
-		game->player.posY += game->player.viewY;
-		game->player.posX += game->player.viewX;
+		if (game->shift)
+			speed = RUN_SPEED;
+		else
+			speed = WALK_SPEED;
+		game->player.posY += speed * game->player.viewY;
+		game->player.posX += speed * game->player.viewX;
 	}
-	if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT)
 	{
 		double	old_X;
 		old_X = game->player.dirX;
@@ -53,8 +72,7 @@ int	ft_key(int keycode, t_cub3D *game)
 		game->player.viewX = old_X * cos(-ROTATE_SPEED) - game->player.viewY * sin(-ROTATE_SPEED);
 		game->player.viewY = old_X * sin(-ROTATE_SPEED) + game->player.viewY * cos(-ROTATE_SPEED);
 	}
-		//rotation matrix
-	if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT)
 	{
 		double	old_X;
 		old_X = game->player.dirX;
@@ -64,12 +82,19 @@ int	ft_key(int keycode, t_cub3D *game)
 		game->player.viewX = old_X * cos(ROTATE_SPEED) - game->player.viewY * sin(ROTATE_SPEED);
 		game->player.viewY = old_X * sin(ROTATE_SPEED) + game->player.viewY * cos(ROTATE_SPEED);
 	}
-	if (keycode == KEY_TAB)
+	else if (keycode == KEY_TAB)
 	{
 		if (game->tab)
 			game->tab = 0;
 		else
 			game->tab = 1;
+	}
+	else if (keycode == KEY_SHIFT)
+	{
+		if (game->shift)
+			game->shift = 0;
+		else
+			game->shift = 1;
 	}
 	return (0);
 }

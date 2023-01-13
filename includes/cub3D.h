@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 15:36:32 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:19:50 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,17 @@
 # include "../libft/libft.h"
 # include <unistd.h>
 # include "../minilibx_linux/mlx.h"
+# include "../minilibx_linux/mlx_int.h"
 # include <math.h>
 
+# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 1920
+# define HALF_HEIGHT 540
+# define HALF_WIDTH 960
 # define ROTATE_SPEED 0.05
+# define MOUSE_SPEED 0.005
+# define WALK_SPEED 0.03
+# define RUN_SPEED 0.1
 
 // Keyboard
 enum	e_keystroke
@@ -33,6 +41,7 @@ enum	e_keystroke
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364,
 	KEY_TAB = 65289,
+	KEY_SHIFT = 65505,
 };
 
 typedef struct s_ray
@@ -93,10 +102,10 @@ typedef struct s_cub3D
 	char		*path;
 	char		**map_arr;
 
-	int			win_H;
-	int			win_L;
-
 	int			tab;
+	int			shift;
+	int			mouse_prev_x;
+	int			mouse_prev_y;
 
 	void		*mlx;
 	void		*window;
