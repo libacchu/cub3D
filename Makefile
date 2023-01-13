@@ -6,7 +6,7 @@
 #    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/13 19:40:57 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/13 22:33:24 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC		=	main.c \
 			err_file_check.c \
 			key_hooks.c \
 			exit.c
-INC		=
+INC		=	includes/cub3D.h
 #LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a ./minilibx_linux/libmlx.a
 LIBS	=	-Lminilibx_linux -lm -lmlx -lXext -lX11 -Iminilibx_linux $(LIBFT)libft.a
 SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
@@ -44,7 +44,7 @@ $(OBJ_DIR)%.o : %.c
 	@printf "\r$(GREY)Compiling $(BLUE)$<"
 	@$(CC) $(CFLAGS) -c -g $< -o $@
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(INC)
 	make re -C $(LIBFT)
 	make -C $(LIBMLX)
 	@printf "\33[2K\r$(GREY)Compiling $(BLUE)$(NAME)$(RESET)\n"

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 21:09:26 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 23:03:40 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ int	ft_key(int keycode, t_cub3D *game)
 	else if (keycode == KEY_TAB)
 	{
 		if (game->tab)
+		{
 			game->tab = 0;
+			game->map_gen = 0;
+		}
 		else
 			game->tab = 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 22:19:50 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 22:59:07 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include "../minilibx_linux/mlx_int.h"
 # include <math.h>
 
-# define WINDOW_HEIGHT 1080
-# define WINDOW_WIDTH 1920
-# define HALF_HEIGHT 540
-# define HALF_WIDTH 960
+//# define WINDOW_HEIGHT 480
+//# define WINDOW_WIDTH 640
+//# define HALF_HEIGHT 240
+//# define HALF_WIDTH 320
 # define ROTATE_SPEED 0.05
 # define MOUSE_SPEED 0.005
 # define WALK_SPEED 0.03
@@ -49,16 +49,16 @@ typedef struct s_ray
 	double	cameraX; // 2 * x / double(w) - 1;
 	double	rayDirX; // dirX + planeX * cameraX
 	double	rayDirY; // dirY + planeY * cameraX;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
+	double	sideDistX; // dist to next X block.
+	double	sideDistY; // dist to next Y block.
+	double	deltaDistX; // dist to X block after next.
+	double	deltaDistY; // dist to Y block after next.
 	double	perpWallDist;
 	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	int		stepX;
-	int		stepY;
+	int		drawStart; // height to begin drawing.
+	int		drawEnd; // height to finish drawing.
+	int		stepX; // direction of the next hit block.
+	int		stepY; // direction of the next hit block.
 	int		mapX;
 	int		mapY;
 	int		texX;
@@ -96,6 +96,7 @@ typedef struct s_cub3D
 
 	t_image		minimap_wall;
 	t_image		minimap_floor;
+	int			map_gen;
 
 	int			ceiling;
 	int			floor;
@@ -109,6 +110,10 @@ typedef struct s_cub3D
 
 	void		*mlx;
 	void		*window;
+	int			window_height;
+	int			window_width;
+	int			half_height;
+	int			half_width;
 
 	t_image		img;
 

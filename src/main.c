@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 22:21:45 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 23:06:39 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void init_game(t_cub3D *game)
 	game->floor = 0;
 	game->path = NULL;
 	game->map_arr = NULL;
+	game->map_gen = 0;
 
 	game->player.direct = 0;
 	game->player.posX = 0;
@@ -58,8 +59,6 @@ void init_game(t_cub3D *game)
 
 	game->tab = 0;
 	game->shift = 0;
-	game->mouse_prev_x = WINDOW_WIDTH / 2;
-	game->mouse_prev_y = WINDOW_HEIGHT / 2;
 }
 
 int	assign_images(t_cub3D *game)
@@ -97,16 +96,20 @@ void make_minimap(t_cub3D *game)
 	int x;
 
 	y = -1;
-	while (game->map_arr[++y])
+	if (!game->map_gen)
 	{
-		x = -1;
-		while (game->map_arr[y][++x])
+		while (game->map_arr[++y])
 		{
-			if (game->map_arr[y][x] == '1' || game->map_arr[y][x] == ' ')
-				mlx_put_image_to_window(game->mlx, game->window, game->minimap_wall.img, x * 34, y * 34);
-			else
-				mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor.img, x * 34, y * 34);
+			x = -1;
+			while (game->map_arr[y][++x])
+			{
+				if (game->map_arr[y][x] == '1' || game->map_arr[y][x] == ' ')
+					mlx_put_image_to_window(game->mlx, game->window, game->minimap_wall.img, x * 34, y * 34);
+				else
+					mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor.img, x * 34, y * 34);
+			}
 		}
+		game->map_gen = 1;
 	}
 	mlx_pixel_put(game->mlx, game->window, (game->player.posX) * 34, (game->player.posY) * 34, game->ceiling);
 }
@@ -135,10 +138,10 @@ int temp_raytracing_func(t_cub3D *game)
 	x = -1;
 	if (!game->tab)
 	{
-		while (++x < WINDOW_WIDTH)
+		while (++x < game->window_width)
 		{
 			hit = 0;
-			game->ray.cameraX = 2 * x / (double)WINDOW_WIDTH - 1;
+			game->ray.cameraX = 2 * x / (double)game->window_width - 1;
 			game->ray.rayDirX = game->player.dirX + game->player.viewX * game->ray.cameraX;
 			game->ray.rayDirY = game->player.dirY + game->player.viewY * game->ray.cameraX;
 			game->ray.mapX = (int)game->player.posX;
@@ -192,13 +195,13 @@ int temp_raytracing_func(t_cub3D *game)
 				game->ray.perpWallDist = (game->ray.sideDistX - game->ray.deltaDistX);
 			else
 				game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
-			game->ray.lineHeight = WINDOW_HEIGHT / game->ray.perpWallDist;
-			game->ray.drawStart = -game->ray.lineHeight / 2 + WINDOW_HEIGHT / 2;
+			game->ray.lineHeight = game->window_height / game->ray.perpWallDist;
+			game->ray.drawStart = -game->ray.lineHeight / 2 + game->window_height / 2;
 			if (game->ray.drawStart < 0)
 				game->ray.drawStart = 0;
-			game->ray.drawEnd = game->ray.lineHeight / 2 + WINDOW_HEIGHT / 2;
-			if (game->ray.drawEnd >= WINDOW_HEIGHT)
-				game->ray.drawEnd = WINDOW_HEIGHT - 1;
+			game->ray.drawEnd = game->ray.lineHeight / 2 + game->window_height / 2;
+			if (game->ray.drawEnd >= game->window_height)
+				game->ray.drawEnd = game->window_height - 1;
 			int y;
 			y = 0;
 			double wallX;
@@ -216,8 +219,8 @@ int temp_raytracing_func(t_cub3D *game)
 			double step;
 			step = 1.0 * 64.0 / game->ray.lineHeight;
 			double texPos;
-			texPos = (game->ray.drawStart - WINDOW_HEIGHT / 2 + game->ray.lineHeight / 2) * step;
-			while (y < WINDOW_HEIGHT)
+			texPos = (game->ray.drawStart - game->window_height / 2 + game->ray.lineHeight / 2) * step;
+			while (y < game->window_height)
 			{
 				if (y < game->ray.drawStart)
 					my_mlx_pixel_put(&game->img, x, y++, game->ceiling);
@@ -280,11 +283,11 @@ int	mouse_move(int x, int y, t_cub3D *game)
 	// t_win_list list;
 	// list.window = (XID)game->window;
 	// XWarpPointer(game->mlx, 0L, list.window, 0, 0, 0, 0, x, y);
-	if (game->mouse_prev_x > 1000 || game->mouse_prev_y > 1800)
+	if (game->mouse_prev_x > 1000 || game->mouse_prev_x < 100 || game->mouse_prev_y > 1800 || game->mouse_prev_y < 100)
 	{
-		game->mouse_prev_x = HALF_WIDTH;
-		game->mouse_prev_y = HALF_HEIGHT;
-		mlx_mouse_move(game->mlx, game->window, HALF_WIDTH, HALF_HEIGHT);	
+		game->mouse_prev_x = game->half_width;
+		game->mouse_prev_y = game->half_height;
+		mlx_mouse_move(game->mlx, game->window, game->half_width, game->half_height);	
 	}
 	return (0);
 }
@@ -314,13 +317,20 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		return(err_message("Failed to initialise mlx."));
-	game.img.img = mlx_new_image(game.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx_get_screen_size(game.mlx, &game.window_width, &game.window_height);
+	game.half_height = game.window_height / 2;
+	game.half_width = game.window_width / 2;
+	game.mouse_prev_x = game.half_width;
+	game.mouse_prev_y = game.half_height;
+	game.img.img = mlx_new_image(game.mlx, game.window_width, game.window_height);
 	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.line_size, &game.img.endian);
 	if (assign_images(&game))
 		return (1);
-	game.window = mlx_new_window(game.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
+	printf("x: %d, y: %d\n", game.window_width, game.window_height);
+	game.window = mlx_new_window(game.mlx, game.window_width, game.window_height, "cub3D");
 	//temp_raytracing_func(&game);
 	//make_minimap(&game);
+	mlx_do_sync(game.mlx);
 	mlx_hook(game.window, 2, 1L << 0, ft_key, &game);
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
 	mlx_expose_hook(game.window, temp_raytracing_func, &game);
