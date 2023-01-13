@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 22:59:07 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 23:15:33 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,10 @@ typedef struct s_cub3D
 	int			window_width;
 	int			half_height;
 	int			half_width;
+	int			x_left_limit;
+	int			x_right_limit;
+	int			y_up_limit;
+	int			y_down_limit;
 
 	t_image		img;
 

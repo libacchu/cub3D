@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 23:06:39 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/13 23:22:34 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ int	mouse_move(int x, int y, t_cub3D *game)
 	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
 	x_dif = x - game->mouse_prev_x;
 	y_dif = y - game->mouse_prev_y;
-	printf("x_diff: %d, y_diff: %d\n", x_dif, y_dif);
 	game->mouse_prev_x = x;
 	game->mouse_prev_y = y;
 	if (x_dif < 0)
@@ -280,10 +279,7 @@ int	mouse_move(int x, int y, t_cub3D *game)
 			game->player.viewY = old_X * sin(MOUSE_SPEED) + game->player.viewY * cos(MOUSE_SPEED);
 		}
 	}
-	// t_win_list list;
-	// list.window = (XID)game->window;
-	// XWarpPointer(game->mlx, 0L, list.window, 0, 0, 0, 0, x, y);
-	if (game->mouse_prev_x > 1000 || game->mouse_prev_x < 100 || game->mouse_prev_y > 1800 || game->mouse_prev_y < 100)
+	if (game->mouse_prev_x > game->x_right_limit || game->mouse_prev_x < game->x_left_limit || game->mouse_prev_y > game->y_up_limit || game->mouse_prev_y < game->y_down_limit)
 	{
 		game->mouse_prev_x = game->half_width;
 		game->mouse_prev_y = game->half_height;
@@ -297,7 +293,7 @@ int	main(int argc, char **argv)
 	t_cub3D game;
 	init_game(&game);
 	if (argc != 2)
-		return (err_message("Try: ./cub3D map/<map name>"));
+		return (err_message("Try: ./cub3D maps/<map name>"));
 	if (errorcheck(argv, &game))
 		return (1);
 	int i;
@@ -318,10 +314,18 @@ int	main(int argc, char **argv)
 	if (!game.mlx)
 		return(err_message("Failed to initialise mlx."));
 	mlx_get_screen_size(game.mlx, &game.window_width, &game.window_height);
+	if (game.window_width > 1920)
+		game.window_width = 1920;
+	if (game.window_height > 1080)
+		game.window_height = 1080;
 	game.half_height = game.window_height / 2;
 	game.half_width = game.window_width / 2;
 	game.mouse_prev_x = game.half_width;
 	game.mouse_prev_y = game.half_height;
+	game.x_left_limit = game.window_width / 15;
+	game.x_right_limit = game.window_width * 14 / 15;
+	game.y_up_limit = game.window_height * 14 / 15;
+	game.y_down_limit = game.window_height / 15;
 	game.img.img = mlx_new_image(game.mlx, game.window_width, game.window_height);
 	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.line_size, &game.img.endian);
 	if (assign_images(&game))
