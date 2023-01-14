@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 23:22:34 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 11:44:47 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,13 +211,13 @@ int temp_raytracing_func(t_cub3D *game)
 				wallX = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
 			//printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
 			wallX -= floor(wallX);
-			game->ray.texX = (int)(wallX * (double)64);
+			game->ray.texX = (int)(wallX * (double)RESOLUTION);
 			if (side == 0 && game->ray.rayDirX > 0)
-				game->ray.texX = 64 - game->ray.texX - 1;
+				game->ray.texX = RESOLUTION - game->ray.texX - 1;
 			else if (side == 1 && game->ray.rayDirY < 0)
-				game->ray.texX = 64 - game->ray.texX - 1;
+				game->ray.texX = RESOLUTION - game->ray.texX - 1;
 			double step;
-			step = 1.0 * 64.0 / game->ray.lineHeight;
+			step = 1.0 * RESOLUTION / game->ray.lineHeight;
 			double texPos;
 			texPos = (game->ray.drawStart - game->window_height / 2 + game->ray.lineHeight / 2) * step;
 			while (y < game->window_height)
@@ -228,10 +228,10 @@ int temp_raytracing_func(t_cub3D *game)
 					my_mlx_pixel_put(&game->img, x, y++, game->floor);
 				else
 				{
-					game->ray.texY = (int)texPos & (64 - 1);
+					game->ray.texY = (int)texPos & (RESOLUTION - 1);
 					texPos += step;
 					int colour;
-					colour = *(int *)(game->east_wall.addr + game->ray.texY % 64 * game->east_wall.line_size + game->ray.texX % 64 * (game->east_wall.bpp / 8));
+					colour = *(int *)(game->east_wall.addr + game->ray.texY % RESOLUTION * game->east_wall.line_size + game->ray.texX % RESOLUTION * (game->east_wall.bpp / 8));
 					my_mlx_pixel_put(&game->img, x, y++, colour);
 				}
 			}
@@ -253,6 +253,7 @@ int	mouse_move(int x, int y, t_cub3D *game)
 	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
 	x_dif = x - game->mouse_prev_x;
 	y_dif = y - game->mouse_prev_y;
+	(void) y_dif;
 	game->mouse_prev_x = x;
 	game->mouse_prev_y = y;
 	if (x_dif < 0)
