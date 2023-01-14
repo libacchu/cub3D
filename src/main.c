@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 19:07:32 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 19:13:10 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -455,14 +455,13 @@ void	start_loop(t_cub3D *game)
 	mlx_loop(game->mlx);
 }
 
-void print_map_array(t_cub3D *game)
+void	print_map_array(t_cub3D *game)
 {
-	int i;
+	int	i;
+
 	i = -1;
 	while (game->map_arr[++i])
-	{
-		printf("%s\n", game->map_arr[i]);	
-	}
+		printf("%s\n", game->map_arr[i]);
 }
 
 void	set_screen_size(t_cub3D *game)
@@ -480,13 +479,16 @@ void	set_screen_size(t_cub3D *game)
 	game->x_right_limit = game->window_width * 14 / 15;
 	game->y_up_limit = game->window_height * 14 / 15;
 	game->y_down_limit = game->window_height / 15;
-	game->img.img = mlx_new_image(game->mlx, game->window_width, game->window_height);
-	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.line_size, &game->img.endian);
+	game->img.img = mlx_new_image(game->mlx, game->window_width,
+			game->window_height);
+	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp,
+			&game->img.line_size, &game->img.endian);
 }
 
 int	main(int argc, char **argv)
 {
-	t_cub3D game;
+	t_cub3D	game;
+
 	init_game(&game);
 	if (argc != 2)
 		return (err_message("Try: ./cub3D maps/<map name>"));
@@ -495,18 +497,16 @@ int	main(int argc, char **argv)
 	print_map_array(&game); // for debugging
 	game.mlx = mlx_init();
 	if (!game.mlx)
-		return(err_message("Failed to initialise mlx."));
+		return (err_message("Failed to initialise mlx."));
 	set_screen_size(&game);
 	if (assign_images(&game))
 		return (1);
 	printf("x: %d, y: %d\n", game.window_width, game.window_height);
-	game.window = mlx_new_window(game.mlx, game.window_width, game.window_height, "cub3D");
-	//temp_raytracing_func(&game);
-	//make_minimap(&game);
+	game.window = mlx_new_window(game.mlx, game.window_width,
+			game.window_height, "cub3D");
 	mlx_hook(game.window, 2, 1L << 0, ft_key, &game);
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
 	mlx_expose_hook(game.window, temp_raytracing_func, &game);
-	//mlx_mouse_hook(game.window, mouse_move, &game);
 	mlx_hook(game.window, 6, 1L << 6, mouse_move, &game);
 	start_loop(&game);
 	return (0);
