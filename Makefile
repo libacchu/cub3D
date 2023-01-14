@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/14 10:28:36 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/14 14:58:00 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRC		=	main.c \
 			err_map_check2.c \
 			err_file_check.c \
 			key_hooks.c \
-			exit.c
+			exit.c \
+			player_direction.c
+
 INC		=	includes/cub3D.h
 SYS		=	$(shell uname -s)
 ifeq ($(SYS), Linux)
