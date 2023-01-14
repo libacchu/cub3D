@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 12:01:36 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:51:02 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,18 @@ int	assign_images(t_cub3D *game)
 	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
 	game->south_wall.addr = mlx_get_data_addr(game->south_wall.img, &game->south_wall.bpp, &game->south_wall.line_size, &game->south_wall.endian);
 	free(ptr);
-	game->minimap_wall.img = mlx_xpm_file_to_image(game->mlx, "./texture/whiteb.xpm", &x, &y);
+	game->minimap_wall.img = mlx_xpm_file_to_image(game->mlx, "./textures/whiteb.xpm", &x, &y);
 	game->minimap_wall.addr = mlx_get_data_addr(game->minimap_wall.img, &game->minimap_wall.bpp, &game->minimap_wall.line_size, &game->minimap_wall.endian);
-	game->minimap_floor.img = mlx_xpm_file_to_image(game->mlx, "./texture/blackb.xpm", &x, &y);
+	game->minimap_floor.img = mlx_xpm_file_to_image(game->mlx, "./textures/blackb.xpm", &x, &y);
 	game->minimap_floor.addr = mlx_get_data_addr(game->minimap_floor.img, &game->minimap_floor.bpp, &game->minimap_floor.line_size, &game->minimap_floor.endian);
+	game->north_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/n.xpm", &x, &y);
+	game->north_compass.addr = mlx_get_data_addr(game->north_compass.img, &game->north_compass.bpp, &game->north_compass.line_size, &game->north_compass.endian);
+	game->east_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/e.xpm", &x, &y);
+	game->east_compass.addr = mlx_get_data_addr(game->east_compass.img, &game->east_compass.bpp, &game->east_compass.line_size, &game->east_compass.endian);
+	game->south_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/s.xpm", &x, &y);
+	game->south_compass.addr = mlx_get_data_addr(game->south_compass.img, &game->south_compass.bpp, &game->south_compass.line_size, &game->south_compass.endian);
+	game->west_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/w.xpm", &x, &y);
+	game->west_compass.addr = mlx_get_data_addr(game->west_compass.img, &game->west_compass.bpp, &game->west_compass.line_size, &game->west_compass.endian);
 	return (0);
 }
 
@@ -140,6 +148,14 @@ int temp_raytracing_func(t_cub3D *game)
 	x = -1;
 	if (!game->tab)
 	{
+		game->ray.north_x = 0;
+		game->ray.north_y = 0;
+		game->ray.east_x = 0;
+		game->ray.east_y = 0;
+		game->ray.south_x = 0;
+		game->ray.south_y = 0;
+		game->ray.west_x = 0;
+		game->ray.west_y = 0;
 		while (++x < game->window_width)
 		{
 			hit = 0;
@@ -234,7 +250,29 @@ int temp_raytracing_func(t_cub3D *game)
 			while (++y < game->window_height)
 			{
 				if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2 && x > game->x_left_limit && x < game->x_right_limit)
+				{
 					my_mlx_pixel_put(&game->img, x, y, game->compass);
+					if (game->ray.rayDirY < -0.999 && game->ray.rayDirY > -1.001)
+					{
+						game->ray.north_x = x;
+						game->ray.north_y = y;
+					}
+					else if (game->ray.rayDirX > 0.999 && game->ray.rayDirX < 1.001)
+					{
+						game->ray.east_x = x;
+						game->ray.east_y = y;
+					}
+					else if (game->ray.rayDirY > 0.999 && game->ray.rayDirY < 1.001)
+					{
+						game->ray.south_x = x;
+						game->ray.south_y = y;
+					}
+					else if (game->ray.rayDirX < -0.999 && game->ray.rayDirX > -1.001)
+					{
+						game->ray.west_x = x;
+						game->ray.west_y = y;
+					}
+				}
 				else if (y < game->ray.drawStart)
 					my_mlx_pixel_put(&game->img, x, y, game->ceiling);
 				else if (y > game->ray.drawEnd)
@@ -248,14 +286,20 @@ int temp_raytracing_func(t_cub3D *game)
 					my_mlx_pixel_put(&game->img, x, y, colour);
 				}
 			}
-			/*if (game->player.dirX < 0 && game->player.dirY > 0)
-				mlx_string_put(game->mlx, game->window, x, y, game->floor, "N");*/
 		}
 		mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+		if (game->ray.north_x)
+			mlx_put_image_to_window(game->mlx, game->window, game->north_compass.img, game->ray.north_x - 6, game->ray.north_y - 12);
+		if (game->ray.east_x)
+			mlx_put_image_to_window(game->mlx, game->window, game->east_compass.img, game->ray.east_x - 6, game->ray.east_y - 12);
+		if (game->ray.south_x)
+			mlx_put_image_to_window(game->mlx, game->window, game->south_compass.img, game->ray.south_x - 6, game->ray.south_y - 12);
+		if (game->ray.west_x)
+			mlx_put_image_to_window(game->mlx, game->window, game->west_compass.img, game->ray.west_x - 6, game->ray.west_y - 12);
 	}
 	else
 		make_minimap(game);
-	usleep(2000);
+	usleep(1000);
 	return (0);
 }
 
@@ -352,10 +396,10 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
 	mlx_expose_hook(game.window, temp_raytracing_func, &game);
 	//mlx_mouse_hook(game.window, mouse_move, &game);
-	mlx_hook(game.window, 6, 1L << 6, mouse_move, &game);
 	mlx_mouse_hide(game.mlx, game.window);
 	mlx_do_key_autorepeaton(game.mlx);
 	mlx_loop_hook(game.mlx, temp_raytracing_func, &game);
+	//mlx_hook(game.window, 6, 1L << 6, mouse_move, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

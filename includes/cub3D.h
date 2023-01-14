@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 11:44:28 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:35:10 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ typedef struct s_ray
 	int		mapY;
 	int		texX;
 	int		texY;
+	int		north_x;
+	int		north_y;
+	int		east_x;
+	int		east_y;
+	int		south_x;
+	int		south_y;
+	int		west_x;
+	int		west_y;
 } t_ray;
 
 typedef struct s_image
@@ -93,6 +101,10 @@ typedef struct s_cub3D
 	t_image		west_wall;
 	t_image		east_wall;
 	t_image		south_wall;
+	t_image		north_compass;
+	t_image		east_compass;
+	t_image		south_compass;
+	t_image		west_compass;
 
 	t_image		minimap_wall;
 	t_image		minimap_floor;
