@@ -1,6 +1,6 @@
-NO ./texture/whiteb.xpm
-SO ./texture/whiteb.xpm
-WE ./texture/whiteb.xpm
+NO ./texture/bluestone.xpm
+SO ./texture/purplestone.xpm
+WE ./texture/eagle.xpm
 EA ./texture/brick.xpm
 
 F 100,100,100

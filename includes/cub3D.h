@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 23:15:33 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 11:44:28 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ typedef struct s_cub3D
 
 	int			ceiling;
 	int			floor;
+	int			compass;
+	int			dark;
+
 	char		*path;
 	char		**map_arr;
 
@@ -147,7 +150,7 @@ void	ft_exit(char *str, t_cub3D *game);
 int		ft_key(int keycode, t_cub3D *game);
 int		ft_mouse(t_cub3D *game);
 
-int	colourshift(int r, int g, int b);
+int	colourshift(int t, int r, int g, int b);
 void make_minimap(t_cub3D *game);
 
 #endif

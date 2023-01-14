@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 23:22:34 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:01:36 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void init_game(t_cub3D *game)
 
 	game->ceiling = 0;
 	game->floor = 0;
+	game->compass = colourshift(5, 90, 120, 150);
+	game->dark = colourshift(0, 25, 25, 25);
 	game->path = NULL;
 	game->map_arr = NULL;
 	game->map_gen = 0;
@@ -202,14 +204,12 @@ int temp_raytracing_func(t_cub3D *game)
 			game->ray.drawEnd = game->ray.lineHeight / 2 + game->window_height / 2;
 			if (game->ray.drawEnd >= game->window_height)
 				game->ray.drawEnd = game->window_height - 1;
-			int y;
-			y = 0;
 			double wallX;
 			if (!side)
 				wallX = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
 			else
 				wallX = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
-			//printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
+			printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
 			wallX -= floor(wallX);
 			game->ray.texX = (int)(wallX * (double)64);
 			if (side == 0 && game->ray.rayDirX > 0)
@@ -220,21 +220,36 @@ int temp_raytracing_func(t_cub3D *game)
 			step = 1.0 * 64.0 / game->ray.lineHeight;
 			double texPos;
 			texPos = (game->ray.drawStart - game->window_height / 2 + game->ray.lineHeight / 2) * step;
-			while (y < game->window_height)
+			t_image *img;
+			if (side == 0 && game->ray.rayDirX > 0)
+				img = &game->east_wall;
+			else if (side == 0)
+				img = &game->west_wall;
+			else if (side == 1 && game->ray.rayDirY > 0)
+				img = &game->south_wall;
+			else
+				img = &game->north_wall;
+			int y;
+			y = -1;
+			while (++y < game->window_height)
 			{
-				if (y < game->ray.drawStart)
-					my_mlx_pixel_put(&game->img, x, y++, game->ceiling);
+				if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2 && x > game->x_left_limit && x < game->x_right_limit)
+					my_mlx_pixel_put(&game->img, x, y, game->compass);
+				else if (y < game->ray.drawStart)
+					my_mlx_pixel_put(&game->img, x, y, game->ceiling);
 				else if (y > game->ray.drawEnd)
-					my_mlx_pixel_put(&game->img, x, y++, game->floor);
+					my_mlx_pixel_put(&game->img, x, y, game->floor);
 				else
 				{
 					game->ray.texY = (int)texPos & (64 - 1);
 					texPos += step;
 					int colour;
-					colour = *(int *)(game->east_wall.addr + game->ray.texY % 64 * game->east_wall.line_size + game->ray.texX % 64 * (game->east_wall.bpp / 8));
-					my_mlx_pixel_put(&game->img, x, y++, colour);
+					colour = *(int *)(img->addr + game->ray.texY % 64 * img->line_size + game->ray.texX % 64 * (img->bpp / 8));
+					my_mlx_pixel_put(&game->img, x, y, colour);
 				}
 			}
+			/*if (game->player.dirX < 0 && game->player.dirY > 0)
+				mlx_string_put(game->mlx, game->window, x, y, game->floor, "N");*/
 		}
 		mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
 	}
@@ -247,12 +262,10 @@ int temp_raytracing_func(t_cub3D *game)
 int	mouse_move(int x, int y, t_cub3D *game)
 {
 	int x_dif;
-	int y_dif;
 	double old_X;
 	
 	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
 	x_dif = x - game->mouse_prev_x;
-	y_dif = y - game->mouse_prev_y;
 	game->mouse_prev_x = x;
 	game->mouse_prev_y = y;
 	if (x_dif < 0)
