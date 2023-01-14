@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 16:02:42 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 18:50:56 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@
 		
 */
 
-// checks map file for valid NO, SO, WE, and EA images, valid rgb values for c and f, and valid map.
+// checks map file for valid NO, SO, WE, and EA images, 
+// valid rgb values for c and f, and valid map.
 
-void init_game(t_cub3D *game)
+void	init_game(t_cub3D *game)
 {
 	game->north_wall.img = NULL;
 	game->south_wall.img = NULL;
 	game->west_wall.img = NULL;
 	game->east_wall.img = NULL;
-
 	game->ceiling = 0;
 	game->floor = 0;
 	game->compass = colourshift(200, 90, 120, 150);
@@ -54,56 +54,110 @@ void init_game(t_cub3D *game)
 	game->path = NULL;
 	game->map_arr = NULL;
 	game->map_gen = 0;
-
 	game->player.direct = 0;
 	game->player.posX = 0;
 	game->player.posY = 0;
-
 	game->tab = 0;
 	game->shift = 0;
 }
 
-int	assign_images(t_cub3D *game)
+void	assign_compass(t_cub3D *game)
 {
-	char *ptr;
-	int x;
-	int y;
+	int	x;
+	int	y;
+
+	game->north_compass.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/n.xpm", &x, &y);
+	game->north_compass.addr = mlx_get_data_addr(game->north_compass.img,
+			&game->north_compass.bpp, &game->north_compass.line_size,
+			&game->north_compass.endian);
+	game->east_compass.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/e.xpm", &x, &y);
+	game->east_compass.addr = mlx_get_data_addr(game->east_compass.img,
+			&game->east_compass.bpp, &game->east_compass.line_size,
+			&game->east_compass.endian);
+	game->south_compass.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/s.xpm", &x, &y);
+	game->south_compass.addr = mlx_get_data_addr(game->south_compass.img,
+			&game->south_compass.bpp, &game->south_compass.line_size,
+			&game->south_compass.endian);
+	game->west_compass.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/w.xpm", &x, &y);
+	game->west_compass.addr = mlx_get_data_addr(game->west_compass.img,
+			&game->west_compass.bpp, &game->west_compass.line_size,
+			&game->west_compass.endian);
+}
+
+void	assign_minimap(t_cub3D *game)
+{
+	int	x;
+	int	y;
+
+	game->minimap_wall.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/whiteb.xpm", &x, &y);
+	game->minimap_wall.addr = mlx_get_data_addr(game->minimap_wall.img,
+			&game->minimap_wall.bpp, &game->minimap_wall.line_size,
+			&game->minimap_wall.endian);
+	game->minimap_floor.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/blackb.xpm", &x, &y);
+	game->minimap_floor.addr = mlx_get_data_addr(game->minimap_floor.img,
+			&game->minimap_floor.bpp, &game->minimap_floor.line_size,
+			&game->minimap_floor.endian);
+}
+
+void	assign_walls_ns(t_cub3D *game)
+{
+	char	*ptr;
+	int		x;
+	int		y;
 
 	ptr = game->north_wall.img;
 	game->north_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	game->north_wall.addr = mlx_get_data_addr(game->north_wall.img, &game->north_wall.bpp, &game->north_wall.line_size, &game->north_wall.endian);
-	free(ptr);
-	ptr = game->east_wall.img;
-	game->east_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	game->east_wall.addr = mlx_get_data_addr(game->east_wall.img, &game->east_wall.bpp, &game->east_wall.line_size, &game->east_wall.endian);
-	free(ptr);
-	ptr = game->west_wall.img;
-	game->west_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	game->west_wall.addr = mlx_get_data_addr(game->west_wall.img, &game->west_wall.bpp, &game->west_wall.line_size, &game->west_wall.endian);
+	game->north_wall.addr = mlx_get_data_addr(game->north_wall.img,
+			&game->north_wall.bpp, &game->north_wall.line_size,
+			&game->north_wall.endian);
 	free(ptr);
 	ptr = game->south_wall.img;
 	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	game->south_wall.addr = mlx_get_data_addr(game->south_wall.img, &game->south_wall.bpp, &game->south_wall.line_size, &game->south_wall.endian);
+	game->south_wall.addr = mlx_get_data_addr(game->south_wall.img,
+			&game->south_wall.bpp, &game->south_wall.line_size,
+			&game->south_wall.endian);
 	free(ptr);
-	game->minimap_wall.img = mlx_xpm_file_to_image(game->mlx, "./textures/whiteb.xpm", &x, &y);
-	game->minimap_wall.addr = mlx_get_data_addr(game->minimap_wall.img, &game->minimap_wall.bpp, &game->minimap_wall.line_size, &game->minimap_wall.endian);
-	game->minimap_floor.img = mlx_xpm_file_to_image(game->mlx, "./textures/blackb.xpm", &x, &y);
-	game->minimap_floor.addr = mlx_get_data_addr(game->minimap_floor.img, &game->minimap_floor.bpp, &game->minimap_floor.line_size, &game->minimap_floor.endian);
-	game->north_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/n.xpm", &x, &y);
-	game->north_compass.addr = mlx_get_data_addr(game->north_compass.img, &game->north_compass.bpp, &game->north_compass.line_size, &game->north_compass.endian);
-	game->east_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/e.xpm", &x, &y);
-	game->east_compass.addr = mlx_get_data_addr(game->east_compass.img, &game->east_compass.bpp, &game->east_compass.line_size, &game->east_compass.endian);
-	game->south_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/s.xpm", &x, &y);
-	game->south_compass.addr = mlx_get_data_addr(game->south_compass.img, &game->south_compass.bpp, &game->south_compass.line_size, &game->south_compass.endian);
-	game->west_compass.img = mlx_xpm_file_to_image(game->mlx, "./textures/w.xpm", &x, &y);
-	game->west_compass.addr = mlx_get_data_addr(game->west_compass.img, &game->west_compass.bpp, &game->west_compass.line_size, &game->west_compass.endian);
+}
+
+void	assign_walls_ew(t_cub3D *game)
+{
+	char	*ptr;
+	int		x;
+	int		y;
+
+	ptr = game->east_wall.img;
+	game->east_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
+	game->east_wall.addr = mlx_get_data_addr(game->east_wall.img,
+			&game->east_wall.bpp, &game->east_wall.line_size,
+			&game->east_wall.endian);
+	free(ptr);
+	ptr = game->west_wall.img;
+	game->west_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
+	game->west_wall.addr = mlx_get_data_addr(game->west_wall.img,
+			&game->west_wall.bpp, &game->west_wall.line_size,
+			&game->west_wall.endian);
+	free(ptr);
+}
+
+int	assign_images(t_cub3D *game)
+{
+	assign_walls_ns(game);
+	assign_walls_ew(game);
+	assign_minimap(game);
+	assign_compass(game);
 	return (0);
 }
 
-void make_minimap(t_cub3D *game)
+void	make_minimap(t_cub3D *game)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = -1;
 	if (!game->map_gen)
@@ -114,14 +168,17 @@ void make_minimap(t_cub3D *game)
 			while (game->map_arr[y][++x])
 			{
 				if (game->map_arr[y][x] == '1' || game->map_arr[y][x] == ' ')
-					mlx_put_image_to_window(game->mlx, game->window, game->minimap_wall.img, x * 34, y * 34);
+					mlx_put_image_to_window(game->mlx, game->window,
+						game->minimap_wall.img, x * 34, y * 34);
 				else
-					mlx_put_image_to_window(game->mlx, game->window, game->minimap_floor.img, x * 34, y * 34);
+					mlx_put_image_to_window(game->mlx, game->window,
+						game->minimap_floor.img, x * 34, y * 34);
 			}
 		}
 		game->map_gen = 1;
 	}
-	mlx_pixel_put(game->mlx, game->window, (game->player.posX) * 34, (game->player.posY) * 34, game->ceiling);
+	mlx_pixel_put(game->mlx, game->window, (game->player.posX) * 34,
+		(game->player.posY) * 34, game->ceiling);
 }
 
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
@@ -129,180 +186,263 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_size + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-double ft_abs(double x)
+double	ft_abs(double x)
 {
 	if (x < 0)
 		x = -x;
 	return (x);
 }
 
-int temp_raytracing_func(t_cub3D *game)
+void	get_draw_coords(t_cub3D *game)
 {
-	int x;
-	int hit;
-	int	side;
-	// int n_coordx;
-	// int n_coordy;
+	game->ray.lineHeight = game->window_height / game->ray.perpWallDist;
+	game->ray.drawStart = -game->ray.lineHeight / 2 + game->window_height / 2;
+	if (game->ray.drawStart < 0)
+		game->ray.drawStart = 0;
+	game->ray.drawEnd = game->ray.lineHeight / 2 + game->window_height / 2;
+	if (game->ray.drawEnd >= game->window_height)
+		game->ray.drawEnd = game->window_height - 1;
+}
+
+void	get_hit(t_cub3D *game, int *side)
+{
+	int	hit;
+
+	hit = 0;
+	while (!hit)
+	{
+		if (game->ray.sideDistX < game->ray.sideDistY)
+		{
+			game->ray.sideDistX += game->ray.deltaDistX;
+			game->ray.mapX += game->ray.stepX;
+			*side = 0;
+		}
+		else
+		{
+			game->ray.sideDistY += game->ray.deltaDistY;
+			game->ray.mapY += game->ray.stepY;
+			*side = 1;
+		}
+		if (game->map_arr[game->ray.mapY][game->ray.mapX] == '1')
+			hit = 1;
+	}
+}
+
+void	put_images_to_window(t_cub3D *game)
+{
+	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+	if (game->ray.north_x)
+		mlx_put_image_to_window(game->mlx, game->window,
+			game->north_compass.img, game->ray.north_x - 6,
+			game->ray.north_y - 12);
+	if (game->ray.east_x)
+		mlx_put_image_to_window(game->mlx, game->window,
+			game->east_compass.img, game->ray.east_x - 6,
+			game->ray.east_y - 14);
+	if (game->ray.south_x)
+		mlx_put_image_to_window(game->mlx, game->window,
+			game->south_compass.img, game->ray.south_x - 6,
+			game->ray.south_y - 12);
+	if (game->ray.west_x)
+		mlx_put_image_to_window(game->mlx, game->window,
+			game->west_compass.img, game->ray.west_x - 6,
+			game->ray.west_y - 11);
+}
+
+void	put_compass(t_cub3D *game, int x, int y)
+{
+	my_mlx_pixel_put(&game->img, x, y, game->compass);
+	if (game->ray.rayDirY < -0.999
+		&& game->ray.rayDirY > -1.001)
+	{
+		game->ray.north_x = x;
+		game->ray.north_y = y;
+	}
+	else if (game->ray.rayDirX > 0.999
+		&& game->ray.rayDirX < 1.001)
+	{
+		game->ray.east_x = x;
+		game->ray.east_y = y;
+	}
+	else if (game->ray.rayDirY > 0.999
+		&& game->ray.rayDirY < 1.001)
+	{
+		game->ray.south_x = x;
+		game->ray.south_y = y;
+	}
+	else if (game->ray.rayDirX < -0.999
+		&& game->ray.rayDirX > -1.001)
+	{
+		game->ray.west_x = x;
+		game->ray.west_y = y;
+	}
+}
+
+void	init_compass(t_cub3D *game)
+{
+	game->ray.north_x = 0;
+	game->ray.north_y = 0;
+	game->ray.east_x = 0;
+	game->ray.east_y = 0;
+	game->ray.south_x = 0;
+	game->ray.south_y = 0;
+	game->ray.west_x = 0;
+	game->ray.west_y = 0;
+}
+
+void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y)
+{
+	int	colour;
+
+	game->ray.texY = (int)game->ray.tex_pos & (RESOLUTION - 1);
+	game->ray.tex_pos += game->ray.step;
+	colour = *(int *)(img->addr + game->ray.texY % RESOLUTION * img->line_size
+			+ game->ray.texX % RESOLUTION * (img->bpp / 8));
+	my_mlx_pixel_put(&game->img, x, y, colour);
+}
+
+void	draw_to_image(t_cub3D *game, int x, t_image *img)
+{
+	int	y;
+
+	y = -1;
+	while (++y < game->window_height)
+	{
+		if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2
+			&& x > game->x_left_limit && x < game->x_right_limit)
+			put_compass(game, x, y);
+		else if (y < game->ray.drawStart)
+			my_mlx_pixel_put(&game->img, x, y, game->ceiling);
+		else if (y > game->ray.drawEnd)
+			my_mlx_pixel_put(&game->img, x, y, game->floor);
+		else
+			get_pixel_colour(game, img, x, y);
+	}
+}
+
+void	get_perp_wall_dist(t_cub3D *game, int side)
+{
+	if (!side)
+		game->ray.perpWallDist = (game->ray.sideDistX
+				- game->ray.deltaDistX);
+	else
+		game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
+}
+
+t_image	*set_image_ptr(t_cub3D *game, int side)
+{
+	t_image	*img;
+
+	if (side == 0 && game->ray.rayDirX > 0)
+		img = &game->east_wall;
+	else if (side == 0)
+		img = &game->west_wall;
+	else if (side == 1 && game->ray.rayDirY > 0)
+		img = &game->south_wall;
+	else
+		img = &game->north_wall;
+	return (img);
+}
+
+void	get_tex_pos(t_cub3D *game, int side)
+{
+	double	wallx;
+
+	if (!side)
+		wallx = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
+	else
+		wallx = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
+	wallx -= floor(wallx);
+	game->ray.texX = (int)(wallx * (double)RESOLUTION);
+	if (side == 0 && game->ray.rayDirX > 0)
+		game->ray.texX = RESOLUTION - game->ray.texX - 1;
+	else if (side == 1 && game->ray.rayDirY < 0)
+		game->ray.texX = RESOLUTION - game->ray.texX - 1;
+	game->ray.step = 1.0 * RESOLUTION / game->ray.lineHeight;
+	game->ray.tex_pos = (game->ray.drawStart - game->window_height
+			/ 2 + game->ray.lineHeight / 2) * game->ray.step;
+}
+
+void	init_ray(t_cub3D *game, int x)
+{
+	game->ray.cameraX = 2 * x / (double)game->window_width - 1;
+	game->ray.rayDirX = game->player.dirX + game->player.viewX
+		* game->ray.cameraX;
+	game->ray.rayDirY = game->player.dirY + game->player.viewY
+		* game->ray.cameraX;
+	game->ray.mapX = (int)game->player.posX;
+	game->ray.mapY = (int)game->player.posY;
+}
+
+void	get_delta_dist(t_cub3D *game)
+{
+	if (!game->ray.rayDirY)
+		game->ray.deltaDistY = 1e30;
+	else
+		game->ray.deltaDistY = ft_abs(1 / game->ray.rayDirY);
+	if (!game->ray.rayDirX)
+		game->ray.deltaDistX = 1e30;
+	else
+		game->ray.deltaDistX = ft_abs(1 / game->ray.rayDirX);
+}
+
+void	get_side_dist(t_cub3D *game)
+{
+	if (game->ray.rayDirX < 0)
+	{
+		game->ray.stepX = -1;
+		game->ray.sideDistX = (game->player.posX - game->ray.mapX)
+			* game->ray.deltaDistX;
+	}
+	else
+	{
+		game->ray.stepX = 1;
+		game->ray.sideDistX = (game->ray.mapX + 1.0 - game->player.posX)
+			* game->ray.deltaDistX;
+	}
+	if (game->ray.rayDirY < 0)
+	{
+		game->ray.stepY = -1;
+		game->ray.sideDistY = (game->player.posY - game->ray.mapY)
+			* game->ray.deltaDistY;
+	}
+	else
+	{
+		game->ray.stepY = 1;
+		game->ray.sideDistY = (game->ray.mapY + 1.0 - game->player.posY)
+			* game->ray.deltaDistY;
+	}
+}
+
+int	temp_raytracing_func(t_cub3D *game)
+{
+	int		x;
+	int		side;
+	t_image	*img;
 
 	x = -1;
 	if (!game->tab)
 	{
-		game->ray.north_x = 0;
-		game->ray.north_y = 0;
-		game->ray.east_x = 0;
-		game->ray.east_y = 0;
-		game->ray.south_x = 0;
-		game->ray.south_y = 0;
-		game->ray.west_x = 0;
-		game->ray.west_y = 0;
+		init_compass(game);
 		while (++x < game->window_width)
 		{
-			hit = 0;
-			game->ray.cameraX = 2 * x / (double)game->window_width - 1;
-			game->ray.rayDirX = game->player.dirX + game->player.viewX * game->ray.cameraX;
-			game->ray.rayDirY = game->player.dirY + game->player.viewY * game->ray.cameraX;
-			game->ray.mapX = (int)game->player.posX;
-			game->ray.mapY = (int)game->player.posY;
-			if (!game->ray.rayDirY)
-				game->ray.deltaDistY = 1e30;
-			else
-				game->ray.deltaDistY = ft_abs(1 / game->ray.rayDirY);
-			if (!game->ray.rayDirX)
-				game->ray.deltaDistX = 1e30;
-			else
-				game->ray.deltaDistX = ft_abs(1 / game->ray.rayDirX);
-			if (game->ray.rayDirX < 0)
-			{
-				game->ray.stepX = -1;
-				game->ray.sideDistX = (game->player.posX - game->ray.mapX) * game->ray.deltaDistX;
-			}
-			else
-			{
-				game->ray.stepX = 1;
-				game->ray.sideDistX = (game->ray.mapX + 1.0 - game->player.posX) * game->ray.deltaDistX;
-			}
-			if (game->ray.rayDirY < 0)
-			{
-				game->ray.stepY = -1;
-				game->ray.sideDistY = (game->player.posY - game->ray.mapY) * game->ray.deltaDistY;
-			}
-			else
-			{
-				game->ray.stepY = 1;
-				game->ray.sideDistY = (game->ray.mapY + 1.0 - game->player.posY) * game->ray.deltaDistY;
-			}
-			while (!hit)
-			{
-				if (game->ray.sideDistX < game->ray.sideDistY)
-				{
-					game->ray.sideDistX += game->ray.deltaDistX;
-					game->ray.mapX += game->ray.stepX;
-					side = 0;
-				}
-				else
-				{
-					game->ray.sideDistY += game->ray.deltaDistY;
-					game->ray.mapY += game->ray.stepY;
-					side = 1;
-				}
-				if (game->map_arr[game->ray.mapY][game->ray.mapX] == '1')
-					hit = 1;
-			}
-			if (!side)
-				game->ray.perpWallDist = (game->ray.sideDistX - game->ray.deltaDistX);
-			else
-				game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
-			game->ray.lineHeight = game->window_height / game->ray.perpWallDist;
-			game->ray.drawStart = -game->ray.lineHeight / 2 + game->window_height / 2;
-			if (game->ray.drawStart < 0)
-				game->ray.drawStart = 0;
-			game->ray.drawEnd = game->ray.lineHeight / 2 + game->window_height / 2;
-			if (game->ray.drawEnd >= game->window_height)
-				game->ray.drawEnd = game->window_height - 1;
-			double wallX;
-			if (!side)
-				wallX = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
-			else
-				wallX = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
-			// printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
-			wallX -= floor(wallX);
-			game->ray.texX = (int)(wallX * (double)RESOLUTION);
-			if (side == 0 && game->ray.rayDirX > 0)
-				game->ray.texX = RESOLUTION - game->ray.texX - 1;
-			else if (side == 1 && game->ray.rayDirY < 0)
-				game->ray.texX = RESOLUTION - game->ray.texX - 1;
-			double step;
-			step = 1.0 * RESOLUTION / game->ray.lineHeight;
-			double texPos;
-			texPos = (game->ray.drawStart - game->window_height / 2 + game->ray.lineHeight / 2) * step;
-			t_image *img;
-			if (side == 0 && game->ray.rayDirX > 0)
-				img = &game->east_wall;
-			else if (side == 0)
-				img = &game->west_wall;
-			else if (side == 1 && game->ray.rayDirY > 0)
-				img = &game->south_wall;
-			else
-				img = &game->north_wall;
-			int y;
-			y = -1;
-			//printf("TexPos: %f, WallX: %f, texX: %d, texY: %d, step: %f\n", texPos, wallX, game->ray.texX, game->ray.texY, step);
-			while (++y < game->window_height)
-			{
-				if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2 && x > game->x_left_limit && x < game->x_right_limit)
-				{
-					my_mlx_pixel_put(&game->img, x, y, game->compass);
-					if (game->ray.rayDirY < -0.999 && game->ray.rayDirY > -1.001)
-					{
-						game->ray.north_x = x;
-						game->ray.north_y = y;
-					}
-					else if (game->ray.rayDirX > 0.999 && game->ray.rayDirX < 1.001)
-					{
-						game->ray.east_x = x;
-						game->ray.east_y = y;
-					}
-					else if (game->ray.rayDirY > 0.999 && game->ray.rayDirY < 1.001)
-					{
-						game->ray.south_x = x;
-						game->ray.south_y = y;
-					}
-					else if (game->ray.rayDirX < -0.999 && game->ray.rayDirX > -1.001)
-					{
-						game->ray.west_x = x;
-						game->ray.west_y = y;
-					}
-				}
-				else if (y < game->ray.drawStart)
-					my_mlx_pixel_put(&game->img, x, y, game->ceiling);
-				else if (y > game->ray.drawEnd)
-					my_mlx_pixel_put(&game->img, x, y, game->floor);
-				else
-				{
-					game->ray.texY = (int)texPos & (RESOLUTION - 1);
-					texPos += step;
-					int colour;
-					colour = *(int *)(img->addr + game->ray.texY % RESOLUTION * img->line_size + game->ray.texX % RESOLUTION * (img->bpp / 8));
-					my_mlx_pixel_put(&game->img, x, y, colour);
-				}
-			}
+			init_ray(game, x);
+			get_delta_dist(game);
+			get_side_dist(game);
+			get_hit(game, &side);
+			get_perp_wall_dist(game, side);
+			get_draw_coords(game);
+			get_tex_pos(game, side);
+			img = set_image_ptr(game, side);
+			draw_to_image(game, x, img);
 		}
-		mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
-		if (game->ray.north_x)
-			mlx_put_image_to_window(game->mlx, game->window, game->north_compass.img, game->ray.north_x - 6, game->ray.north_y - 12);
-		if (game->ray.east_x)
-			mlx_put_image_to_window(game->mlx, game->window, game->east_compass.img, game->ray.east_x - 6, game->ray.east_y - 12);
-		if (game->ray.south_x)
-			mlx_put_image_to_window(game->mlx, game->window, game->south_compass.img, game->ray.south_x - 6, game->ray.south_y - 12);
-		if (game->ray.west_x)
-			mlx_put_image_to_window(game->mlx, game->window, game->west_compass.img, game->ray.west_x - 6, game->ray.west_y - 12);
+		put_images_to_window(game);
 	}
 	else
 		make_minimap(game);
-	usleep(1000);
 	return (0);
 }
 

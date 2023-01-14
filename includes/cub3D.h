@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 17:12:23 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:45:57 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_ray
 	int		drawEnd; // height to finish drawing.
 	int		stepX; // direction of the next hit block.
 	int		stepY; // direction of the next hit block.
+	double	tex_pos;
+	double	step;
 	int		mapX;
 	int		mapY;
 	int		texX;
