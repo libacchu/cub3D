@@ -6,15 +6,15 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:59:43 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/12 16:32:51 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 10:21:20 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	colourshift(int r, int g, int b)
+int	colourshift(int t, int r, int g, int b)
 {
-	return (0 << 24 | r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 int	set_rgb(char *str, int *colour)
@@ -48,7 +48,7 @@ int	set_rgb(char *str, int *colour)
 		i++;
 		c++;
 	}
-	*colour = colourshift(r, g, b);
+	*colour = colourshift(0, r, g, b);
 	return (0);
 }
 

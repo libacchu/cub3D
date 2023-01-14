@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 23:03:40 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 10:14:56 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_key(int keycode, t_cub3D *game)
 {
 	double speed;
 
-	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
 	else if (keycode == KEY_W)

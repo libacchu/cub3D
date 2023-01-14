@@ -6,7 +6,7 @@
 #    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/13 22:33:24 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/14 10:28:36 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,13 @@ SRC		=	main.c \
 			key_hooks.c \
 			exit.c
 INC		=	includes/cub3D.h
-#LIBS	=	-L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a ./minilibx_linux/libmlx.a
-LIBS	=	-Lminilibx_linux -lm -lmlx -lXext -lX11 -Iminilibx_linux $(LIBFT)libft.a
+SYS		=	$(shell uname -s)
+ifeq ($(SYS), Linux)
+    LIBS    =    -Lminilibx_linux -lm -lmlx -lXext -lX11 -Iminilibx_linux $(LIBFT)libft.a
+endif
+ifeq ($(SYS), Darwin)
+    LIBS    =    -L/usr/X11/lib -lX11 -lXext $(LIBFT)libft.a ./minilibx_linux/libmlx.a
+endif
 SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
 OBJ		=	$(SRCS:%.c=$(OBJ_DIR)%.o)
 CC		=	gcc
