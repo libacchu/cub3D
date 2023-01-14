@@ -6,7 +6,7 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/14 17:11:59 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/14 17:51:42 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC		=	main.c \
 			key_hooks.c \
 			movement.c \
 			exit.c \
-			player_direction.c
+			player_direction.c \
+			mouse_move.c
 
 INC		=	includes/cub3D.h
 SYS		=	$(shell uname -s)

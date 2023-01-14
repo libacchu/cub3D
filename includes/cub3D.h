@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 17:12:23 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:39:36 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,10 @@ int		ft_mouse(t_cub3D *game);
 void	move_player(t_cub3D *game, double y, double x, int grad);
 void	rotate_player(t_cub3D *game, int dir);
 
-int	colourshift(int t, int r, int g, int b);
-void make_minimap(t_cub3D *game);
+int		colourshift(int t, int r, int g, int b);
+void	make_minimap(t_cub3D *game);
 
 void	player_start_direction(int x, int y, t_cub3D *game);
+int		mouse_move(int x, int y, t_cub3D *game);
 
 #endif
