@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 14:45:03 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:50:03 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,41 +62,10 @@ int	loop_x(t_cub3D *game, int x, int y)
 		if (ft_strchr("NSEW", game->map_arr[y][x]))
 		{
 			if (!game->player.direct)
-			{
-				game->player.direct = game->map_arr[y][x];
-				game->player.posX = 0.5 + x;
-				game->player.posY = 0.5 + y;
-				if (game->map_arr[y][x] == 'N')
-				{
-					game->player.dirX = 0;
-					game->player.dirY = -1;
-					game->player.viewX = 0.90;
-					game->player.viewY = 0;
-				}
-				if (game->map_arr[y][x] == 'E')
-				{
-					game->player.dirX = 1;
-					game->player.dirY = 0;
-					game->player.viewX = 0;
-					game->player.viewY = 0.90;
-				}
-				if (game->map_arr[y][x] == 'S')
-				{
-					game->player.dirX = 0;
-					game->player.dirY = 1;
-					game->player.viewX = -0.90;
-					game->player.viewY = 0;
-				}
-				if (game->map_arr[y][x] == 'W')
-				{
-					game->player.dirX = -1;
-					game->player.dirY = 0;
-					game->player.viewX = 0;
-					game->player.viewY = -0.90;
-				}
-			}
+				player_start_direction(x, y, game);
 			else
-				return (err_message("Invalid character: Check player elements."));
+				return (\
+				err_message("Invalid character: Check player elements."));
 		}
 		if (check_walls_chars(game, x, y))
 			return (1);

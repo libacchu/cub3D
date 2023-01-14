@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_rgb_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:59:43 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/14 10:21:20 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 16:01:20 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,53 @@ int	colourshift(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+void	set_color(int **rgb, int c, int n)
+{
+	if (c == 0)
+		*rgb[0] = n;
+	else if (c == 1)
+		*rgb[1] = n;
+	else if (c == 2)
+		*rgb[2] = n;
+}
+
+int	convert_number(char *str, int *i, int *n)
+{
+	while (str[*i] && (str[*i] <= 32 || str[*i] == ','))
+		*i = *i + 1;
+	if (!(str[*i]) || !ft_isdigit(str[*i]))
+		return (1);
+	*n = ft_atoi(&str[*i]);
+	if (*n > 255 || *n < 0)
+		return (1);
+	return (0);
+}
+
 int	set_rgb(char *str, int *colour)
 {
 	int	n;
 	int	i;
-	int r;
-	int g;
-	int b;
-	int c;
+	int	c;
+	int	rgb[3];
 
 	i = 1;
-	c = 0;
-	while (c < 3)
+	c = -1;
+	while (++c < 3)
 	{
-		while (str[i] && (str[i] <= 32 || str[i] == ','))
-			i++;
-		if (!str[i] || !ft_isdigit(str[i]))
-			return (1);
-		n = ft_atoi(&str[i]);
-		if (n > 255 || n < 0)
+		if (convert_number(str, &i, &n))
 			return (1);
 		if (c == 0)
-			r = n;
+			rgb[0] = n;
 		else if (c == 1)
-			g = n;
+			rgb[1] = n;
 		else if (c == 2)
-			b = n;
+			rgb[2] = n;
 		while (str[i] && str[i] != ',')
 			i++;
 		i++;
-		c++;
 	}
-	*colour = colourshift(0, r, g, b);
+	ft_printf("R = %d, G = %d, B = %d \n", rgb[0], rgb[1], rgb[2]);
+	*colour = colourshift(0, rgb[0], rgb[1], rgb[2]);
 	return (0);
 }
 
