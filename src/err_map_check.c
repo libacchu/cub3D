@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/13 14:45:03 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:33:37 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	loop_x(t_cub3D *game, int x, int y)
 				{
 					game->player.dirX = 0;
 					game->player.dirY = -1;
-					game->player.viewX = 0.90;
+					game->player.viewX = 0.66;
 					game->player.viewY = 0;
 				}
 				if (game->map_arr[y][x] == 'E')
@@ -78,13 +78,13 @@ int	loop_x(t_cub3D *game, int x, int y)
 					game->player.dirX = 1;
 					game->player.dirY = 0;
 					game->player.viewX = 0;
-					game->player.viewY = 0.90;
+					game->player.viewY = 0.66;
 				}
 				if (game->map_arr[y][x] == 'S')
 				{
 					game->player.dirX = 0;
 					game->player.dirY = 1;
-					game->player.viewX = -0.90;
+					game->player.viewX = -0.66;
 					game->player.viewY = 0;
 				}
 				if (game->map_arr[y][x] == 'W')
@@ -92,7 +92,7 @@ int	loop_x(t_cub3D *game, int x, int y)
 					game->player.dirX = -1;
 					game->player.dirY = 0;
 					game->player.viewX = 0;
-					game->player.viewY = -0.90;
+					game->player.viewY = -0.66;
 				}
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 10:14:56 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 15:31:02 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,92 +19,50 @@
 		- red cross: close the window and quit the program cleanly.
  */
 
+void	toggle_shift(t_cub3D *game)
+{
+	if (game->shift)
+		game->shift = 0;
+	else
+		game->shift = 1;
+}
+
+void	toggle_tab(t_cub3D *game)
+{
+	if (game->tab)
+	{
+		game->tab = 0;
+		game->map_gen = 0;
+	}
+	else
+		game->tab = 1;
+}
+
 int	ft_key(int keycode, t_cub3D *game)
 {
-	double speed;
-
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
 	else if (keycode == KEY_W)
-	{
-		if (game->shift)
-			speed = RUN_SPEED;
-		else
-			speed = WALK_SPEED;
-		game->player.posY += speed * game->player.dirY;
-		game->player.posX += speed * game->player.dirX;
-	}
+		move_player(game, game->player.dirY, game->player.dirX, 1);
 	else if (keycode == KEY_A)
-	{
-		if (game->shift)
-			speed = RUN_SPEED;
-		else
-			speed = WALK_SPEED;
-		game->player.posY -= speed * game->player.viewY;
-		game->player.posX -= speed * game->player.viewX;
-	}
+		move_player(game, game->player.viewY, game->player.viewX, -1);
 	else if (keycode == KEY_S)
-	{
-		if (game->shift)
-			speed = RUN_SPEED;
-		else
-			speed = WALK_SPEED;
-		game->player.posY -= speed * game->player.dirY;
-		game->player.posX -= speed * game->player.dirX;
-	}
+		move_player(game, game->player.dirY, game->player.dirX, -1);
 	else if (keycode == KEY_D)
-	{
-		if (game->shift)
-			speed = RUN_SPEED;
-		else
-			speed = WALK_SPEED;
-		game->player.posY += speed * game->player.viewY;
-		game->player.posX += speed * game->player.viewX;
-	}
+		move_player(game, game->player.viewY, game->player.viewX, 1);
 	else if (keycode == KEY_LEFT)
-	{
-		double	old_X;
-		old_X = game->player.dirX;
-		game->player.dirX = old_X * cos(-ROTATE_SPEED) - game->player.dirY * sin(-ROTATE_SPEED);
-		game->player.dirY = old_X * sin(-ROTATE_SPEED) + game->player.dirY * cos(-ROTATE_SPEED);
-		old_X = game->player.viewX;
-		game->player.viewX = old_X * cos(-ROTATE_SPEED) - game->player.viewY * sin(-ROTATE_SPEED);
-		game->player.viewY = old_X * sin(-ROTATE_SPEED) + game->player.viewY * cos(-ROTATE_SPEED);
-	}
+		rotate_player(game, -1);
 	else if (keycode == KEY_RIGHT)
-	{
-		double	old_X;
-		old_X = game->player.dirX;
-		game->player.dirX = old_X * cos(ROTATE_SPEED) - game->player.dirY * sin(ROTATE_SPEED);
-		game->player.dirY = old_X * sin(ROTATE_SPEED) + game->player.dirY * cos(ROTATE_SPEED);
-		old_X = game->player.viewX;
-		game->player.viewX = old_X * cos(ROTATE_SPEED) - game->player.viewY * sin(ROTATE_SPEED);
-		game->player.viewY = old_X * sin(ROTATE_SPEED) + game->player.viewY * cos(ROTATE_SPEED);
-	}
+		rotate_player(game, 1);
 	else if (keycode == KEY_TAB)
-	{
-		if (game->tab)
-		{
-			game->tab = 0;
-			game->map_gen = 0;
-		}
-		else
-			game->tab = 1;
-	}
+		toggle_tab(game);
 	else if (keycode == KEY_SHIFT)
-	{
-		if (game->shift)
-			game->shift = 0;
-		else
-			game->shift = 1;
-	}
+		toggle_shift(game);
 	return (0);
 }
 
 int	ft_mouse(t_cub3D *game)
 {
-	/* red cross */
-
 	ft_exit(NULL, game);
 	return (0);
 }

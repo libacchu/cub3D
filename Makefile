@@ -6,7 +6,7 @@
 #    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/14 10:28:36 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/14 15:35:20 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC		=	main.c \
 			err_map_check2.c \
 			err_file_check.c \
 			key_hooks.c \
+			movement.c \
 			exit.c
 INC		=	includes/cub3D.h
 SYS		=	$(shell uname -s)

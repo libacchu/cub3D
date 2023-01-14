@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 14:01:16 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:02:51 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ void	ft_exit(char *str, t_cub3D *game);
 
 int		ft_key(int keycode, t_cub3D *game);
 int		ft_mouse(t_cub3D *game);
+
+void	move_player(t_cub3D *game, double y, double x, int grad);
+void	rotate_player(t_cub3D *game, int dir);
 
 int	colourshift(int t, int r, int g, int b);
 void make_minimap(t_cub3D *game);

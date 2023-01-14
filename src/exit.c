@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:39 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 13:41:06 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 14:07:47 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void ft_exit(char *str, t_cub3D *game)
+void	ft_exit(char *str, t_cub3D *game)
 {
 	(void)game;
 	if (str)

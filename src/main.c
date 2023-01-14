@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 14:04:17 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:02:42 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ int temp_raytracing_func(t_cub3D *game)
 				img = &game->north_wall;
 			int y;
 			y = -1;
+			//printf("TexPos: %f, WallX: %f, texX: %d, texY: %d, step: %f\n", texPos, wallX, game->ray.texX, game->ray.texY, step);
 			while (++y < game->window_height)
 			{
 				if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2 && x > game->x_left_limit && x < game->x_right_limit)
