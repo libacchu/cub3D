@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 12:18:15 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:44:25 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void init_game(t_cub3D *game)
 
 	game->ceiling = 0;
 	game->floor = 0;
-	game->compass = colourshift(5, 90, 120, 150);
+	game->compass = colourshift(200, 90, 120, 150);
 	game->dark = colourshift(0, 25, 25, 25);
 	game->path = NULL;
 	game->map_arr = NULL;
@@ -136,6 +136,8 @@ int temp_raytracing_func(t_cub3D *game)
 	int x;
 	int hit;
 	int	side;
+	// int n_coordx;
+	// int n_coordy;
 
 	x = -1;
 	if (!game->tab)
@@ -209,7 +211,7 @@ int temp_raytracing_func(t_cub3D *game)
 				wallX = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
 			else
 				wallX = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
-			printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
+			// printf("wall: %f, playposY %f, playposX %f, perpWallDist: %f, rayDirY %f, rayDirX %f\n", wallX, game->player.posY, game->player.posX, game->ray.perpWallDist, game->ray.rayDirY, game->ray.rayDirX);
 			wallX -= floor(wallX);
 			game->ray.texX = (int)(wallX * (double)RESOLUTION);
 			if (side == 0 && game->ray.rayDirX > 0)
@@ -244,18 +246,22 @@ int temp_raytracing_func(t_cub3D *game)
 					game->ray.texY = (int)texPos & (RESOLUTION - 1);
 					texPos += step;
 					int colour;
-					colour = *(int *)(game->east_wall.addr + game->ray.texY % RESOLUTION * game->east_wall.line_size + game->ray.texX % RESOLUTION * (game->east_wall.bpp / 8));
-					my_mlx_pixel_put(&game->img, x, y++, colour);
+					colour = *(int *)(img->addr + game->ray.texY % RESOLUTION * img->line_size + game->ray.texX % RESOLUTION * (img->bpp / 8));
+					my_mlx_pixel_put(&game->img, x, y, colour);
 				}
 			}
-			/*if (game->player.dirX < 0 && game->player.dirY > 0)
-				mlx_string_put(game->mlx, game->window, x, y, game->floor, "N");*/
+			// if (game->ray.rayDirX > 0.99 && game->ray.rayDirX < 1.01)
+			// {
+			// 	n_coordx = x;
+			// 	n_coordy = y;
+			// }
 		}
 		mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+		// mlx_put_image_to_window(game->mlx, game->window, game->north_compass.img, n_coordx, n_coordy);
 	}
 	else
 		make_minimap(game);
-	usleep(2000);
+	usleep(1000);
 	return (0);
 }
 
@@ -301,6 +307,44 @@ int	mouse_move(int x, int y, t_cub3D *game)
 	return (0);
 }
 
+void	start_loop(t_cub3D *game)
+{
+	mlx_do_sync(game->mlx);
+	mlx_mouse_hide(game->mlx, game->window);
+	mlx_do_key_autorepeaton(game->mlx);
+	mlx_loop_hook(game->mlx, temp_raytracing_func, game);
+	mlx_loop(game->mlx);
+}
+
+void print_map_array(t_cub3D *game)
+{
+	int i;
+	i = -1;
+	while (game->map_arr[++i])
+	{
+		printf("%s\n", game->map_arr[i]);	
+	}
+}
+
+void	set_screen_size(t_cub3D *game)
+{
+	mlx_get_screen_size(game->mlx, &game->window_width, &game->window_height);
+	if (game->window_width > 1920)
+		game->window_width = 1920;
+	if (game->window_height > 1080)
+		game->window_height = 1080;
+	game->half_height = game->window_height / 2;
+	game->half_width = game->window_width / 2;
+	game->mouse_prev_x = game->half_width;
+	game->mouse_prev_y = game->half_height;
+	game->x_left_limit = game->window_width / 15;
+	game->x_right_limit = game->window_width * 14 / 15;
+	game->y_up_limit = game->window_height * 14 / 15;
+	game->y_down_limit = game->window_height / 15;
+	game->img.img = mlx_new_image(game->mlx, game->window_width, game->window_height);
+	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.line_size, &game->img.endian);
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub3D game;
@@ -309,53 +353,22 @@ int	main(int argc, char **argv)
 		return (err_message("Try: ./cub3D maps/<map name>"));
 	if (errorcheck(argv, &game))
 		return (1);
-	int i;
-	i = -1;
-	while (++i < 16)
-	{
-		if (1 & (game.ceiling >> i))
-			printf("%d\n", 1);
-		else
-			printf("%d\n", 0);
-	}
-	i = -1;
-	while (game.map_arr[++i])
-	{
-		printf("%s\n", game.map_arr[i]);	
-	}
+	print_map_array(&game); // for debugging
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		return(err_message("Failed to initialise mlx."));
-	mlx_get_screen_size(game.mlx, &game.window_width, &game.window_height);
-	if (game.window_width > 1920)
-		game.window_width = 1920;
-	if (game.window_height > 1080)
-		game.window_height = 1080;
-	game.half_height = game.window_height / 2;
-	game.half_width = game.window_width / 2;
-	game.mouse_prev_x = game.half_width;
-	game.mouse_prev_y = game.half_height;
-	game.x_left_limit = game.window_width / 15;
-	game.x_right_limit = game.window_width * 14 / 15;
-	game.y_up_limit = game.window_height * 14 / 15;
-	game.y_down_limit = game.window_height / 15;
-	game.img.img = mlx_new_image(game.mlx, game.window_width, game.window_height);
-	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.line_size, &game.img.endian);
+	set_screen_size(&game);
 	if (assign_images(&game))
 		return (1);
 	printf("x: %d, y: %d\n", game.window_width, game.window_height);
 	game.window = mlx_new_window(game.mlx, game.window_width, game.window_height, "cub3D");
 	//temp_raytracing_func(&game);
 	//make_minimap(&game);
-	mlx_do_sync(game.mlx);
 	mlx_hook(game.window, 2, 1L << 0, ft_key, &game);
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
 	mlx_expose_hook(game.window, temp_raytracing_func, &game);
 	//mlx_mouse_hook(game.window, mouse_move, &game);
 	mlx_hook(game.window, 6, 1L << 6, mouse_move, &game);
-	mlx_mouse_hide(game.mlx, game.window);
-	mlx_do_key_autorepeaton(game.mlx);
-	mlx_loop_hook(game.mlx, temp_raytracing_func, &game);
-	mlx_loop(game.mlx);
+	start_loop(&game);
 	return (0);
 }
