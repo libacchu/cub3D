@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 18:50:56 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/14 19:07:32 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,48 +443,6 @@ int	temp_raytracing_func(t_cub3D *game)
 	}
 	else
 		make_minimap(game);
-	return (0);
-}
-
-int	mouse_move(int x, int y, t_cub3D *game)
-{
-	int x_dif;
-	double old_X;
-	
-	mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
-	x_dif = x - game->mouse_prev_x;
-	game->mouse_prev_x = x;
-	game->mouse_prev_y = y;
-	if (x_dif < 0)
-	{
-		while (x_dif++ < 0)
-		{
-			old_X = game->player.dirX;
-			game->player.dirX = old_X * cos(-MOUSE_SPEED) - game->player.dirY * sin(-MOUSE_SPEED);
-			game->player.dirY = old_X * sin(-MOUSE_SPEED) + game->player.dirY * cos(-MOUSE_SPEED);
-			old_X = game->player.viewX;
-			game->player.viewX = old_X * cos(-MOUSE_SPEED) - game->player.viewY * sin(-MOUSE_SPEED);
-			game->player.viewY = old_X * sin(-MOUSE_SPEED) + game->player.viewY * cos(-MOUSE_SPEED);
-		}
-	}
-	else if (x_dif > 0)
-	{
-		while (x_dif-- > 0)
-		{
-			old_X = game->player.dirX;
-			game->player.dirX = old_X * cos(MOUSE_SPEED) - game->player.dirY * sin(MOUSE_SPEED);
-			game->player.dirY = old_X * sin(MOUSE_SPEED) + game->player.dirY * cos(MOUSE_SPEED);
-			old_X = game->player.viewX;
-			game->player.viewX = old_X * cos(MOUSE_SPEED) - game->player.viewY * sin(MOUSE_SPEED);
-			game->player.viewY = old_X * sin(MOUSE_SPEED) + game->player.viewY * cos(MOUSE_SPEED);
-		}
-	}
-	if (game->mouse_prev_x > game->x_right_limit || game->mouse_prev_x < game->x_left_limit || game->mouse_prev_y > game->y_up_limit || game->mouse_prev_y < game->y_down_limit)
-	{
-		game->mouse_prev_x = game->half_width;
-		game->mouse_prev_y = game->half_height;
-		mlx_mouse_move(game->mlx, game->window, game->half_width, game->half_height);	
-	}
 	return (0);
 }
 
