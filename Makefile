@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
+#    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/14 17:51:42 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/15 00:55:46 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,15 @@ SRC		=	main.c \
 			movement.c \
 			exit.c \
 			player_direction.c \
-			mouse_move.c
-
+			mouse_move.c \
+			raycast.c \
+			raycast_calc.c \
+			raycast_calc_2.c \
+			game_init.c \
+			assign_images.c \
+			image.c \
+			utils.c \
+			minimap.c
 INC		=	includes/cub3D.h
 SYS		=	$(shell uname -s)
 ifeq ($(SYS), Linux)

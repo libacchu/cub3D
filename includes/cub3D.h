@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 19:04:06 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/15 00:56:41 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,17 @@ typedef struct s_cub3D
 	t_image		south_compass;
 	t_image		west_compass;
 
+	t_image		minimap;
 	t_image		minimap_wall;
 	t_image		minimap_floor;
-	int			map_gen;
+	t_image		minimap_player;
+	int			minimap_size_x;
+	int			minimap_size_y;
+	int			once;
 
 	int			ceiling;
 	int			floor;
 	int			compass;
-	int			dark;
 
 	char		*path;
 	char		**map_arr;
@@ -150,6 +153,8 @@ int		check_chars(char c);
 int		check_map(char *str, t_cub3D *game, int fd);
 int		check_rgb(char *str, t_cub3D *game);
 int		check_tex(char *str, t_cub3D *game);
+void	set_screen_size(t_cub3D *game);
+int		assign_images(t_cub3D *game);
 
 int		check_x(int c);
 int		check_y(char **map_arr, int y, int x);
@@ -161,6 +166,9 @@ int		err_path_name(char *path);
 int		only_white_space(char *str);
 int		errorcheck(char **argv, t_cub3D *game);
 
+double	ft_abs(double x);
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+
 void	ft_exit(char *str, t_cub3D *game);
 void	ft_free(t_cub3D *game);
 
@@ -171,7 +179,23 @@ void	move_player(t_cub3D *game, double y, double x, int grad);
 void	rotate_player(t_cub3D *game, int dir);
 
 int		colourshift(int t, int r, int g, int b);
+int		raycast(t_cub3D *game);
 void	make_minimap(t_cub3D *game);
+
+void	init_ray(t_cub3D *game, int x);
+void	init_compass(t_cub3D *game);
+void	put_compass(t_cub3D *game, int x, int y);
+void	get_delta_dist(t_cub3D *game);
+void	get_side_dist(t_cub3D *game);
+void	get_perp_wall_dist(t_cub3D *game, int side);
+void	get_hit(t_cub3D *game, int *side);
+void	get_draw_coords(t_cub3D *game);
+void	get_tex_pos(t_cub3D *game, int side);
+
+t_image	*set_image_ptr(t_cub3D *game, int side);
+void	draw_to_image(t_cub3D *game, int x, t_image *img);
+void	put_images_to_window(t_cub3D *game);
+void	pixel_put_image(t_cub3D *game, t_image *img, int x, int y);
 
 void	player_start_direction(int x, int y, t_cub3D *game);
 int		mouse_move(int x, int y, t_cub3D *game);

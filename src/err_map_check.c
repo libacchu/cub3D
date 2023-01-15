@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 17:13:17 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/15 02:06:08 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	loop_x(t_cub3D *game, int x, int y)
 		if (check_walls_chars(game, x, y))
 			return (1);
 	}
+	if (game->minimap_size_x < x)
+		game->minimap_size_x = x;
 	return (0);
 }
 
@@ -87,6 +89,8 @@ int	check_map(char *str, t_cub3D *game, int fd)
 		if (loop_x(game, x, y))
 			return (1);
 	}
+	game->minimap_size_y = y * 34;
+	game->minimap_size_x *= 34;
 	if (!game->player.direct)
 		return (err_message("No player location in map."));
 	return (0);

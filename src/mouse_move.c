@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:37:08 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 17:58:38 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/15 01:31:34 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

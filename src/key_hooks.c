@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 15:31:02 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/15 00:47:20 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	toggle_tab(t_cub3D *game)
 	if (game->tab)
 	{
 		game->tab = 0;
-		game->map_gen = 0;
+		game->once = 0;
 	}
 	else
 		game->tab = 1;
