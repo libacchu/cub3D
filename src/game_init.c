@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/15 01:37:32 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/15 23:55:40 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	init_game(t_cub3D *game)
 	game->east_wall.img = NULL;
 	game->ceiling = 0;
 	game->floor = 0;
-	game->compass = colourshift(250, 90, 120, 150);
+	game->compass = colourshift(200, 90, 120, 150);
+	game->ray_colour = colourshift(100, 128, 128, 128);
+	game->minimap.img = NULL;
+	game->doors = 0;
+	game->door_list = NULL;
 	game->path = NULL;
 	game->map_arr = NULL;
 	game->minimap_size_x = 0;

@@ -6,7 +6,7 @@
 #    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/15 00:55:46 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/16 00:06:21 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRC_DIR =	src/
 SRC		=	main.c \
 			free.c \
 			error_check.c \
-			err_utils.c \
 			err_tex_check.c \
 			err_rgb_check.c \
 			err_map_check.c \
@@ -36,7 +35,9 @@ SRC		=	main.c \
 			assign_images.c \
 			image.c \
 			utils.c \
-			minimap.c
+			minimap.c \
+			door.c \
+			lines.c
 INC		=	includes/cub3D.h
 SYS		=	$(shell uname -s)
 ifeq ($(SYS), Linux)
@@ -57,7 +58,7 @@ all : $(NAME)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(@D)
-	@printf "\r$(GREY)Compiling $(BLUE)$<"
+	@printf "\33[2K\r$(GREY)Compiling $(BLUE)$<"
 	@$(CC) $(CFLAGS) -c -g $< -o $@
 
 $(NAME) : $(OBJ) $(INC)
