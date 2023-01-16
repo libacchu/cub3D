@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/15 18:43:20 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:31:49 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	add_door(t_cub3D *game, int x, int y)
 	t_door	*new_door;
 	t_door	*door;
 
-	new_door = ft_calloc(1, sizeof(t_door *));
+	new_door = ft_calloc(1, sizeof(t_door));
 	if (!new_door)
 		return (err_message("Failed to allocate memory.\n"));
 	new_door->x = x;
