@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/16 00:15:49 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:00:28 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 # include <unistd.h>
 # include "../minilibx_linux/mlx.h"
-# include "../minilibx_linux/mlx_int.h"
+// # include "../minilibx_linux/mlx_int.h"
 # include <math.h>
 
 //# define WINDOW_HEIGHT 480
