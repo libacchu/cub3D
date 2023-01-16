@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:30:01 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/15 22:14:11 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:50:50 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@ void	rotate_player(t_cub3D *game, int dir)
 		+ game->player.viewY * cos(-ROTATE_SPEED);
 }
 
+int find_door_node(t_cub3D *game, int new_x, int new_y)
+{
+	t_door	*door;
+
+	door = game->door_list;
+	while (door)
+	{
+		if (door->x == new_x && door->y == new_y)
+			return (door->open);
+		door = door->next;
+	}
+	return (0);
+}
+
 void	move_left_down(t_cub3D *game, double speed_x, double speed_y)
 {
 	int new_x;
@@ -48,9 +62,11 @@ void	move_left_down(t_cub3D *game, double speed_x, double speed_y)
 
 	new_x = (int)(game->player.posX - speed_x);
 	new_y = (int)(game->player.posY - speed_y);
-	if (game->map_arr[(int)game->player.posY][new_x] != '1')
+	if (game->map_arr[(int)game->player.posY][new_x] != '1' && 
+		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posX -= speed_x;
-	if (game->map_arr[new_y][(int)game->player.posX] != '1')
+	if (game->map_arr[new_y][(int)game->player.posX] != '1' && 
+		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posY -= speed_y;
 }
 
@@ -61,9 +77,11 @@ void	move_right_up(t_cub3D *game, double speed_x, double speed_y)
 
 	new_x = (int)(game->player.posX + speed_x);
 	new_y = (int)(game->player.posY + speed_y);
-	if (game->map_arr[(int)game->player.posY][new_x] != '1')
+	if (game->map_arr[(int)game->player.posY][new_x] != '1' && 
+		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posX += speed_x;
-	if (game->map_arr[new_y][(int)game->player.posX] != '1')
+	if (game->map_arr[new_y][(int)game->player.posX] != '1' && 
+		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posY += speed_y;
 }
 
