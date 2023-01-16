@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_check2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/15 12:36:28 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 12:05:39 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	check_chars(char c)
 {
 	char	*list;
 
-	list = "01DNSEW";
+	list = "01DNSEWG";
 	if (ft_strchr(list, c))
 		return (0);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/15 11:43:49 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 15:04:43 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ int	assign_images(t_cub3D *game)
 	assign_door(game);
 	assign_minimap(game);
 	assign_compass(game);
+	// if (game->sprite_list)
+	assign_sprite(game);
 	return (0);
 }

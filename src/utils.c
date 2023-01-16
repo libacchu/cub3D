@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:42:55 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/15 23:41:08 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:56:44 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_size + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	ft_swap(int *distance_x, int *distance_y, int *order_x, int *order_y)
+{
+	int z;
+	
+	z = *distance_x;
+	*distance_x = *distance_y;
+	*distance_y = z;
+	z = *order_x;
+	*order_x = *order_y;
+	*order_y = z;
 }
 
 double	ft_abs(double x)

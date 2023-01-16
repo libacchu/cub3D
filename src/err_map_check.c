@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/15 12:07:47 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 15:02:04 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ int	loop_x(t_cub3D *game, int x, int y)
 		else if (game->map_arr[y][x] == 'D')
 		{
 			if (add_door(game, x, y))
+				return (1);
+		}
+		else if (game->map_arr[y][x] == 'G')
+		{
+			if (add_sprite(game, x, y))
 				return (1);
 		}
 		if (check_walls_chars(game, x, y))

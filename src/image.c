@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 00:02:43 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:07:09 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,23 @@ void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y)
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
 
+int	check_sprite_hit(t_cub3D *game, int x, int y)
+{
+	t_sprite	*sprite;
+
+	sprite = game->sprite_list;
+	while(sprite)
+	{
+		if (sprite->sprite_hit)
+		{
+			if (check_colour_pix(&game->sprite[sprite->sp_anime], ((64 * sprite->sp_img) + (x / 8)), (y / 8)))
+				return (1);
+		}
+		sprite = sprite->next;
+	}
+	return (0);
+}
+
 void	draw_to_image(t_cub3D *game, int x, t_image *img)
 {
 	int	y;
@@ -58,6 +75,8 @@ void	draw_to_image(t_cub3D *game, int x, t_image *img)
 			my_mlx_pixel_put(&game->img, x, y, game->ceiling);
 		else if (y > game->ray.drawEnd)
 			my_mlx_pixel_put(&game->img, x, y, game->floor);
+		else if (check_sprite_hit(game, x, y))
+			get_sprite_colour(game, x, y);
 		else if (game->door_hit && ((int)game->ray.tex_pos
 				& (RESOLUTION - 1)) > 25)
 			get_door_colour(game, &game->door, x, y);

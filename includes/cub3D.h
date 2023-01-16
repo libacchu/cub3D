@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/16 11:31:38 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:36:18 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_ray
 	double	deltaDistX; // dist to X block after next.
 	double	deltaDistY; // dist to Y block after next.
 	double	perpWallDist;
+	double	*zbuffer;
 	int		lineHeight;
 	int		drawStart; // height to begin drawing.
 	int		drawEnd; // height to finish drawing.
@@ -109,6 +110,17 @@ typedef struct s_image
 	int		endian;
 } t_image;
 
+typedef	struct s_sprite
+{
+	int		x;
+	int		y;
+	int		sp_img;
+	int		sp_anime;
+	int		sprite_active;
+	int		sprite_hit;
+	void	*next;
+} t_sprite;
+
 typedef struct s_player
 {
 	char	direct; // N, S, E, W
@@ -150,6 +162,11 @@ typedef struct s_cub3D
 	int			doors;
 	int			door_hit;
 	t_door		*door_list;
+
+	t_sprite	*sprite_list;
+	t_image 	*sprite;
+	int			sprite_total;
+	
 
 	char		*path;
 	char		**map_arr;
@@ -238,5 +255,14 @@ void	pixel_put_image(t_cub3D *game, t_image *img, int x, int y);
 
 void	player_start_direction(int x, int y, t_cub3D *game);
 int		mouse_move(int x, int y, t_cub3D *game);
+
+int	check_sprite(t_cub3D *game, int side);
+void	assign_sprite(t_cub3D *game);
+
+void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y);
+void	get_sprite_colour(t_cub3D *game, int x, int y);
+int	check_colour_pix(t_image *data, int x, int y);
+
+int	add_sprite(t_cub3D *game, int x, int y);
 
 #endif

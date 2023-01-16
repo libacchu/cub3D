@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/15 23:55:40 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:36:57 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_game(t_cub3D *game)
 	game->east_wall.img = NULL;
 	game->ceiling = 0;
 	game->floor = 0;
+	game->sprite_total = 0;
 	game->compass = colourshift(200, 90, 120, 150);
 	game->ray_colour = colourshift(100, 128, 128, 128);
 	game->minimap.img = NULL;
@@ -35,6 +36,7 @@ void	init_game(t_cub3D *game)
 	game->player.posY = 0;
 	game->tab = 0;
 	game->shift = 0;
+	game->sprite_list = NULL;
 }
 
 void	set_screen_size(t_cub3D *game)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/16 00:06:21 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/16 14:52:34 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC		=	main.c \
 			utils.c \
 			minimap.c \
 			door.c \
-			lines.c
+			lines.c \
+			sprite.c
 INC		=	includes/cub3D.h
 SYS		=	$(shell uname -s)
 ifeq ($(SYS), Linux)
