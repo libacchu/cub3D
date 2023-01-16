@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/15 00:47:20 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/15 18:38:30 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	ft_key(int keycode, t_cub3D *game)
 		rotate_player(game, -1);
 	else if (keycode == KEY_RIGHT)
 		rotate_player(game, 1);
+	else if (keycode == KEY_E)
+		find_door(game);
 	else if (keycode == KEY_TAB)
 		toggle_tab(game);
 	else if (keycode == KEY_SHIFT)

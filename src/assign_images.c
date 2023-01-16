@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/14 23:06:51 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/15 11:43:49 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	assign_images(t_cub3D *game)
 {
 	assign_walls_ns(game);
 	assign_walls_ew(game);
+	assign_door(game);
 	assign_minimap(game);
 	assign_compass(game);
 	return (0);

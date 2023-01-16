@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/15 00:56:41 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/16 00:15:49 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ enum	e_keystroke
 	KEY_LEFT = 65361,
 	KEY_RIGHT = 65363,
 	KEY_DOWN = 65364,
+	KEY_E = 101,
 	KEY_TAB = 65289,
 	KEY_SHIFT = 65505,
 };
@@ -76,6 +77,28 @@ typedef struct s_ray
 	int		west_x;
 	int		west_y;
 } t_ray;
+
+typedef struct s_line
+{
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		err2;
+	int		x0;
+	int		y0;
+	double	x1;
+	double	y1;
+} t_line;
+
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	int		open;
+	void	*next;
+} t_door;
 
 typedef struct s_image
 {
@@ -121,6 +144,12 @@ typedef struct s_cub3D
 	int			ceiling;
 	int			floor;
 	int			compass;
+	int			ray_colour;
+
+	t_image		door;
+	int			doors;
+	int			door_hit;
+	t_door		*door_list;
 
 	char		*path;
 	char		**map_arr;
@@ -178,9 +207,19 @@ int		ft_mouse(t_cub3D *game);
 void	move_player(t_cub3D *game, double y, double x, int grad);
 void	rotate_player(t_cub3D *game, int dir);
 
+int	add_door(t_cub3D *game, int x, int y);
+int	check_door(t_cub3D *game, int side);
+void	assign_door(t_cub3D *game);
+void	get_door_colour(t_cub3D *game, t_image *img, int x, int y);
+void	find_door(t_cub3D *game);
+void	open_door(t_cub3D *game, int x, int y);
+
 int		colourshift(int t, int r, int g, int b);
 int		raycast(t_cub3D *game);
 void	make_minimap(t_cub3D *game);
+void	refresh_minimap(t_cub3D *game);
+void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y);
+void	line_algo(t_cub3D *game, int x, int y);
 
 void	init_ray(t_cub3D *game, int x);
 void	init_compass(t_cub3D *game);

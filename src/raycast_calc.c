@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_init.c                                     :+:      :+:    :+:   */
+/*   raycast_calc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:28:08 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/14 22:32:04 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/15 12:47:57 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	get_perp_wall_dist(t_cub3D *game, int side)
+void	init_ray(t_cub3D *game, int x)
 {
-	if (!side)
-		game->ray.perpWallDist = (game->ray.sideDistX
-				- game->ray.deltaDistX);
-	else
-		game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
-}
-
-void	get_tex_pos(t_cub3D *game, int side)
-{
-	double	wallx;
-
-	if (!side)
-		wallx = game->player.posY + game->ray.perpWallDist * game->ray.rayDirY;
-	else
-		wallx = game->player.posX + game->ray.perpWallDist * game->ray.rayDirX;
-	wallx -= floor(wallx);
-	game->ray.texX = (int)(wallx * (double)RESOLUTION);
-	if (side == 0 && game->ray.rayDirX > 0)
-		game->ray.texX = RESOLUTION - game->ray.texX - 1;
-	else if (side == 1 && game->ray.rayDirY < 0)
-		game->ray.texX = RESOLUTION - game->ray.texX - 1;
-	game->ray.step = 1.0 * RESOLUTION / game->ray.lineHeight;
-	game->ray.tex_pos = (game->ray.drawStart - game->window_height
-			/ 2 + game->ray.lineHeight / 2) * game->ray.step;
+	game->ray.cameraX = 2 * x / (double)game->window_width - 1;
+	game->ray.rayDirX = game->player.dirX + game->player.viewX
+		* game->ray.cameraX;
+	game->ray.rayDirY = game->player.dirY + game->player.viewY
+		* game->ray.cameraX;
+	game->ray.mapX = (int)game->player.posX;
+	game->ray.mapY = (int)game->player.posY;
 }
 
 void	get_delta_dist(t_cub3D *game)
@@ -80,13 +63,38 @@ void	get_side_dist(t_cub3D *game)
 	}
 }
 
-void	init_ray(t_cub3D *game, int x)
+void	get_hit(t_cub3D *game, int *side)
 {
-	game->ray.cameraX = 2 * x / (double)game->window_width - 1;
-	game->ray.rayDirX = game->player.dirX + game->player.viewX
-		* game->ray.cameraX;
-	game->ray.rayDirY = game->player.dirY + game->player.viewY
-		* game->ray.cameraX;
-	game->ray.mapX = (int)game->player.posX;
-	game->ray.mapY = (int)game->player.posY;
+	int	hit;
+
+	hit = 0;
+	game->door_hit = 0;
+	while (!hit)
+	{
+		if (game->ray.sideDistX < game->ray.sideDistY)
+		{
+			game->ray.sideDistX += game->ray.deltaDistX;
+			game->ray.mapX += game->ray.stepX;
+			*side = 0;
+		}
+		else
+		{
+			game->ray.sideDistY += game->ray.deltaDistY;
+			game->ray.mapY += game->ray.stepY;
+			*side = 1;
+		}
+		if (game->map_arr[game->ray.mapY][game->ray.mapX] == '1' ||
+			(game->map_arr[game->ray.mapY][game->ray.mapX] == 'D'
+			&& check_door(game, *side)))
+			hit = 1;
+	}
+}
+
+void	get_perp_wall_dist(t_cub3D *game, int side)
+{
+	if (!side)
+		game->ray.perpWallDist = (game->ray.sideDistX
+				- game->ray.deltaDistX);
+	else
+		game->ray.perpWallDist = (game->ray.sideDistY - game->ray.deltaDistY);
 }
