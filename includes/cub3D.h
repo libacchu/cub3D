@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/17 13:04:12 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:00:15 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,14 @@ typedef struct s_image
 
 typedef	struct s_sprite
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	int		sp_img;
 	int		sp_anime;
 	int		sprite_active;
+	int		sprite_activate;
+	int		sprite_deactivate;
+	int		sprite_scare;
 	int		sp_img_total[4];
 	void	*next;
 } t_sprite;

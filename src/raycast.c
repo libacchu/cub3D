@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 13:39:54 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:27:00 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,24 @@ void	sort_sprites(int *sprite_order, int *sprite_distance, int total_sprites)
 	}
 }
 
+void	move_sprite(t_cub3D *game, int *sprite_order, int i)
+{
+	
+	if (ft_abs(game->player.posX - game->sprite_arr[i]->x) < 2 && ft_abs(game->player.posY - game->sprite_arr[i]->y) < 2)
+	{
+		if (!game->sprite_arr[i]->sprite_scare)
+		{
+			game->sprite_arr[i]->sp_anime = 2;
+			game->sprite_arr[i]->sp_img = 0;
+			game->sprite_arr[i]->sprite_scare = 1;
+		}
+		game->sprite_arr[sprite_order[i]]->x += 0.2 * (game->player.posX - game->sprite_arr[sprite_order[i]]->x);
+		game->sprite_arr[sprite_order[i]]->y += 0.2 * (game->player.posY - game->sprite_arr[sprite_order[i]]->y);
+	}
+	game->sprite_arr[sprite_order[i]]->x += 0.005 * (game->player.posX - game->sprite_arr[sprite_order[i]]->x);
+	game->sprite_arr[sprite_order[i]]->y += 0.005 * (game->player.posY - game->sprite_arr[sprite_order[i]]->y);
+}
+
 int	do_stuff_to_sprites(t_cub3D *game)
 {
 	int			*sprite_order;
@@ -100,8 +118,11 @@ int	do_stuff_to_sprites(t_cub3D *game)
 		int		d;
 		int		colour;
 
+		if (!game->sprite_arr[sprite_order[i]]->sprite_active)
+			continue ;
 		sprite_x = game->sprite_arr[sprite_order[i]]->x - game->player.posX;
 		sprite_y = game->sprite_arr[sprite_order[i]]->y - game->player.posY;
+		move_sprite(game, sprite_order, i);
 		inv_det = 1.0 / (game->player.viewX * game->player.dirY - game->player.dirX * game->player.viewY);
 		trans_x = inv_det * (game->player.dirY * sprite_x - game->player.dirX * sprite_y);
 		trans_y = inv_det * (-game->player.viewY * sprite_x + game->player.viewX * sprite_y);
@@ -154,14 +175,60 @@ void	inc_anims(t_cub3D *game)
 	{
 		while (game->sprite_arr[++i])
 		{
-			if (game->sprite_arr[i]->sp_img == game->sprite_arr[i]->sp_img_total[game->sprite_arr[i]->sp_anime])
+			game->sprite_arr[i]->sp_img++;
+			if (game->sprite_arr[i]->sprite_scare)
 			{
-				game->sprite_arr[i]->sp_img = 0;
-				game->sprite_arr[i]->sp_anime = (game->sprite_arr[i]->sp_anime + 1) % 4;
-				
+				if (game->sprite_arr[i]->sp_img > 3)
+					game->sprite_arr[i]->sp_img = 2;
+			}
+			else if (game->sprite_arr[i]->sp_anime == 2)
+			{
+				game->sprite_arr[i]->sp_img -= 2;
+				if (game->sprite_arr[i]->sp_img < 0)
+				{
+					game->sprite_arr[i]->sp_anime = 1;
+					game->sprite_arr[i]->sp_img = 0;
+				}
+			}
+			else if (game->sprite_arr[i]->sprite_activate)
+			{
+				if (game->sprite_arr[i]->sprite_activate == 1)
+				{
+					game->sprite_arr[i]->sp_anime = 0;
+					game->sprite_arr[i]->sp_img = 0;
+					game->sprite_arr[i]->sprite_active = 1;
+				}
+				if (game->sprite_arr[i]->sp_img == game->sprite_arr[i]->sp_img_total[game->sprite_arr[i]->sp_anime])
+				{
+					game->sprite_arr[i]->sp_anime++;
+					game->sprite_arr[i]->sp_img = 0;
+				}
+				game->sprite_arr[i]->sprite_activate++;
+				if (game->sprite_arr[i]->sprite_activate == 15)
+				{
+					game->sprite_arr[i]->sprite_activate = 0;
+					game->sprite_arr[i]->sp_img = 0;
+				}
+			}
+			else if (game->sprite_arr[i]->sprite_deactivate)
+			{
+				if (game->sprite_arr[i]->sprite_deactivate == 1)
+				{
+					game->sprite_arr[i]->sp_anime = 3;
+					game->sprite_arr[i]->sp_img = 1;
+				}
+				game->sprite_arr[i]->sprite_deactivate++;
+				if (game->sprite_arr[i]->sprite_deactivate == 7)
+				{
+					game->sprite_arr[i]->sprite_active = 0;
+					game->sprite_arr[i]->sprite_deactivate = 0;
+				}
 			}
 			else
-				game->sprite_arr[i]->sp_img++;
+			{
+				game->sprite_arr[i]->sp_anime = 1;
+				game->sprite_arr[i]->sp_img = game->sprite_arr[i]->sp_img % game->sprite_arr[i]->sp_img_total[game->sprite_arr[i]->sp_anime];
+			}
 		}
 		game->last_time = game->current_time;
 	}
