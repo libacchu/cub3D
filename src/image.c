@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 13:21:33 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:28:40 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	draw_to_image(t_cub3D *game, int x, t_image *img)
 		else if (y > game->ray.drawEnd)
 			my_mlx_pixel_put(&game->img, x, y, game->floor);
 		else if (game->door_hit && ((int)game->ray.tex_pos
-				& (RESOLUTION - 1)) > 25)
+				& (RESOLUTION - 1)) > 30)
 			get_door_colour(game, &game->door, x, y);
 		else
 			get_pixel_colour(game, img, x, y);

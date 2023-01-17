@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 11:31:49 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:28:30 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_door(t_cub3D *game, int side)
 			get_perp_wall_dist(game, side);
 			get_draw_coords(game);
 			get_tex_pos(game, side);
-			if (game->ray.texX < 152 || game->ray.texX > 512 - 153)
+			if (game->ray.texX < 130 || game->ray.texX > 512 - 125)
 				return (1);
 			if (!door->open)
 			{
