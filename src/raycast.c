@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 17:27:00 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 18:04:48 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void	move_sprite(t_cub3D *game, int *sprite_order, int i)
 			game->sprite_arr[i]->sp_anime = 2;
 			game->sprite_arr[i]->sp_img = 0;
 			game->sprite_arr[i]->sprite_scare = 1;
+			if (!fork())
+			{
+				system("afplay sound/sample-3s.mp3");
+				exit(0);
+			}
 		}
 		game->sprite_arr[sprite_order[i]]->x += 0.2 * (game->player.posX - game->sprite_arr[sprite_order[i]]->x);
 		game->sprite_arr[sprite_order[i]]->y += 0.2 * (game->player.posY - game->sprite_arr[sprite_order[i]]->y);

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/17 17:00:15 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 18:02:13 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../minilibx_linux/mlx.h"
 // # include "../minilibx_linux/mlx_int.h"
 # include <math.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
 //# define WINDOW_HEIGHT 480
 //# define WINDOW_WIDTH 640
