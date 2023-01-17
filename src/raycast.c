@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 12:29:23 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 13:39:54 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	do_stuff_to_sprites(t_cub3D *game)
 	int			*sprite_distance;
 	int			i;
 
-	printf("HERE sprite inside\n");
 	sprite_order = ft_calloc(game->sprite_total, sizeof(int));
 	if (!sprite_order)
 		return (err_message("Memory allocation failed."));
@@ -78,7 +77,6 @@ int	do_stuff_to_sprites(t_cub3D *game)
 		sprite_distance[i] = ((game->player.posX - game->sprite_arr[i]->x) * (game->player.posX - game->sprite_arr[i]->x) + (game->player.posY - game->sprite_arr[i]->y) * (game->player.posY - game->sprite_arr[i]->y));
 		i++;
 	}
-	printf("HERE sprite mid\n");
 	sort_sprites(sprite_order, sprite_distance, game->sprite_total);
 	i = -1;
 	while (++i < game->sprite_total)
@@ -125,7 +123,6 @@ int	do_stuff_to_sprites(t_cub3D *game)
 		if (draw_end_x >= game->window_width)
 			draw_end_x = game->window_width - 1;
 		x = draw_start_x - 1;
-		printf("%d\n", game->sprite[game->sprite_arr[sprite_order[i]]->sp_anime].line_size);
 		while (++x < draw_end_x)
 		{
 			tex_x = (int)(256 * (x - (-s_width / 2 + s_screen_x)) * RESOLUTION / s_width / 256);
@@ -152,10 +149,23 @@ void	inc_anims(t_cub3D *game)
 	int	i;
 
 	i = -1;
-	while (game->sprite_arr[++i])
+	game->current_time = get_time_in_ms();
+	if (get_time_in_ms() - game->last_time >= 150)
 	{
-		game->sprite_arr[i]->sp_img = (game->sprite_arr[i]->sp_img + 1) % 6;
+		while (game->sprite_arr[++i])
+		{
+			if (game->sprite_arr[i]->sp_img == game->sprite_arr[i]->sp_img_total[game->sprite_arr[i]->sp_anime])
+			{
+				game->sprite_arr[i]->sp_img = 0;
+				game->sprite_arr[i]->sp_anime = (game->sprite_arr[i]->sp_anime + 1) % 4;
+				
+			}
+			else
+				game->sprite_arr[i]->sp_img++;
+		}
+		game->last_time = game->current_time;
 	}
+	
 }
 
 int	raycast(t_cub3D *game)

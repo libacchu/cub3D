@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:42:55 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 18:56:44 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:38:19 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ void	open_door(t_cub3D *game, int x, int y)
 		}
 		door = door->next;
 	}
+}
+
+time_t	get_time_in_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

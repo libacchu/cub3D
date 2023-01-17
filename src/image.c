@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 12:20:07 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 13:21:33 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,6 @@ void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y)
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
 
-int	check_sprite_hit(t_cub3D *game, int x, int y)
-{
-	t_sprite	*sprite;
-
-	sprite = game->sprite_list;
-	while(sprite)
-	{
-		if (sprite->sprite_hit)
-		{
-			if (check_colour_pix(&game->sprite[sprite->sp_anime], ((64 * sprite->sp_img) + (x / 8)), (y / 8)))
-				return (1);
-		}
-		sprite = sprite->next;
-	}
-	return (0);
-}
 
 void	draw_to_image(t_cub3D *game, int x, t_image *img)
 {

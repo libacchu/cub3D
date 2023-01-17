@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 12:22:17 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 13:35:42 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,10 @@ int	make_sprite_array(t_cub3D *game)
 		game->sprite_arr[i]->y = node->y;
 		game->sprite_arr[i]->sp_anime = 0;
 		game->sprite_arr[i]->sp_img = 0;
+		game->sprite_arr[i]->sp_img_total[0] = 6;
+		game->sprite_arr[i]->sp_img_total[1] = 7;
+		game->sprite_arr[i]->sp_img_total[2] = 4;
+		game->sprite_arr[i]->sp_img_total[3] = 7;
 		game->sprite_arr[i]->sprite_active = 0;
 		prev = node;
 		node = node->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/17 12:05:56 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 13:04:12 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../minilibx_linux/mlx.h"
 // # include "../minilibx_linux/mlx_int.h"
 # include <math.h>
+#include <sys/time.h>
 
 //# define WINDOW_HEIGHT 480
 //# define WINDOW_WIDTH 640
@@ -117,7 +118,7 @@ typedef	struct s_sprite
 	int		sp_img;
 	int		sp_anime;
 	int		sprite_active;
-	int		sprite_hit;
+	int		sp_img_total[4];
 	void	*next;
 } t_sprite;
 
@@ -187,6 +188,9 @@ typedef struct s_cub3D
 	int			x_right_limit;
 	int			y_up_limit;
 	int			y_down_limit;
+
+	time_t		current_time;
+	time_t		last_time;
 
 	t_image		img;
 
@@ -266,5 +270,7 @@ void	get_sprite_colour(t_cub3D *game, int x, int y);
 int	check_colour_pix(t_image *data, int x, int y);
 
 int	add_sprite(t_cub3D *game, int x, int y);
+
+time_t	get_time_in_ms(void);
 
 #endif

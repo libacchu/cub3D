@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 18:36:57 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:42:11 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_game(t_cub3D *game)
 	game->tab = 0;
 	game->shift = 0;
 	game->sprite_list = NULL;
+	game->last_time = get_time_in_ms();
 }
 
 void	set_screen_size(t_cub3D *game)
