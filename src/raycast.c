@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 20:39:15 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 10:42:16 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,19 @@ int	do_stuff_to_sprites(t_cub3D *game)
 		double	sprite_x;
 		double	sprite_y;
 		double	inv_det;
+		double	trans_x;
+		double	trans_y;
+		int		s_screen_x;
+		int		s_screen_y;
 
 		sprite_x = game->sprite_list[sprite_order[i]].x - game->player.posX;
 		sprite_y = game->sprite_list[sprite_order[i]].y - game->player.posY;
 		inv_det = 1.0 / (game->player.viewX * game->player.dirY - game->player.dirX * game->player.viewY);
+		trans_x = inv_det * (game->player.dirY * sprite_x - game->player.dirX * sprite_y);
+		trans_y = inv_det * (-game->player.viewY * sprite_x + game->player.viewX * sprite_y);
+		s_screen_x = (int)(game->half_width * (1 + trans_x / trans_y));
 	}
+
 	// //after sorting the sprites, do the projection and draw them
     // for(int i = 0; i < numSprites; i++)
     // {
