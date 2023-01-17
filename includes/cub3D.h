@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/16 20:16:38 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 12:05:56 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct s_cub3D
 	t_door		*door_list;
 
 	t_sprite	*sprite_list;
+	t_sprite	**sprite_arr;
 	t_image 	*sprite;
 	int			sprite_total;
 	
@@ -214,6 +215,7 @@ int		errorcheck(char **argv, t_cub3D *game);
 
 double	ft_abs(double x);
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void	ft_swap(int *distance_x, int *distance_y, int *order_x, int *order_y);
 
 void	ft_exit(char *str, t_cub3D *game);
 void	ft_free(t_cub3D *game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 18:07:09 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:20:07 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	draw_to_image(t_cub3D *game, int x, t_image *img)
 			my_mlx_pixel_put(&game->img, x, y, game->ceiling);
 		else if (y > game->ray.drawEnd)
 			my_mlx_pixel_put(&game->img, x, y, game->floor);
-		else if (check_sprite_hit(game, x, y))
-			get_sprite_colour(game, x, y);
 		else if (game->door_hit && ((int)game->ray.tex_pos
 				& (RESOLUTION - 1)) > 25)
 			get_door_colour(game, &game->door, x, y);

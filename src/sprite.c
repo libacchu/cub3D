@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 18:36:42 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:26:23 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ void	get_sprite_colour(t_cub3D *game, int x, int y)
 			
 			colour = *(int *)(game->sprite[sprite->sp_anime].addr + game->ray.texY % 64 * game->sprite[sprite->sp_anime].line_size
 					+ (((game->ray.texX / 8) % 64) + 64 * sprite->sp_img) * (game->sprite[sprite->sp_anime].bpp / 8));
-
-		
 			if(colour != 0X06FF00)
 				my_mlx_pixel_put(&game->img, x, y, colour);
 		}

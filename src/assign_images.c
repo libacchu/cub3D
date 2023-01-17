@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 20:34:49 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/17 12:22:17 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,27 +103,29 @@ void	assign_walls_ew(t_cub3D *game)
 
 int	make_sprite_array(t_cub3D *game)
 {
-	t_sprite	*sprites;
 	t_sprite	*node;
 	t_sprite	*prev;
 	int			i;
 
 	node = game->sprite_list;
-	sprites = ft_calloc(game->sprite_total, sizeof(t_sprite));
+	game->sprite_arr = ft_calloc(game->sprite_total + 1, sizeof(t_sprite *));
+	if (!game->sprite_arr)
+		return (err_message("Memory allocation failed."));
 	i = 0;
 	while (node)
 	{
-		sprites[i].x = node->x;
-		sprites[i].y = node->y;
-		sprites[i].sp_anime = 0;
-		sprites[i].sp_img = 0;
-		sprites[i].sprite_active = 0;
+		game->sprite_arr[i] = ft_calloc(1, sizeof(t_sprite));
+		game->sprite_arr[i]->x = node->x;
+		game->sprite_arr[i]->y = node->y;
+		game->sprite_arr[i]->sp_anime = 0;
+		game->sprite_arr[i]->sp_img = 0;
+		game->sprite_arr[i]->sprite_active = 0;
 		prev = node;
 		node = node->next;
 		free(prev);
 		i++;
 	}
-	game->sprite_list = sprites;
+	return (0);
 }
 
 int	assign_images(t_cub3D *game)
@@ -133,8 +135,9 @@ int	assign_images(t_cub3D *game)
 	assign_door(game);
 	assign_minimap(game);
 	assign_compass(game);
-	// if (game->sprite_list)
+	//if (game->sprite_list)
 	assign_sprite(game);
-	make_sprite_array(game);
+	if (make_sprite_array(game))
+		return (1);
 	return (0);
 }
