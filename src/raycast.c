@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 19:00:37 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:39:15 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,17 @@ int	do_stuff_to_sprites(t_cub3D *game)
 		i++;
 	}
 	sort_sprites(sprite_order, sprite_distance, game->sprite_total);
+	i = -1;
+	while (++i < game->sprite_total)
+	{
+		double	sprite_x;
+		double	sprite_y;
+		double	inv_det;
+
+		sprite_x = game->sprite_list[sprite_order[i]].x - game->player.posX;
+		sprite_y = game->sprite_list[sprite_order[i]].y - game->player.posY;
+		inv_det = 1.0 / (game->player.viewX * game->player.dirY - game->player.dirX * game->player.viewY);
+	}
 	// //after sorting the sprites, do the projection and draw them
     // for(int i = 0; i < numSprites; i++)
     // {

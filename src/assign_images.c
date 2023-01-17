@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 15:04:43 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:34:49 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,31 @@ void	assign_walls_ew(t_cub3D *game)
 	free(ptr);
 }
 
+int	make_sprite_array(t_cub3D *game)
+{
+	t_sprite	*sprites;
+	t_sprite	*node;
+	t_sprite	*prev;
+	int			i;
+
+	node = game->sprite_list;
+	sprites = ft_calloc(game->sprite_total, sizeof(t_sprite));
+	i = 0;
+	while (node)
+	{
+		sprites[i].x = node->x;
+		sprites[i].y = node->y;
+		sprites[i].sp_anime = 0;
+		sprites[i].sp_img = 0;
+		sprites[i].sprite_active = 0;
+		prev = node;
+		node = node->next;
+		free(prev);
+		i++;
+	}
+	game->sprite_list = sprites;
+}
+
 int	assign_images(t_cub3D *game)
 {
 	assign_walls_ns(game);
@@ -110,5 +135,6 @@ int	assign_images(t_cub3D *game)
 	assign_compass(game);
 	// if (game->sprite_list)
 	assign_sprite(game);
+	make_sprite_array(game);
 	return (0);
 }

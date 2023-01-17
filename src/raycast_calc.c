@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_calc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:28:08 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 14:50:24 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:07:23 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	get_hit(t_cub3D *game, int *side)
 			game->ray.mapY += game->ray.stepY;
 			*side = 1;
 		}
-		check_sprite(game, *side);
 		if (game->map_arr[game->ray.mapY][game->ray.mapX] == '1' ||
 			(game->map_arr[game->ray.mapY][game->ray.mapX] == 'D'
 			&& check_door(game, *side)))
