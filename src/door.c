@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 17:28:30 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:35:53 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	assign_door(t_cub3D *game)
 	int	y;
 
 	game->door.img = mlx_xpm_file_to_image(game->mlx,
-			"textures/door.xpm", &x, &y);
+			"textures/imgs/door.xpm", &x, &y);
 	game->door.addr = mlx_get_data_addr(game->door.img,
 			&game->door.bpp, &game->door.line_size,
 			&game->door.endian);
@@ -78,10 +78,10 @@ void	get_door_colour(t_cub3D *game, t_image *img, int x, int y)
 {
 	int	colour;
 
-	game->ray.texY = (int)(game->ray.tex_pos / 8) & (64 - 1);
+	game->ray.texY = (int)(game->ray.tex_pos) & (512 - 1);
 	game->ray.tex_pos += game->ray.step;
-	colour = *(int *)(img->addr + game->ray.texY % 64 * img->line_size
-			+ (game->ray.texX / 8) % 64 * (img->bpp / 8));
+	colour = *(int *)(img->addr + game->ray.texY % 512 * img->line_size
+			+ (game->ray.texX) % 512 * (img->bpp / 8));
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
 
