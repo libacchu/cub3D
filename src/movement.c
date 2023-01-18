@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:30:01 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 17:28:09 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 12:13:51 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	move_left_down(t_cub3D *game, double speed_x, double speed_y)
 		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posX -= speed_x;
 	if (game->map_arr[new_y][(int)game->player.posX] != '1' && 
-		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
+		(game->map_arr[new_y][(int)game->player.posX] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posY -= speed_y;
 }
 
@@ -81,7 +81,7 @@ void	move_right_up(t_cub3D *game, double speed_x, double speed_y)
 		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posX += speed_x;
 	if (game->map_arr[new_y][(int)game->player.posX] != '1' && 
-		(game->map_arr[(int)game->player.posY][new_x] != 'D' || find_door_node(game, new_x, new_y)))
+		(game->map_arr[new_y][(int)game->player.posX] != 'D' || find_door_node(game, new_x, new_y)))
 		game->player.posY += speed_y;
 }
 
