@@ -1,10 +1,9 @@
-NO texture/brick.xpm
-SO texture/brick.xpm
+NO ./textures/imgs/blue_wall.xpm
+SO ./textures/imgs/brick_wall_dark.xpm
 F 0,0,0
 C 255,255,255
-WE texture/brick.xpm
-EA texture/brick.xpm
-
+WE ./textures/imgs/eye_wall.xpm
+EA ./textures/imgs/wooden_wall_dark.xpm
 
 
 111111
