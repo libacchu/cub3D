@@ -1,7 +1,7 @@
-NO ./textures/confusedgui_smol.xpm
-SO ./textures/brick_024-2.xpm
-WE ./textures/city_014.xpm
-EA ./textures/nature_07.xpm
+NO ./textures/imgs/blue_wall.xpm
+SO ./textures/imgs/brick_wall_dark.xpm
+WE ./textures/imgs/eye_wall.xpm
+EA ./textures/imgs/wooden_wall_dark.xpm
 
 F 224,245,66
 C 66,245,206
@@ -18,8 +18,8 @@ C 66,245,206
                   111000000011111                    11111
                   10000000111 111                     1111
                   1000000011  111111    11111111111   1111
-                  100000001111111111   11000002222111 1111
-                  1111111111111111    11100000221111111111
+                  100000001111111111   1100000D00G111 1111
+                  1111111111111111    11100000001111111111
                  1111    1111111111  1111000N0011 11111111
                 1111111  1111111111  11110000001  11111111
                11111111111111111      11100000011111 11111

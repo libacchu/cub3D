@@ -1,6 +1,6 @@
-NO ./texture/bluestone.xpm
-SO ./texture/purplestone.xpm
-WE ./texture/wall_1.xpm
+NO ./textures/imgs/blue_wall.xpm
+SO ./textures/imgs/brick_wall_dark.xpm
+WE ./textures/imgs/eye_wall.xpm
 
 F 255, 255, 255
 C 255, 255, 200

@@ -1,7 +1,7 @@
-NO ./textures/brick_017.xpm
-SO ./textures/brick_024-2.xpm
-WE ./textures/city_014.xpm
-EA ./textures/nature_07.xpm
+NO ./textures/imgs/blue_wall.xpm
+SO ./textures/imgs/brick_wall_dark.xpm
+WE ./textures/imgs/eye_wall.xpm
+EA ./textures/imgs/wooden_wall_dark.xpm
 
 F 224,245,66
 C 66,245,206
