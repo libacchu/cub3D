@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 14:22:30 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:20:17 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,10 @@ void	init_game(t_cub3D *game)
 void	set_screen_size(t_cub3D *game)
 {
 	mlx_get_screen_size(game->mlx, &game->window_width, &game->window_height);
-	// if (game->window_width > 1920)
-	// 	game->window_width = 1920;
-	// if (game->window_height > 1080)
-	// 	game->window_height = 1080;
-	game->window_width = 1366;
-	game->window_height = 768;
+	if (game->window_width > 1920)
+		game->window_width = 1920;
+	if (game->window_height > 1080)
+		game->window_height = 1080;
 	game->half_height = game->window_height / 2;
 	game->half_width = game->window_width / 2;
 	game->mouse_prev_x = game->half_width;

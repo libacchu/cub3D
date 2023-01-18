@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 13:33:10 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:17:40 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	assign_minimap(t_cub3D *game)
 			"./textures/minimap/blackb.xpm", &x, &y);
 	game->minimap_player.img = mlx_xpm_file_to_image(game->mlx,
 			"./textures/minimap/gui.xpm", &x, &y);
-	if (!game->minimap_wall.img || !game->minimap_floor.img || !game->minimap_player.img)
+	if (!game->minimap_wall.img || !game->minimap_floor.img
+		|| !game->minimap_player.img)
 		return (err_message("Minimap image not loaded!"));
 	add_data_addr(&game->minimap_wall);
 	add_data_addr(&game->minimap_floor);

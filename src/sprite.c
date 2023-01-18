@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:05:27 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:10:26 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	add_sprite(t_cub3D *game, int x, int y)
 void	add_data_addr(t_image *img)
 {
 	img->addr = mlx_get_data_addr(img->img,
-		&img->bpp, &img->line_size, &img->endian);
+			&img->bpp, &img->line_size, &img->endian);
 }
 
 int	assign_sprite(t_cub3D *game)
@@ -83,7 +83,7 @@ int	init_sprite_node(t_sprite **sprite, t_sprite	*node)
 	(*sprite)->sp_img_total[3] = 7;
 	(*sprite)->sprite_active = 0;
 	(*sprite)->sprite_deactivate = 0;
-	return(0);
+	return (0);
 }
 
 int	make_sprite_array(t_cub3D *game)

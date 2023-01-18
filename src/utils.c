@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:42:55 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 12:38:19 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:09:54 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 
 void	ft_swap(int *distance_x, int *distance_y, int *order_x, int *order_y)
 {
-	int z;
-	
+	int	z;
+
 	z = *distance_x;
 	*distance_x = *distance_y;
 	*distance_y = z;

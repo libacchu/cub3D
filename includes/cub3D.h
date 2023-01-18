@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 15:52:17 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:14:34 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ int		assign_door(t_cub3D *game);
 void	get_door_colour(t_cub3D *game, t_image *img, int x, int y);
 void	find_door(t_cub3D *game);
 void	open_door(t_cub3D *game, int x, int y);
+int		find_door_node(t_cub3D *game, int new_x, int new_y);
 
 int		colourshift(int t, int r, int g, int b);
 void	raycast(t_cub3D *game);

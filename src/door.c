@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 09:46:42 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:17:19 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	assign_door(t_cub3D *game)
 	game->door.img = mlx_xpm_file_to_image(game->mlx,
 			"textures/imgs/door.xpm", &x, &y);
 	if (!game->door.img)
-		return(err_message("Door image not loaded!"));
+		return (err_message("Door image not loaded!"));
 	game->door.addr = mlx_get_data_addr(game->door.img,
 			&game->door.bpp, &game->door.line_size,
 			&game->door.endian);

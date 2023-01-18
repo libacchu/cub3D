@@ -6,7 +6,7 @@
 #    By: obibby <obibby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/18 15:50:14 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/18 16:14:51 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC		=	main.c \
 			utils.c \
 			minimap.c \
 			door.c \
+			door2.c \
 			lines.c \
 			sprite.c \
 			sprite_anim.c \
