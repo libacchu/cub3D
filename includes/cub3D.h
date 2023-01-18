@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 09:32:24 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:39:16 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ void	player_start_direction(int x, int y, t_cub3D *game);
 int		mouse_move(int x, int y, t_cub3D *game);
 
 int	check_sprite(t_cub3D *game, int side);
-void	assign_sprite(t_cub3D *game);
+int	assign_sprite(t_cub3D *game);
 
 void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y);
 void	get_sprite_colour(t_cub3D *game, int x, int y);
@@ -275,5 +275,8 @@ int	check_colour_pix(t_image *data, int x, int y);
 int	add_sprite(t_cub3D *game, int x, int y);
 
 time_t	get_time_in_ms(void);
+
+void	add_data_addr(t_image *img);
+int	make_sprite_array(t_cub3D *game);
 
 #endif

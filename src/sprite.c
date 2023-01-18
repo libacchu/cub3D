@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 13:36:26 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:26:19 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,48 +39,71 @@ int	add_sprite(t_cub3D *game, int x, int y)
 	return (0);
 }
 
-void	assign_sprite(t_cub3D *game)
+void	add_data_addr(t_image *img)
+{
+	img->addr = mlx_get_data_addr(img->img,
+		&img->bpp, &img->line_size, &img->endian);
+}
+
+int	assign_sprite(t_cub3D *game)
 {
 	int	x;
 	int	y;
 
-	
 	game->sprite = ft_calloc(4, sizeof(t_image));
 	game->sprite[0].img = mlx_xpm_file_to_image(game->mlx,
 			"textures/sprites/ghost-appears.xpm", &x, &y);
-	game->sprite[0].addr = mlx_get_data_addr(game->sprite[0].img,
-			&game->sprite[0].bpp, &game->sprite[0].line_size,
-			&game->sprite[0].endian);
 	game->sprite[1].img = mlx_xpm_file_to_image(game->mlx,
 			"textures/sprites/ghost-idle.xpm", &x, &y);
-	game->sprite[1].addr = mlx_get_data_addr(game->sprite[1].img,
-			&game->sprite[1].bpp, &game->sprite[1].line_size,
-			&game->sprite[1].endian);
 	game->sprite[2].img = mlx_xpm_file_to_image(game->mlx,
 			"textures/sprites/ghost-shriek.xpm", &x, &y);
-	game->sprite[2].addr = mlx_get_data_addr(game->sprite[2].img,
-			&game->sprite[2].bpp, &game->sprite[2].line_size,
-			&game->sprite[2].endian);
 	game->sprite[3].img = mlx_xpm_file_to_image(game->mlx,
 			"textures/sprites/ghost-vanish.xpm", &x, &y);
-	game->sprite[3].addr = mlx_get_data_addr(game->sprite[3].img,
-			&game->sprite[3].bpp, &game->sprite[3].line_size,
-			&game->sprite[3].endian);
+	if (!game->sprite[0].img || !game->sprite[1].img \
+		|| !game->sprite[2].img || !game->sprite[3].img)
+		return (err_message("Sprite image not loaded!"));
+	add_data_addr(&game->sprite[0]);
+	add_data_addr(&game->sprite[1]);
+	add_data_addr(&game->sprite[2]);
+	add_data_addr(&game->sprite[3]);
 	game->ray.zbuffer = ft_calloc(game->window_width, sizeof(double));
+	return (0);
 }
 
-// void	find_door(t_cub3D *game)
-// {
-// 	if (game->player.dirX > 0.5 && game->map_arr[(int)game->player.posY]
-// 		[(int)game->player.posX + 1] == 'D')
-// 		open_door(game, game->player.posX + 1, game->player.posY);
-// 	else if (game->player.dirX < -0.5 && game->map_arr[(int)game->player.posY]
-// 		[(int)game->player.posX - 1] == 'D')
-// 		open_door(game, game->player.posX - 1, game->player.posY);
-// 	else if (game->player.dirY > 0.5 && game->map_arr
-// 		[(int)game->player.posY + 1][(int)game->player.posX] == 'D')
-// 		open_door(game, game->player.posX, game->player.posY + 1);
-// 	else if (game->player.dirY < -0.5 && game->map_arr
-// 		[(int)game->player.posY - 1][(int)game->player.posX] == 'D')
-// 		open_door(game, game->player.posX, game->player.posY - 1);
-// }
+int	init_sprite_node(t_sprite **sprite, t_sprite	*node)
+{
+	*sprite = ft_calloc(1, sizeof(t_sprite));
+	(*sprite)->x = node->x;
+	(*sprite)->y = node->y;
+	(*sprite)->sp_anime = 0;
+	(*sprite)->sp_img = 0;
+	(*sprite)->sp_img_total[0] = 6;
+	(*sprite)->sp_img_total[1] = 7;
+	(*sprite)->sp_img_total[2] = 4;
+	(*sprite)->sp_img_total[3] = 7;
+	(*sprite)->sprite_active = 0;
+	(*sprite)->sprite_deactivate = 0;
+	return(0);
+}
+
+int	make_sprite_array(t_cub3D *game)
+{
+	t_sprite	*node;
+	t_sprite	*prev;
+	int			i;
+
+	node = game->sprite_list;
+	game->sprite_arr = ft_calloc(game->sprite_total + 1, sizeof(t_sprite *));
+	if (!game->sprite_arr)
+		return (err_message("Memory allocation failed."));
+	i = 0;
+	while (node)
+	{
+		init_sprite_node(&game->sprite_arr[i], node);
+		prev = node;
+		node = node->next;
+		free(prev);
+		i++;
+	}
+	return (0);
+}
