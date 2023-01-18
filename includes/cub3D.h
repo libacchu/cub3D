@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 16:35:14 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:37:17 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,10 @@ time_t	get_time_in_ms(void);
 
 void	add_data_addr(t_image *img);
 int	make_sprite_array(t_cub3D *game);
+
+void	free_array(char **str);
+void	free_img(void *mlx, void *ptr);
+void	free_sprites(void *mlx, t_image *sprite);
 
 void	free_wall_imgs(t_cub3D *game);
 void	free_compass_imgs(t_cub3D *game);
