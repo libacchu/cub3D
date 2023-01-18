@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 13:36:26 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:13:23 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	assign_sprite(t_cub3D *game)
 	int	x;
 	int	y;
 
-	
 	game->sprite = ft_calloc(4, sizeof(t_image));
 	game->sprite[0].img = mlx_xpm_file_to_image(game->mlx,
 			"textures/sprites/ghost-appears.xpm", &x, &y);
@@ -68,19 +67,3 @@ void	assign_sprite(t_cub3D *game)
 			&game->sprite[3].endian);
 	game->ray.zbuffer = ft_calloc(game->window_width, sizeof(double));
 }
-
-// void	find_door(t_cub3D *game)
-// {
-// 	if (game->player.dirX > 0.5 && game->map_arr[(int)game->player.posY]
-// 		[(int)game->player.posX + 1] == 'D')
-// 		open_door(game, game->player.posX + 1, game->player.posY);
-// 	else if (game->player.dirX < -0.5 && game->map_arr[(int)game->player.posY]
-// 		[(int)game->player.posX - 1] == 'D')
-// 		open_door(game, game->player.posX - 1, game->player.posY);
-// 	else if (game->player.dirY > 0.5 && game->map_arr
-// 		[(int)game->player.posY + 1][(int)game->player.posX] == 'D')
-// 		open_door(game, game->player.posX, game->player.posY + 1);
-// 	else if (game->player.dirY < -0.5 && game->map_arr
-// 		[(int)game->player.posY - 1][(int)game->player.posX] == 'D')
-// 		open_door(game, game->player.posX, game->player.posY - 1);
-// }

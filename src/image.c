@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 17:28:40 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:31:25 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	draw_to_image(t_cub3D *game, int x, t_image *img)
 	y = -1;
 	while (++y < game->window_height)
 	{
-		if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2
-			&& x > game->x_left_limit && x < game->x_right_limit)
-			put_compass(game, x, y);
-		else if (y < game->ray.drawStart)
+		if (y < game->ray.drawStart)
 			my_mlx_pixel_put(&game->img, x, y, game->ceiling);
 		else if (y > game->ray.drawEnd)
 			my_mlx_pixel_put(&game->img, x, y, game->floor);
@@ -64,6 +61,9 @@ void	draw_to_image(t_cub3D *game, int x, t_image *img)
 			get_door_colour(game, &game->door, x, y);
 		else
 			get_pixel_colour(game, img, x, y);
+		if (y > game->y_down_limit / 3 && y < game->y_down_limit / 2
+			&& x > game->x_left_limit && x < game->x_right_limit)
+			put_compass(game, x, y);
 	}
 }
 

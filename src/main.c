@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/17 20:39:42 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 13:00:41 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	start_loop(t_cub3D *game)
 {
 	mlx_mouse_hide(game->mlx, game->window);
-	//mlx_do_key_autorepeaton(game->mlx);
+	mlx_do_key_autorepeaton(game->mlx);
 	mlx_loop_hook(game->mlx, raycast, game);
 	mlx_loop(game->mlx);
 }
