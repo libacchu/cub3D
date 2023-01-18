@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:10:26 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 17:07:29 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ int	init_sprite_node(t_sprite **sprite, t_sprite	*node)
 	(*sprite)->sp_img_total[2] = 4;
 	(*sprite)->sp_img_total[3] = 7;
 	(*sprite)->sprite_active = 0;
+	(*sprite)->sprite_activate = 0;
 	(*sprite)->sprite_deactivate = 0;
+	(*sprite)->sprite_scare = 0;
 	return (0);
 }
 

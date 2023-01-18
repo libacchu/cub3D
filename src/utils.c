@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:42:55 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:09:54 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 17:31:41 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,12 @@ double	ft_abs(double x)
 	return (x);
 }
 
-void	open_door(t_cub3D *game, int x, int y)
+void	play_sound(char *str)
 {
-	t_door	*door;
-
-	door = game->door_list;
-	while (door)
+	if (!fork())
 	{
-		if (door->x == x && door->y == y)
-		{
-			if (!door->open)
-				door->open = 1;
-			else
-				door->open = 0;
-			break ;
-		}
-		door = door->next;
+		system(str);
+		exit(0);
 	}
 }
 

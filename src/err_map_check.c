@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 16:16:55 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:30:46 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	check_y(char **map_arr, int y, int x)
 
 int	check_walls_chars(t_cub3D *game, int x, int y)
 {
-	if (game->map_arr[y][x] != ' ' && check_chars(game->map_arr[y][x]))
+	if (game->map_arr[y][x] != ' ' && game->map_arr[y][x] != '	'
+		&& check_chars(game->map_arr[y][x]))
 		return (err_message("Invalid character in map."));
 	if (game->map_arr[y][x] != '1' && game->map_arr[y][x] > 32)
 	{
