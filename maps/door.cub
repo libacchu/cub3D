@@ -1,16 +1,21 @@
-NO ./texture/L_wall_brick.xpm
-SO ./texture/L_wall_brick.xpm
-WE ./texture/L_wall_grey.xpm
-EA ./texture/L_wall_grey.xpm
+NO ./textures/imgs/blue_wall.xpm
+SO ./textures/imgs/brick_wall_dark.xpm
+WE ./textures/imgs/eye_wall.xpm
+EA ./textures/imgs/wooden_wall_dark.xpm
 
 C 10,50,150
 F 50,50,50
 
+1111
+1101
+11D1
+10001
+10001
+10001
+10N01
+10001
+10001
+10001
+1101
+1111
 
-1111111111111111111111111
-1000000000001000000000001
-1000000000001000000000001
-10000E000000D000000000001
-1000000000001000000000001
-1000000000001000000000001
-1111111111111111111111111
