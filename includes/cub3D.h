@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 13:39:16 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 14:33:11 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,9 @@
 # include "../libft/libft.h"
 # include <unistd.h>
 # include "../minilibx_linux/mlx.h"
-// # include "../minilibx_linux/mlx_int.h"
 # include <math.h>
 # include <sys/time.h>
 
-//# define WINDOW_HEIGHT 480
-//# define WINDOW_WIDTH 640
-//# define HALF_HEIGHT 240
-//# define HALF_WIDTH 320
 # define ROTATE_SPEED 0.05
 # define MOUSE_SPEED 0.005
 # define WALK_SPEED 0.03
@@ -125,6 +120,18 @@ typedef	struct s_sprite
 	void	*next;
 } t_sprite;
 
+typedef struct s_sprite_cast
+{
+	double	trans_y;
+	int		s_screen_x;
+	int		s_height;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		s_width;
+	int		draw_start_x;
+	int		draw_end_x;
+} t_sprite_cast;
+
 typedef struct s_player
 {
 	char	direct; // N, S, E, W
@@ -171,7 +178,9 @@ typedef struct s_cub3D
 	t_sprite	**sprite_arr;
 	t_image 	*sprite;
 	int			sprite_total;
-	
+	int			*sprite_order;
+	int			*sprite_distance;
+
 
 	char		*path;
 	char		**map_arr;
