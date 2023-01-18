@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 01:13:30 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 10:50:44 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	move_sprite(t_cub3D *game, int *sprite_order, int i)
 			game->sprite_arr[i]->sprite_scare = 1;
 			if (!fork())
 			{
-				system("aplay sound/soft-scream.mp3");
+				system("afplay sound/scream.mp3");
 				exit(0);
 			}
 		}
