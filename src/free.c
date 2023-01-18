@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 16:31:30 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:06:41 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_sprites(void *mlx, t_image *sprite)
 
 	i = -1;
 	while (++i < 4)
-		free_img(mlx, &sprite[i]);
+		free_img(mlx, sprite[i].img);
 	free(sprite);
 	sprite = NULL;
 }

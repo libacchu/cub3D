@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 16:31:01 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:09:25 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,21 @@ void	free_minimap_imgs(t_cub3D *game)
 		free_img(game->mlx, game->minimap_floor.img);
 	if (game->minimap.img)
 		free_img(game->mlx, game->minimap.img);
+	if (game->minimap_player.img)
+		free_img(game->mlx, game->minimap_player.img);
+}
+
+void	free_sprite_arr(t_cub3D *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->sprite_total)
+	{
+		free(game->sprite_arr[i]);
+		i++;
+	}
+	free(game->sprite_arr);
 }
 
 void	free_all_imgs(t_cub3D *game)
@@ -55,6 +70,10 @@ void	free_all_imgs(t_cub3D *game)
 	free_minimap_imgs(game);
 	if (game->img.img)
 		free_img(game->mlx, game->img.img);
+	if (game->sprite_arr)
+		free_sprite_arr(game);
 	if (game->sprite)
 		free_sprites(game->mlx, game->sprite);
+	if (game->ray.zbuffer)
+		free(game->ray.zbuffer);
 }
