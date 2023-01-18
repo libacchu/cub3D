@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:30:01 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 14:36:30 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:04:11 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	check_sprite_proximity(t_cub3D *game)
 	i = -1;
 	while (game->sprite_arr[++i])
 	{
-		if (!game->sprite_arr[i]->sprite_active && ft_abs(game->player.posX - game->sprite_arr[i]->x) < 4 && ft_abs(game->player.posY - game->sprite_arr[i]->y) < 4)
+		if (!game->sprite_arr[i]->sprite_active && ft_abs(game->player.posX - game->sprite_arr[i]->x) < 5 && ft_abs(game->player.posY - game->sprite_arr[i]->y) < 5)
 		{
 			game->sprite_arr[i]->sp_anime = 0;
 			game->sprite_arr[i]->sp_img = 0;
@@ -100,7 +100,7 @@ void	check_sprite_proximity(t_cub3D *game)
 		}
 		else if (game->sprite_arr[i]->sprite_active && !game->sprite_arr[i]->sprite_deactivate && (ft_abs(game->player.posX - game->sprite_arr[i]->x) > 5 || ft_abs(game->player.posY - game->sprite_arr[i]->y) > 5))
 			game->sprite_arr[i]->sprite_deactivate = 1;
-		else if (game->sprite_arr[i]->sprite_scare && (ft_abs(game->player.posX - game->sprite_arr[i]->x) > 2 || ft_abs(game->player.posY - game->sprite_arr[i]->y) > 2))
+		else if (game->sprite_arr[i]->sprite_scare && (ft_abs(game->player.posX - game->sprite_arr[i]->x) > 3 || ft_abs(game->player.posY - game->sprite_arr[i]->y) > 3))
 			game->sprite_arr[i]->sprite_scare = 0;
 	}
 }

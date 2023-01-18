@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 15:50:00 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:02:03 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	put_minimap(t_cub3D *game)
 		get_delta_dist(game);
 		get_side_dist(game);
 		get_hit(game, &side);
-		printf("playX: %f, playY: %f\n", game->player.posX, game->player.posY);
 		line_algo(game, game->player.posX * 34, game->player.posY * 34);
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->minimap.img,

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 14:35:52 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:05:27 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	add_sprite(t_cub3D *game, int x, int y)
 	new_sprite = ft_calloc(1, sizeof(t_sprite));
 	if (!new_sprite)
 		return (err_message("Failed to allocate memory.\n"));
-	new_sprite->x = x;
-	new_sprite->y = y;
+	new_sprite->x = x + 0.5;
+	new_sprite->y = y + 0.5;
 	new_sprite->sp_img = 5;
 	new_sprite->sp_anime = 0;
 	new_sprite->sprite_active = 1;
