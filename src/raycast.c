@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 18:04:48 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 01:13:30 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void	put_minimap(t_cub3D *game)
 	}
 	refresh_minimap(game);
 	x = -1;
-	while (++x < game->minimap_size_x)
+	while (++x < 2305)
 	{
 		init_ray(game, x);
 		get_delta_dist(game);
 		get_side_dist(game);
 		get_hit(game, &side);
+		printf("playX: %f, playY: %f\n", game->player.posX, game->player.posY);
 		line_algo(game, game->player.posX * 34, game->player.posY * 34);
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->minimap.img,
@@ -70,7 +71,7 @@ void	move_sprite(t_cub3D *game, int *sprite_order, int i)
 			game->sprite_arr[i]->sprite_scare = 1;
 			if (!fork())
 			{
-				system("afplay sound/sample-3s.mp3");
+				system("aplay sound/soft-scream.mp3");
 				exit(0);
 			}
 		}

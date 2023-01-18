@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_rgb_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:59:43 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/14 16:01:20 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 00:45:44 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	set_rgb(char *str, int *colour)
 			i++;
 		i++;
 	}
-	ft_printf("R = %d, G = %d, B = %d \n", rgb[0], rgb[1], rgb[2]);
 	*colour = colourshift(0, rgb[0], rgb[1], rgb[2]);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/17 12:42:11 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 01:03:07 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	set_screen_size(t_cub3D *game)
 		game->window_width = 1920;
 	if (game->window_height > 1080)
 		game->window_height = 1080;
+	//game->window_width = 640;
+	//game->window_height = 420;
 	game->half_height = game->window_height / 2;
 	game->half_width = game->window_width / 2;
 	game->mouse_prev_x = game->half_width;
