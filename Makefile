@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obibby <obibby@student.42.fr>              +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/18 15:50:14 by obibby           ###   ########.fr        #
+#    Updated: 2023/01/18 16:31:56 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBMLX	=	./minilibx_linux/
 SRC_DIR =	src/
 SRC		=	main.c \
 			free.c \
+			free_game_imgs.c \
 			error_check.c \
 			err_tex_check.c \
 			err_rgb_check.c \

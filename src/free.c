@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/15 02:08:24 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:31:30 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,15 @@ void	free_img(void *mlx, void *ptr)
 	ptr = NULL;
 }
 
-void	free_all_imgs(t_cub3D *game)
+void	free_sprites(void *mlx, t_image *sprite)
 {
-	if (game->north_wall.img)
-		free_img(game->mlx, game->north_wall.img);
-	if (game->west_wall.img)
-		free_img(game->mlx, game->west_wall.img);
-	if (game->east_wall.img)
-		free_img(game->mlx, game->east_wall.img);
-	if (game->south_wall.img)
-		free_img(game->mlx, game->south_wall.img);
-	if (game->north_compass.img)
-		free_img(game->mlx, game->north_compass.img);
-	if (game->east_compass.img)
-		free_img(game->mlx, game->east_compass.img);
-	if (game->south_compass.img)
-		free_img(game->mlx, game->south_compass.img);
-	if (game->west_compass.img)
-		free_img(game->mlx, game->west_compass.img);
-	if (game->minimap_wall.img)
-		free_img(game->mlx, game->minimap_wall.img);
-	if (game->minimap_floor.img)
-		free_img(game->mlx, game->minimap_floor.img);
-	if (game->img.img)
-		free_img(game->mlx, game->img.img);
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		free_img(mlx, &sprite[i]);
+	free(sprite);
+	sprite = NULL;
 }
 
 void	ft_free(t_cub3D *game)
