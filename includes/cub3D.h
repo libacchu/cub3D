@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/17 18:02:13 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 09:32:24 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,9 +233,9 @@ int		ft_mouse(t_cub3D *game);
 void	move_player(t_cub3D *game, double y, double x, int grad);
 void	rotate_player(t_cub3D *game, int dir);
 
-int	add_door(t_cub3D *game, int x, int y);
-int	check_door(t_cub3D *game, int side);
-void	assign_door(t_cub3D *game);
+int		add_door(t_cub3D *game, int x, int y);
+int		check_door(t_cub3D *game, int side);
+int		assign_door(t_cub3D *game);
 void	get_door_colour(t_cub3D *game, t_image *img, int x, int y);
 void	find_door(t_cub3D *game);
 void	open_door(t_cub3D *game, int x, int y);
