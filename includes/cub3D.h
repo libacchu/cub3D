@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 14:33:11 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 15:52:17 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef	struct s_sprite
 	void	*next;
 } t_sprite;
 
-typedef struct s_sprite_cast
+typedef struct s_spr_cast
 {
 	double	trans_y;
 	int		s_screen_x;
@@ -130,7 +130,8 @@ typedef struct s_sprite_cast
 	int		s_width;
 	int		draw_start_x;
 	int		draw_end_x;
-} t_sprite_cast;
+	int		index;
+} t_spr_cast;
 
 typedef struct s_player
 {
@@ -176,6 +177,7 @@ typedef struct s_cub3D
 
 	t_sprite	*sprite_list;
 	t_sprite	**sprite_arr;
+	t_spr_cast	sprite_info;
 	t_image 	*sprite;
 	int			sprite_total;
 	int			*sprite_order;
@@ -207,6 +209,8 @@ typedef struct s_cub3D
 	t_image		img;
 
 }	t_cub3D;
+
+int	render(t_cub3D *game);
 
 void	init_game(t_cub3D *game);
 int		err_map(int fd, t_cub3D *game);
@@ -250,7 +254,7 @@ void	find_door(t_cub3D *game);
 void	open_door(t_cub3D *game, int x, int y);
 
 int		colourshift(int t, int r, int g, int b);
-int		raycast(t_cub3D *game);
+void	raycast(t_cub3D *game);
 void	make_minimap(t_cub3D *game);
 void	refresh_minimap(t_cub3D *game);
 void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y);
@@ -276,6 +280,17 @@ int		mouse_move(int x, int y, t_cub3D *game);
 
 int	check_sprite(t_cub3D *game, int side);
 int	assign_sprite(t_cub3D *game);
+int	get_sprite_dist(t_cub3D *game);
+void	get_sprite_size(t_cub3D *game, t_spr_cast *info, int i);
+void	get_sprite_coords(t_cub3D *game, t_spr_cast *info);
+void	move_sprite(t_cub3D *game, int *sprite_order, int i);
+int		draw_sprites(t_cub3D *game);
+void	scare_sprite(t_cub3D *game, int i);
+void	deactivate_scare(t_cub3D *game, int i);
+void	deactivate_sprite(t_cub3D *game, int i);
+void	activate_sprite(t_cub3D *game, int i);
+void	idle_sprite(t_cub3D *game, int i);
+void	inc_anims(t_cub3D *game);
 
 void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y);
 void	get_sprite_colour(t_cub3D *game, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 13:00:41 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 15:40:23 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	start_loop(t_cub3D *game)
 {
 	mlx_mouse_hide(game->mlx, game->window);
 	mlx_do_key_autorepeaton(game->mlx);
-	mlx_loop_hook(game->mlx, raycast, game);
+	mlx_loop_hook(game->mlx, render, game);
 	mlx_loop(game->mlx);
 }
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	make_minimap(&game);
 	mlx_hook(game.window, 2, 1L << 0, ft_key, &game);
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
-	mlx_expose_hook(game.window, raycast, &game);
+	mlx_expose_hook(game.window, render, &game);
 	mlx_hook(game.window, 6, 1L << 6, mouse_move, &game);
 	start_loop(&game);
 	return (0);
