@@ -6,7 +6,7 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/18 16:31:56 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/18 20:56:06 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC		=	main.c \
 			utils.c \
 			minimap.c \
 			door.c \
+			door2.c \
 			lines.c \
 			sprite.c \
 			sprite_anim.c \

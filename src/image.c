@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 13:31:25 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:14:57 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y)
 			+ game->ray.texX % RESOLUTION * (img->bpp / 8));
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
-
 
 void	draw_to_image(t_cub3D *game, int x, t_image *img)
 {

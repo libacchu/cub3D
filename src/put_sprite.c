@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:47:53 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 15:55:30 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/18 17:19:08 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	draw_sprites(t_cub3D *game)
 		if (!game->sprite_arr[game->sprite_order
 				[game->sprite_info.index]]->sprite_active)
 			continue ;
-		move_sprite(game, game->sprite_order, game->sprite_info.index);
+		move_sprite(game, game->sprite_order[game->sprite_info.index]);
 		get_sprite_size(game, &game->sprite_info, game->sprite_info.index);
 		get_sprite_coords(game, &game->sprite_info);
 		put_sprite(game, &game->sprite_info);

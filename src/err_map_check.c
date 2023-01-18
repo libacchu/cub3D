@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/17 13:33:04 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:30:46 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	check_y(char **map_arr, int y, int x)
 
 int	check_walls_chars(t_cub3D *game, int x, int y)
 {
-	if (game->map_arr[y][x] != ' ' && check_chars(game->map_arr[y][x]))
+	if (game->map_arr[y][x] != ' ' && game->map_arr[y][x] != '	'
+		&& check_chars(game->map_arr[y][x]))
 		return (err_message("Invalid character in map."));
 	if (game->map_arr[y][x] != '1' && game->map_arr[y][x] > 32)
 	{
@@ -64,8 +65,7 @@ int	loop_x(t_cub3D *game, int x, int y)
 			if (!game->player.direct)
 				player_start_direction(x, y, game);
 			else
-				return (\
-				err_message("Invalid character: Check player elements."));
+				return (err_message("Too many player starts in map."));
 		}
 		else if (game->map_arr[y][x] == 'D')
 		{
