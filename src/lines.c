@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 00:06:30 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 00:18:44 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 10:18:42 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	line_algo(t_cub3D *game, int x, int y)
 
 	line.x0 = x;
 	line.y0 = y;
-	line.x1 = (game->ray.mapX + 0.5) * 34;
-	line.y1 = (game->ray.mapY + 0.5) * 34;
+	line.x1 = (game->ray.map_x + 0.5) * 34;
+	line.y1 = (game->ray.map_y + 0.5) * 34;
 	line.dx = ft_abs(line.x1 - line.x0);
 	line.dy = ft_abs(line.y1 - line.y0);
 	if (line.x0 < line.x1)

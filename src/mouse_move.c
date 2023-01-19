@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:37:08 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/15 01:31:34 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 09:48:27 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	rotate_left(t_cub3D *game, int x_dif)
 	old_x = 0;
 	while (x_dif++ < 0)
 	{
-		old_x = game->player.dirX;
-		game->player.dirX = old_x * cos(-MOUSE_SPEED) \
-			- game->player.dirY * sin(-MOUSE_SPEED);
-		game->player.dirY = old_x * sin(-MOUSE_SPEED) \
-			+ game->player.dirY * cos(-MOUSE_SPEED);
-		old_x = game->player.viewX;
-		game->player.viewX = old_x * cos(-MOUSE_SPEED) \
-			- game->player.viewY * sin(-MOUSE_SPEED);
-		game->player.viewY = old_x * sin(-MOUSE_SPEED) \
-			+ game->player.viewY * cos(-MOUSE_SPEED);
+		old_x = game->player.dir_x;
+		game->player.dir_x = old_x * cos(-MOUSE_SPEED) \
+			- game->player.dir_y * sin(-MOUSE_SPEED);
+		game->player.dir_y = old_x * sin(-MOUSE_SPEED) \
+			+ game->player.dir_y * cos(-MOUSE_SPEED);
+		old_x = game->player.view_x;
+		game->player.view_x = old_x * cos(-MOUSE_SPEED) \
+			- game->player.view_y * sin(-MOUSE_SPEED);
+		game->player.view_y = old_x * sin(-MOUSE_SPEED) \
+			+ game->player.view_y * cos(-MOUSE_SPEED);
 	}
 }
 
@@ -39,16 +39,16 @@ void	rotate_right(t_cub3D *game, int x_dif)
 	old_x = 0;
 	while (x_dif-- > 0)
 	{
-		old_x = game->player.dirX;
-		game->player.dirX = old_x * cos(MOUSE_SPEED) \
-			- game->player.dirY * sin(MOUSE_SPEED);
-		game->player.dirY = old_x * sin(MOUSE_SPEED) \
-			+ game->player.dirY * cos(MOUSE_SPEED);
-		old_x = game->player.viewX;
-		game->player.viewX = old_x * cos(MOUSE_SPEED) \
-			- game->player.viewY * sin(MOUSE_SPEED);
-		game->player.viewY = old_x * sin(MOUSE_SPEED) \
-			+ game->player.viewY * cos(MOUSE_SPEED);
+		old_x = game->player.dir_x;
+		game->player.dir_x = old_x * cos(MOUSE_SPEED) \
+			- game->player.dir_y * sin(MOUSE_SPEED);
+		game->player.dir_y = old_x * sin(MOUSE_SPEED) \
+			+ game->player.dir_y * cos(MOUSE_SPEED);
+		old_x = game->player.view_x;
+		game->player.view_x = old_x * cos(MOUSE_SPEED) \
+			- game->player.view_y * sin(MOUSE_SPEED);
+		game->player.view_y = old_x * sin(MOUSE_SPEED) \
+			+ game->player.view_y * cos(MOUSE_SPEED);
 	}
 }
 

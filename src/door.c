@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:17:19 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 10:17:17 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ int	check_door(t_cub3D *game, int side)
 	door = game->door_list;
 	while (door)
 	{
-		if (door->x == game->ray.mapX && door->y == game->ray.mapY)
+		if (door->x == game->ray.map_x && door->y == game->ray.map_y)
 		{
 			get_perp_wall_dist(game, side);
 			get_draw_coords(game);
 			get_tex_pos(game, side);
-			if (game->ray.texX < 130 || game->ray.texX > 512 - 125)
+			if (game->ray.tex_x < 130 || game->ray.tex_x > 512 - 125)
 				return (1);
 			if (!door->open)
 			{
@@ -81,25 +81,25 @@ void	get_door_colour(t_cub3D *game, t_image *img, int x, int y)
 {
 	int	colour;
 
-	game->ray.texY = (int)(game->ray.tex_pos) & (512 - 1);
+	game->ray.tex_y = (int)(game->ray.tex_pos) & (512 - 1);
 	game->ray.tex_pos += game->ray.step;
-	colour = *(int *)(img->addr + game->ray.texY % 512 * img->line_size
-			+ (game->ray.texX) % 512 * (img->bpp / 8));
+	colour = *(int *)(img->addr + game->ray.tex_y % 512 * img->line_size
+			+ (game->ray.tex_x) % 512 * (img->bpp / 8));
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
 
 void	find_door(t_cub3D *game)
 {
-	if (game->player.dirX > 0.5 && game->map_arr[(int)game->player.posY]
-		[(int)game->player.posX + 1] == 'D')
-		open_door(game, game->player.posX + 1, game->player.posY);
-	else if (game->player.dirX < -0.5 && game->map_arr[(int)game->player.posY]
-		[(int)game->player.posX - 1] == 'D')
-		open_door(game, game->player.posX - 1, game->player.posY);
-	else if (game->player.dirY > 0.5 && game->map_arr
-		[(int)game->player.posY + 1][(int)game->player.posX] == 'D')
-		open_door(game, game->player.posX, game->player.posY + 1);
-	else if (game->player.dirY < -0.5 && game->map_arr
-		[(int)game->player.posY - 1][(int)game->player.posX] == 'D')
-		open_door(game, game->player.posX, game->player.posY - 1);
+	if (game->player.dir_x > 0.5 && game->map_arr[(int)game->player.pos_y]
+		[(int)game->player.pos_x + 1] == 'D')
+		open_door(game, game->player.pos_x + 1, game->player.pos_y);
+	else if (game->player.dir_x < -0.5 && game->map_arr[(int)game->player.pos_y]
+		[(int)game->player.pos_x - 1] == 'D')
+		open_door(game, game->player.pos_x - 1, game->player.pos_y);
+	else if (game->player.dir_y > 0.5 && game->map_arr
+		[(int)game->player.pos_y + 1][(int)game->player.pos_x] == 'D')
+		open_door(game, game->player.pos_x, game->player.pos_y + 1);
+	else if (game->player.dir_y < -0.5 && game->map_arr
+		[(int)game->player.pos_y - 1][(int)game->player.pos_x] == 'D')
+		open_door(game, game->player.pos_x, game->player.pos_y - 1);
 }

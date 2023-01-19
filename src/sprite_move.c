@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:49:37 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 17:31:26 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 10:23:11 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	move_sprite(t_cub3D *game, int i)
 {
 	if (!game->sprite_arr[i]->sprite_activate
-		&& ft_abs(game->player.posX - game->sprite_arr[i]->x) < 2.5
-		&& ft_abs(game->player.posY - game->sprite_arr[i]->y) < 2.5)
+		&& ft_abs(game->player.pos_x - game->sprite_arr[i]->x) < 2.5
+		&& ft_abs(game->player.pos_y - game->sprite_arr[i]->y) < 2.5)
 	{
 		if (!game->sprite_arr[i]->sprite_scare)
 		{
@@ -26,16 +26,16 @@ void	move_sprite(t_cub3D *game, int i)
 			play_sound("afplay sound/scream.mp3");
 		}
 		game->sprite_arr[i]->x += 0.2
-			* (game->player.posX - game->sprite_arr[i]->x);
+			* (game->player.pos_x - game->sprite_arr[i]->x);
 		game->sprite_arr[i]->y += 0.2
-			* (game->player.posY - game->sprite_arr[i]->y);
+			* (game->player.pos_y - game->sprite_arr[i]->y);
 	}
 	else
 	{
 		game->sprite_arr[i]->x += 0.005
-			* (game->player.posX - game->sprite_arr[i]->x);
+			* (game->player.pos_x - game->sprite_arr[i]->x);
 		game->sprite_arr[i]->y += 0.005
-			* (game->player.posY - game->sprite_arr[i]->y);
+			* (game->player.pos_y - game->sprite_arr[i]->y);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_cast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:46:37 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 15:49:14 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 10:22:05 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ int	get_sprite_dist(t_cub3D *game)
 	while (game->sprite_arr[i])
 	{
 		game->sprite_order[i] = i;
-		game->sprite_distance[i] = ((game->player.posX - game->sprite_arr[i]->x)
-				* (game->player.posX - game->sprite_arr[i]->x)
-				+ (game->player.posY - game->sprite_arr[i]->y)
-				* (game->player.posY - game->sprite_arr[i]->y));
+		game->sprite_distance[i] = ((game->player.pos_x - \
+			game->sprite_arr[i]->x)
+				* (game->player.pos_x - game->sprite_arr[i]->x)
+				+ (game->player.pos_y - game->sprite_arr[i]->y)
+				* (game->player.pos_y - game->sprite_arr[i]->y));
 		i++;
 	}
 	sort_sprites(game->sprite_order, game->sprite_distance, game->sprite_total);
@@ -80,14 +81,14 @@ void	get_sprite_size(t_cub3D *game, t_spr_cast *info, int i)
 	double	inv_det;
 	double	trans_x;
 
-	sprite_x = game->sprite_arr[game->sprite_order[i]]->x - game->player.posX;
-	sprite_y = game->sprite_arr[game->sprite_order[i]]->y - game->player.posY;
-	inv_det = 1.0 / (game->player.viewX * game->player.dirY
-			- game->player.dirX * game->player.viewY);
-	trans_x = inv_det * (game->player.dirY * sprite_x
-			- game->player.dirX * sprite_y);
-	info->trans_y = inv_det * (-game->player.viewY * sprite_x
-			+ game->player.viewX * sprite_y);
+	sprite_x = game->sprite_arr[game->sprite_order[i]]->x - game->player.pos_x;
+	sprite_y = game->sprite_arr[game->sprite_order[i]]->y - game->player.pos_y;
+	inv_det = 1.0 / (game->player.view_x * game->player.dir_y
+			- game->player.dir_x * game->player.view_y);
+	trans_x = inv_det * (game->player.dir_y * sprite_x
+			- game->player.dir_x * sprite_y);
+	info->trans_y = inv_det * (-game->player.view_y * sprite_x
+			+ game->player.view_x * sprite_y);
 	info->s_screen_x = (int)(game->half_width * (1 + trans_x / info->trans_y));
 	info->s_height = abs((int)(game->window_height / info->trans_y));
 	info->s_width = abs((int)(game->window_height / info->trans_y));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:44:41 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:14:57 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 10:08:08 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	get_pixel_colour(t_cub3D *game, t_image *img, int x, int y)
 {
 	int	colour;
 
-	game->ray.texY = (int)game->ray.tex_pos & (RESOLUTION - 1);
+	game->ray.tex_y = (int)game->ray.tex_pos & (RESOLUTION - 1);
 	game->ray.tex_pos += game->ray.step;
-	colour = *(int *)(img->addr + game->ray.texY % RESOLUTION * img->line_size
-			+ game->ray.texX % RESOLUTION * (img->bpp / 8));
+	colour = *(int *)(img->addr + game->ray.tex_y % RESOLUTION * img->line_size
+			+ game->ray.tex_x % RESOLUTION * (img->bpp / 8));
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
 
@@ -51,9 +51,9 @@ void	draw_to_image(t_cub3D *game, int x, t_image *img)
 	y = -1;
 	while (++y < game->window_height)
 	{
-		if (y < game->ray.drawStart)
+		if (y < game->ray.draw_start)
 			my_mlx_pixel_put(&game->img, x, y, game->ceiling);
-		else if (y > game->ray.drawEnd)
+		else if (y > game->ray.draw_end)
 			my_mlx_pixel_put(&game->img, x, y, game->floor);
 		else if (game->door_hit && ((int)game->ray.tex_pos
 				& (RESOLUTION - 1)) > 30)
@@ -70,11 +70,11 @@ t_image	*set_image_ptr(t_cub3D *game, int side)
 {
 	t_image	*img;
 
-	if (side == 0 && game->ray.rayDirX > 0)
+	if (side == 0 && game->ray.ray_dir_x > 0)
 		img = &game->east_wall;
 	else if (side == 0)
 		img = &game->west_wall;
-	else if (side == 1 && game->ray.rayDirY > 0)
+	else if (side == 1 && game->ray.ray_dir_y > 0)
 		img = &game->south_wall;
 	else
 		img = &game->north_wall;

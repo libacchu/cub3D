@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:20:17 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 10:05:44 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	init_game(t_cub3D *game)
 	game->minimap_size_y = 0;
 	game->once = 0;
 	game->player.direct = 0;
-	game->player.posX = 0;
-	game->player.posY = 0;
+	game->player.pos_x = 0;
+	game->player.pos_y = 0;
 	game->tab = 0;
 	game->shift = 0;
 	game->sprite_list = NULL;

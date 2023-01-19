@@ -6,18 +6,18 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 23:12:38 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:36:08 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
 # include <unistd.h>
-# include "../minilibx_linux/mlx.h"
 # include <math.h>
 # include <sys/time.h>
+# include "../libft/libft.h"
+# include "../minilibx_linux/mlx.h"
 
 # define ROTATE_SPEED 0.05
 # define MOUSE_SPEED 0.005
@@ -45,26 +45,26 @@ enum	e_keystroke
 
 typedef struct s_ray
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
 	double	*zbuffer;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	int		stepX;
-	int		stepY;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		step_x;
+	int		step_y;
 	double	tex_pos;
 	double	step;
-	int		mapX;
-	int		mapY;
-	int		texX;
-	int		texY;
+	int		map_x;
+	int		map_y;
+	int		tex_x;
+	int		tex_y;
 	int		north_x;
 	int		north_y;
 	int		east_x;
@@ -136,12 +136,12 @@ typedef struct s_spr_cast
 typedef struct s_player
 {
 	char	direct;
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	viewX;
-	double	viewY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	view_x;
+	double	view_y;
 }	t_player;
 
 typedef struct s_cub3D

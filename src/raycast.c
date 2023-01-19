@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:02:03 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 09:50:01 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	put_minimap(t_cub3D *game)
 		get_delta_dist(game);
 		get_side_dist(game);
 		get_hit(game, &side);
-		line_algo(game, game->player.posX * 34, game->player.posY * 34);
+		line_algo(game, game->player.pos_x * 34, game->player.pos_y * 34);
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->minimap.img,
-		game->half_width - 10 - game->player.posX * 34, game->half_height
-		- 10 - game->player.posY * 34);
+		game->half_width - 10 - game->player.pos_x * 34, game->half_height
+		- 10 - game->player.pos_y * 34);
 	mlx_put_image_to_window(game->mlx, game->window, game->minimap_player.img,
 		game->half_width - 8, game->half_height - 10);
 }
@@ -58,7 +58,7 @@ void	raycast(t_cub3D *game)
 		get_tex_pos(game, side);
 		img = set_image_ptr(game, side);
 		draw_to_image(game, x, img);
-		game->ray.zbuffer[x] = game->ray.perpWallDist;
+		game->ray.zbuffer[x] = game->ray.perp_wall_dist;
 	}
 	draw_sprites(game);
 	put_images_to_window(game);
