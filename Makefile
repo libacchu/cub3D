@@ -6,7 +6,7 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/19 10:27:26 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/19 10:32:21 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,12 +77,12 @@ $(NAME) : $(OBJ) $(INC)
 
 clean :
 	@printf "$(GREY)Removing $(BLUE)$(OBJ)$(RESET)\n"
+	make fclean -C $(LIBFT)
+	make clean -C $(LIBMLX)
 	@rm -fr $(OBJ_DIR)
 
 fclean : clean
 	@printf "$(GREY)Removing $(BLUE)$(NAME)$(RESET)\n"
-	make fclean -C $(LIBFT)
-	make clean -C $(LIBMLX)
 	@rm -f $(NAME)
 
 re : fclean all
