@@ -3,8 +3,8 @@ SO ./textures/imgs/brick_wall_dark.xpm
 WE ./textures/imgs/eye_wall.xpm
 EA ./textures/imgs/wooden_wall_dark.xpm
 
-F 0,0,0
 C 255,300,255
+F 0,0,0
 
 111111
 100001111

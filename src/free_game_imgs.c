@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_game_imgs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 22:09:25 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:58:18 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	free_all_imgs(t_cub3D *game)
 		free_sprites(game->mlx, game->sprite);
 	if (game->ray.zbuffer)
 		free(game->ray.zbuffer);
+	free_strings(game);
 }

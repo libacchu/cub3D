@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 10:05:44 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:56:37 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,31 @@
 
 void	init_game(t_cub3D *game)
 {
+	game->window = NULL;
 	game->north_wall.img = NULL;
 	game->south_wall.img = NULL;
 	game->west_wall.img = NULL;
 	game->east_wall.img = NULL;
+	game->north_wall_addr = NULL;
+	game->east_wall_addr = NULL;
+	game->south_wall_addr = NULL;
+	game->west_wall_addr = NULL;
+	game->north_compass.img = NULL;
+	game->east_compass.img = NULL;
+	game->south_compass.img = NULL;
+	game->west_compass.img = NULL;
+	game->minimap.img = NULL;
+	game->minimap_wall.img = NULL;
+	game->minimap_floor.img = NULL;
+	game->minimap_player.img = NULL;
 	game->ceiling = 0;
 	game->floor = 0;
 	game->sprite_total = 0;
 	game->compass = colourshift(200, 90, 120, 150);
 	game->ray_colour = colourshift(100, 128, 128, 128);
-	game->minimap.img = NULL;
 	game->doors = 0;
 	game->door_list = NULL;
+	game->door.img = NULL;
 	game->path = NULL;
 	game->map_arr = NULL;
 	game->minimap_size_x = 0;
@@ -37,6 +50,9 @@ void	init_game(t_cub3D *game)
 	game->tab = 0;
 	game->shift = 0;
 	game->sprite_list = NULL;
+	game->sprite_arr = NULL;
+	game->sprite = NULL;
+	game->ray.zbuffer = NULL;
 	game->last_time = get_time_in_ms();
 }
 

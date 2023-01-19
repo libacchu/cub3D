@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 11:05:49 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 16:16:14 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	free_strings(t_cub3D *game)
 			free(game->map_arr[i]);
 		free(game->map_arr);
 	}
-	if (game->north_wall.img)
-		free(game->north_wall.img);
-	if (game->east_wall.img)
-		free(game->east_wall.img);
-	if (game->south_wall.img)
-		free(game->south_wall.img);
-	if (game->west_wall.img)
-		free(game->west_wall.img);
+	if (game->north_wall_addr)
+		free(game->north_wall_addr);
+	if (game->east_wall_addr)
+		free(game->east_wall_addr);
+	if (game->south_wall_addr)
+		free(game->south_wall_addr);
+	if (game->west_wall_addr)
+		free(game->west_wall_addr);
 	return (1);
 }
 
