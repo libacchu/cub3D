@@ -6,11 +6,33 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 15:40:23 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 11:05:49 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+int	free_strings(t_cub3D *game)
+{
+	int	i;
+
+	if (game->map_arr)
+	{
+		i = -1;
+		while (game->map_arr[++i])
+			free(game->map_arr[i]);
+		free(game->map_arr);
+	}
+	if (game->north_wall.img)
+		free(game->north_wall.img);
+	if (game->east_wall.img)
+		free(game->east_wall.img);
+	if (game->south_wall.img)
+		free(game->south_wall.img);
+	if (game->west_wall.img)
+		free(game->west_wall.img);
+	return (1);
+}
 
 void	start_loop(t_cub3D *game)
 {
@@ -28,7 +50,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (err_message("Try: ./cub3D maps/<map name>"));
 	if (errorcheck(argv, &game))
-		return (1);
+		return (free_strings(&game));
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		return (err_message("Failed to initialise mlx."));

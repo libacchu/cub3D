@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:43:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 15:51:07 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:02:44 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	err_map(int fd, t_cub3D *game)
 		else
 		{
 			if (premap_check(game, str))
-				return (1);
+				return (free(str), 1);
 			i++;
 		}
 		free(str);
