@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:43:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 16:45:05 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:56:39 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ int	premap_check(t_cub3D *game, char *str)
 	return (0);
 }
 
+int	err_check_if_invalid_file(int i, int err)
+{
+	if (i == 0)
+		return (err_message("Empty file."));
+	else if (i < 6 && err != 1)
+		return (err_message("Invalid map file."));
+	else if (i == 6 && err != 1)
+		return (err_message("No map."));
+	return (0);
+}
+
 int	err_map(int fd, t_cub3D *game)
 {
 	char	*str;
@@ -65,11 +76,7 @@ int	err_map(int fd, t_cub3D *game)
 		free(str);
 		str = get_next_line(fd);
 	}
-	if (i == 0)
-		return (err_message("Empty file."));
-	else if (i < 6 && err != 1)
-		return (err_message("Invalid map file."));
-	else if (i == 6 && err != 1)
-		return (err_message("No map."));
+	if (err_check_if_invalid_file(i, err))
+		return (1);
 	return (err);
 }

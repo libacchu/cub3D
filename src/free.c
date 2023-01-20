@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 17:01:42 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:50:34 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	ft_free(t_cub3D *game)
 {
 	t_door	*door;
 
-	// if (game->map_arr)
-	// 	free_array(game->map_arr);
 	free_all_imgs(game);
 	if (game->window)
 		mlx_destroy_window(game->mlx, game->window);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 15:41:17 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 12:19:59 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define RUN_SPEED 0.1
 
 # define RESOLUTION 512
+
+# ifdef __MACH__
+#  define SYSTEM 1
+# elif __linux__
+#  define SYSTEM 2
+# endif
 
 // Keyboard
 enum	e_keystroke
@@ -212,7 +218,7 @@ typedef struct s_cub3D
 
 }	t_cub3D;
 
-int	free_strings(t_cub3D *game);
+int		free_strings(t_cub3D *game);
 
 /* assign_images */
 int		assign_compass(t_cub3D *game);
