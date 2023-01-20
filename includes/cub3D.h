@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/20 10:47:00 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:19:59 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define RUN_SPEED 0.1
 
 # define RESOLUTION 512
+
+# ifdef __MACH__
+#  define SYSTEM 1
+# elif __linux__
+#  define SYSTEM 2
+# endif
 
 // Keyboard
 enum	e_keystroke
