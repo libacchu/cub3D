@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:42:55 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 17:31:41 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 12:20:28 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ double	ft_abs(double x)
 
 void	play_sound(char *str)
 {
-	if (!fork())
+	if (SYSTEM == 1)
 	{
-		system(str);
-		exit(0);
+		if (!fork())
+		{
+			system(str);
+			exit(0);
+		}
 	}
 }
 
