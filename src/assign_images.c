@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/20 10:47:58 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:42:26 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ int	assign_walls_ns(t_cub3D *game)
 	game->north_wall.img = mlx_xpm_file_to_image(game->mlx, \
 		game->north_wall_addr, &x, &y);
 	free(game->north_wall_addr);
+	game->north_wall_addr = NULL;
 	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, \
 		game->south_wall_addr, &x, &y);
 	free(game->south_wall_addr);
+	game->south_wall_addr = NULL;
 	if (!game->south_wall.img || !game->north_wall.img)
 		return (err_message("Wall image not loaded!"));
 	add_data_addr(&game->north_wall);
