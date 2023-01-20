@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 16:56:37 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:52:48 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	init_game(t_cub3D *game)
+void	init_imgs(t_cub3D *game)
 {
-	game->window = NULL;
 	game->north_wall.img = NULL;
 	game->south_wall.img = NULL;
 	game->west_wall.img = NULL;
@@ -31,6 +30,12 @@ void	init_game(t_cub3D *game)
 	game->minimap_wall.img = NULL;
 	game->minimap_floor.img = NULL;
 	game->minimap_player.img = NULL;
+}
+
+void	init_game(t_cub3D *game)
+{
+	game->window = NULL;
+	init_imgs(game);
 	game->ceiling = 0;
 	game->floor = 0;
 	game->sprite_total = 0;

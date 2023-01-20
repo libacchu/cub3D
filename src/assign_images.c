@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 16:28:44 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:47:58 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ int	assign_walls_ns(t_cub3D *game)
 	int		x;
 	int		y;
 
-	game->north_wall.img = mlx_xpm_file_to_image(game->mlx, game->north_wall_addr, &x, &y);
+	game->north_wall.img = mlx_xpm_file_to_image(game->mlx, \
+		game->north_wall_addr, &x, &y);
 	free(game->north_wall_addr);
-	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, game->south_wall_addr, &x, &y);
+	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, \
+		game->south_wall_addr, &x, &y);
 	free(game->south_wall_addr);
 	if (!game->south_wall.img || !game->north_wall.img)
 		return (err_message("Wall image not loaded!"));
@@ -76,10 +78,12 @@ int	assign_walls_ew(t_cub3D *game)
 	int		x;
 	int		y;
 
-	game->east_wall.img = mlx_xpm_file_to_image(game->mlx, game->east_wall_addr, &x, &y);
+	game->east_wall.img = mlx_xpm_file_to_image(game->mlx, \
+		game->east_wall_addr, &x, &y);
 	free(game->east_wall_addr);
 	game->east_wall_addr = NULL;
-	game->west_wall.img = mlx_xpm_file_to_image(game->mlx, game->west_wall_addr, &x, &y);
+	game->west_wall.img = mlx_xpm_file_to_image(game->mlx, \
+		game->west_wall_addr, &x, &y);
 	free(game->west_wall_addr);
 	game->west_wall_addr = NULL;
 	if (!game->east_wall.img || !game->west_wall.img)

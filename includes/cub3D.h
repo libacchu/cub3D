@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 15:41:17 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:47:00 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ typedef struct s_cub3D
 
 }	t_cub3D;
 
-int	free_strings(t_cub3D *game);
+int		free_strings(t_cub3D *game);
 
 /* assign_images */
 int		assign_compass(t_cub3D *game);
