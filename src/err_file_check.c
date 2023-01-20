@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   err_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:43:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/14 15:51:07 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:45:05 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	map_checks(t_cub3D *game, char *str, int fd, int i)
+int	map_checks(t_cub3D *game, char **str, int fd, int i)
 {
-	if (i && !str)
+	if (i && !*str)
 		return (err_message("No map."));
 	else if (i == 6 && check_map(str, game, fd))
 		return (1);
@@ -47,27 +47,29 @@ int	err_map(int fd, t_cub3D *game)
 {
 	char	*str;
 	int		i;
+	int		err;
 
 	i = 0;
+	err = 0;
 	str = get_next_line(fd);
-	while (str && i != 6)
+	while (str)
 	{
-		if (only_white_space(str))
+		if (!err && i <= 6 && !only_white_space(str))
 		{
-			free(str);
-			str = get_next_line(fd);
-			continue ;
-		}
-		else
-		{
-			if (premap_check(game, str))
-				return (1);
+			if (i < 6 && premap_check(game, str))
+				err = 1;
+			else if (i == 6 && check_map(&str, game, fd))
+				err = 1;
 			i++;
 		}
 		free(str);
 		str = get_next_line(fd);
 	}
-	if (map_checks(game, str, fd, i))
-		return (1);
-	return (0);
+	if (i == 0)
+		return (err_message("Empty file."));
+	else if (i < 6 && err != 1)
+		return (err_message("Invalid map file."));
+	else if (i == 6 && err != 1)
+		return (err_message("No map."));
+	return (err);
 }

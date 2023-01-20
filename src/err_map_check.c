@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:49:11 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/18 16:30:46 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 15:09:50 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	loop_x(t_cub3D *game, int x, int y)
 	return (0);
 }
 
-int	check_map(char *str, t_cub3D *game, int fd)
+int	check_map(char **str, t_cub3D *game, int fd)
 {
 	int	x;
 	int	y;

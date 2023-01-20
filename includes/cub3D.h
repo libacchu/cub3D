@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 09:36:08 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:41:17 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,10 @@ typedef struct s_cub3D
 	t_image		west_wall;
 	t_image		east_wall;
 	t_image		south_wall;
+	char		*north_wall_addr;
+	char		*east_wall_addr;
+	char		*south_wall_addr;
+	char		*west_wall_addr;
 	t_image		north_compass;
 	t_image		east_compass;
 	t_image		south_compass;
@@ -208,6 +212,8 @@ typedef struct s_cub3D
 
 }	t_cub3D;
 
+int	free_strings(t_cub3D *game);
+
 /* assign_images */
 int		assign_compass(t_cub3D *game);
 int		assign_minimap(t_cub3D *game);
@@ -230,7 +236,7 @@ void	open_door(t_cub3D *game, int x, int y);
 void	set_screen_size(t_cub3D *game);
 
 /* err_file_check.c */
-int		map_checks(t_cub3D *game, char *str, int fd, int i);
+int		map_checks(t_cub3D *game, char **str, int fd, int i);
 int		premap_check(t_cub3D *game, char *str);
 int		err_map(int fd, t_cub3D *game);
 
@@ -239,12 +245,12 @@ int		check_x(int c);
 int		check_y(char **map_arr, int y, int x);
 int		check_walls_chars(t_cub3D *game, int x, int y);
 int		loop_x(t_cub3D *game, int x, int y);
-int		check_map(char *str, t_cub3D *game, int fd);
+int		check_map(char **str, t_cub3D *game, int fd);
 
 /* err_map_check2.c */
 int		count_rows(char *path);
 int		add_to_arr(char **str, t_cub3D *game, int fd);
-int		create_map_arr(char *str, t_cub3D *game, int fd);
+int		create_map_arr(char **str, t_cub3D *game, int fd);
 int		check_chars(char c);
 
 /* err_rgb_check.c */
@@ -254,7 +260,7 @@ int		set_rgb(char *str, int *colour);
 int		check_rgb(char *str, t_cub3D *game);
 
 /* err_tex_check.c */
-int		alloc_wall(char *str, void **wall_ptr);
+int		alloc_wall(char *str, char **wall_ptr);
 int		check_tex(char *str, t_cub3D *game);
 
 /* error_check.c */
@@ -277,7 +283,7 @@ void	free_all_imgs(t_cub3D *game);
 void	free_array(char **str);
 void	free_img(void *mlx, void *ptr);
 void	free_sprites(void *mlx, t_image *sprite);
-void	ft_free(t_cub3D *game);
+int		ft_free(t_cub3D *game);
 
 /* game_init.c */
 void	init_game(t_cub3D *game);

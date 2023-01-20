@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:28:42 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 10:59:02 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:38:55 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	err_path_name(char *path)
 		i++;
 	if (ft_strncmp(&path[i - 4], ".cub", 5))
 	{
-		err_message("Invalid file extension.\n");
+		err_message("Invalid file extension.");
 		return (-1);
 	}
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		err_message("File doesn't exist!\n");
+		err_message("File doesn't exist!");
 	return (fd);
 }
 
@@ -62,5 +62,6 @@ int	errorcheck(char **argv, t_cub3D *game)
 		return (1);
 	if (err_map(fd, game))
 		return (1);
+	close(fd);
 	return (0);
 }

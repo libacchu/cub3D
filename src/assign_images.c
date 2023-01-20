@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:41:04 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 16:17:40 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 16:28:44 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,14 @@ int	assign_minimap(t_cub3D *game)
 
 int	assign_walls_ns(t_cub3D *game)
 {
-	char	*ptr;
 	int		x;
 	int		y;
 
-	ptr = game->north_wall.img;
-	game->north_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	free(ptr);
-	ptr = game->south_wall.img;
-	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	free(ptr);
-	if (!game->north_wall.img || !game->south_wall.img)
+	game->north_wall.img = mlx_xpm_file_to_image(game->mlx, game->north_wall_addr, &x, &y);
+	free(game->north_wall_addr);
+	game->south_wall.img = mlx_xpm_file_to_image(game->mlx, game->south_wall_addr, &x, &y);
+	free(game->south_wall_addr);
+	if (!game->south_wall.img || !game->north_wall.img)
 		return (err_message("Wall image not loaded!"));
 	add_data_addr(&game->north_wall);
 	add_data_addr(&game->south_wall);
@@ -76,16 +73,15 @@ int	assign_walls_ns(t_cub3D *game)
 
 int	assign_walls_ew(t_cub3D *game)
 {
-	char	*ptr;
 	int		x;
 	int		y;
 
-	ptr = game->east_wall.img;
-	game->east_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	free(ptr);
-	ptr = game->west_wall.img;
-	game->west_wall.img = mlx_xpm_file_to_image(game->mlx, ptr, &x, &y);
-	free(ptr);
+	game->east_wall.img = mlx_xpm_file_to_image(game->mlx, game->east_wall_addr, &x, &y);
+	free(game->east_wall_addr);
+	game->east_wall_addr = NULL;
+	game->west_wall.img = mlx_xpm_file_to_image(game->mlx, game->west_wall_addr, &x, &y);
+	free(game->west_wall_addr);
+	game->west_wall_addr = NULL;
 	if (!game->east_wall.img || !game->west_wall.img)
 		return (err_message("Wall image not loaded!"));
 	add_data_addr(&game->east_wall);
@@ -93,14 +89,13 @@ int	assign_walls_ew(t_cub3D *game)
 	return (0);
 }
 
-//if (game->sprite_list)
 int	assign_images(t_cub3D *game)
 {
 	if (assign_walls_ew(game) || assign_walls_ns(game) \
 	|| assign_door(game) || assign_minimap(game) \
 	|| assign_compass(game) || assign_sprite(game))
-		return (1);
+		return (ft_free(game));
 	if (make_sprite_array(game))
-		return (1);
+		return (ft_free(game));
 	return (0);
 }
