@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
+#    By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 20:17:58 by libacchu          #+#    #+#              #
-#    Updated: 2023/01/19 10:32:21 by libacchu         ###   ########.fr        #
+#    Updated: 2023/01/20 13:17:37 by obibby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

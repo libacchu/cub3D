@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_cast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:46:37 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 10:22:05 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/21 09:53:14 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ int	get_sprite_dist(t_cub3D *game)
 {
 	int	i;
 
-	game->sprite_order = ft_calloc(game->sprite_total, sizeof(int));
-	if (!game->sprite_order)
-		return (err_message("Memory allocation failed."));
-	game->sprite_distance = ft_calloc(game->sprite_total, sizeof(int));
-	if (!game->sprite_distance)
-		return (err_message("Memory allocation failed."));
 	i = 0;
 	while (game->sprite_arr[i])
 	{
@@ -54,7 +48,6 @@ int	get_sprite_dist(t_cub3D *game)
 		i++;
 	}
 	sort_sprites(game->sprite_order, game->sprite_distance, game->sprite_total);
-	free(game->sprite_distance);
 	return (0);
 }
 
