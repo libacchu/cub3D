@@ -3,7 +3,7 @@ SO ./textures/imgs/brick_wall_dark.xpm
 WE ./textures/imgs/eye_wall.xpm
 EA ./textures/imgs/wooden_wall_dark.xpm
 
-C 5,2,50
+C 5,2,100
 F 50,50,50
 
 

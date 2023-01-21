@@ -3,11 +3,12 @@ SO ./textures/imgs/brick_wall_dark.xpm
 WE ./textures/imgs/eye_wall.xpm
 EA ./textures/imgs/wooden_wall_dark.xpm
 
-F 255, 255, 255
-C 255, 255, 200
+C 75,0,25
+F 5,10,30
 
-111111111
-100000001
-10W000001
-100000001
-111111111
+
+11111111111111
+10000000000001
+10W00000000001
+10000000000001
+11111111111111
