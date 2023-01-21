@@ -1,0 +1,21 @@
+NO ./textures/imgs/blue_wall.xpm
+SO ./textures/imgs/brick_wall_dark.xpm
+WE ./textures/imgs/eye_wall.xpm
+EA ./textures/imgs/wooden_wall_dark.xpm
+
+C 10,50,150
+F 50,50,50
+
+1111
+1101
+11D1
+10001
+10001
+10001
+10N01
+10001
+10001
+10001
+1101
+1111
+

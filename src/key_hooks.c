@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/11 13:49:11 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 09:39:21 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,52 @@
 		- red cross: close the window and quit the program cleanly.
  */
 
-int	ft_key(int keycode,  t_cub3D *game)
+void	toggle_shift(t_cub3D *game)
+{
+	if (game->shift)
+		game->shift = 0;
+	else
+		game->shift = 1;
+}
+
+void	toggle_tab(t_cub3D *game)
+{
+	if (game->tab)
+	{
+		game->tab = 0;
+		game->once = 0;
+	}
+	else
+		game->tab = 1;
+}
+
+int	ft_key(int keycode, t_cub3D *game)
 {
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
-	if (keycode == KEY_W || keycode == KEY_UP)
-		printf("W\n");
-	if (keycode == KEY_A || keycode == KEY_LEFT)
-		printf("A\n");
-	if (keycode == KEY_S || keycode == KEY_DOWN)
-		printf("S\n");
-	if (keycode == KEY_D || keycode == KEY_RIGHT)
-		printf("D\n");
+	else if (keycode == KEY_W)
+		move_player(game, game->player.dir_y, game->player.dir_x, 1);
+	else if (keycode == KEY_A)
+		move_player(game, game->player.view_y, game->player.view_x, -1);
+	else if (keycode == KEY_S)
+		move_player(game, game->player.dir_y, game->player.dir_x, -1);
+	else if (keycode == KEY_D)
+		move_player(game, game->player.view_y, game->player.view_x, 1);
+	else if (keycode == KEY_LEFT)
+		rotate_player(game, -1);
+	else if (keycode == KEY_RIGHT)
+		rotate_player(game, 1);
+	else if (keycode == KEY_E)
+		find_door(game);
+	else if (keycode == KEY_TAB)
+		toggle_tab(game);
+	else if (keycode == KEY_SHIFT)
+		toggle_shift(game);
 	return (0);
 }
 
 int	ft_mouse(t_cub3D *game)
 {
-	/* red cross */
-	
 	ft_exit(NULL, game);
 	return (0);
 }

@@ -1,7 +1,7 @@
-NO texture/bri.xpm
-SO texture/bri.xpm
-WE texture/bri.xpm
-EA texture/bri.xpm
+NO ./textures/imgs/blu.xpm
+SO ./textures/imgs/blu.xpm
+WE ./textures/imgs/blu.xpm
+EA ./textures/imgs/blu.xpm
 
 F 255, 255, 255
 C 255, 255, 200

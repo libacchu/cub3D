@@ -6,36 +6,63 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:59:43 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/11 11:08:18 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/19 12:40:18 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
+int	colourshift(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void	set_color(int **rgb, int c, int n)
+{
+	if (c == 0)
+		*rgb[0] = n;
+	else if (c == 1)
+		*rgb[1] = n;
+	else if (c == 2)
+		*rgb[2] = n;
+}
+
+int	convert_number(char *str, int *i, int *n)
+{
+	while (str[*i] && (str[*i] <= 32 || str[*i] == ','))
+		*i = *i + 1;
+	if (!(str[*i]) || !ft_isdigit(str[*i]))
+		return (1);
+	*n = ft_atoi(&str[*i]);
+	if (*n > 255 || *n < 0)
+		return (1);
+	return (0);
+}
+
 int	set_rgb(char *str, int *colour)
 {
-	int	shift;
 	int	n;
 	int	i;
+	int	c;
+	int	rgb[3];
 
-	shift = 16;
 	i = 1;
-	while (shift >= 8)
+	c = -1;
+	while (++c < 3)
 	{
-		while (str[i] && (str[i] <= 32 || str[i] == ','))
-			i++;
-		if (!str[i] || !ft_isdigit(str[i]))
+		if (convert_number(str, &i, &n))
 			return (1);
-		n = ft_atoi(&str[i]);
-		if (n > 255 || n < 0)
-			return (1);
-		*colour = *colour | n;
-		*colour = *colour << shift;
+		if (c == 0)
+			rgb[0] = n;
+		else if (c == 1)
+			rgb[1] = n;
+		else if (c == 2)
+			rgb[2] = n;
 		while (str[i] && str[i] != ',')
 			i++;
 		i++;
-		shift -= 4;
 	}
+	*colour = colourshift(0, rgb[0], rgb[1], rgb[2]);
 	return (0);
 }
 
