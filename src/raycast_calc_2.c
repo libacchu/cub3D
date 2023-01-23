@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:49:36 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/23 10:57:26 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/23 16:56:12 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_tex_pos(t_cub3D *game, int side)
 		game->ray.tex_x = RESOLUTION - game->ray.tex_x - 1;
 	game->ray.step = 1.0 * RESOLUTION / game->ray.line_height;
 	game->ray.tex_pos = (game->ray.draw_start - game->half_height
-		+ game->ray.line_height * 0.5) * game->ray.step;
+			+ game->ray.line_height * 0.5) * game->ray.step;
 }
 
 void	put_compass(t_cub3D *game, int x, int y)

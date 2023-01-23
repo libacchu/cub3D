@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/23 11:34:03 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/23 16:54:19 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 int	free_strings(t_cub3D *game)
 {
-	int	i;
+	int			i;
+	t_sprite	*temp;
 
+	while (game->sprite_list)
+	{
+		temp = game->sprite_list;
+		game->sprite_list = game->sprite_list->next;
+		free(temp);
+	}
 	if (game->map_arr)
 	{
 		i = -1;

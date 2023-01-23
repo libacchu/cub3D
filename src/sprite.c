@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/21 09:52:27 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/23 16:55:52 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	make_sprite_array(t_cub3D *game)
 		free(prev);
 		i++;
 	}
+	game->sprite_list = NULL;
 	game->sprite_order = ft_calloc(game->sprite_total, sizeof(int));
 	if (!game->sprite_order)
 		return (err_message("Memory allocation failed."));
