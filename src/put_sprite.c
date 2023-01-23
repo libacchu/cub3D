@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_sprite.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:47:53 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/18 17:19:08 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/21 09:56:20 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int	draw_sprites(t_cub3D *game)
 		get_sprite_coords(game, &game->sprite_info);
 		put_sprite(game, &game->sprite_info);
 	}
-	free(game->sprite_order);
 	return (0);
 }

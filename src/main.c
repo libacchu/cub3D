@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/23 11:27:40 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/23 11:34:03 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 		return (free_strings(&game));
 	game.mlx = mlx_init();
 	if (!game.mlx)
-		return (err_message("Failed to initialise mlx."));
+		return (free_strings(&game), err_message("Failed to initialise mlx."));
 	set_screen_size(&game);
 	if (assign_images(&game))
 		return (1);

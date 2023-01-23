@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 00:55:01 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/16 00:18:57 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/21 10:50:34 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	refresh_minimap(t_cub3D *game)
 		x = -1;
 		while (game->map_arr[y][++x])
 		{
-			if (game->map_arr[y][x] == '1' || game->map_arr[y][x] == ' ')
+			if (game->map_arr[y][x] == '1')
 				pixel_put_image(game, &game->minimap_wall, x, y);
-			else
+			else if (game->map_arr[y][x] == '0' || game->map_arr[y][x] != ' ')
 				pixel_put_image(game, &game->minimap_floor, x, y);
 		}
 	}

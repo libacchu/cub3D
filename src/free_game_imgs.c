@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_game_imgs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:38:43 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 16:58:18 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/21 09:55:21 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	free_sprite_arr(t_cub3D *game)
 		i++;
 	}
 	free(game->sprite_arr);
+	free(game->sprite_distance);
+	free(game->sprite_order);
 }
 
 void	free_all_imgs(t_cub3D *game)
