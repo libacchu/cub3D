@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/20 12:19:59 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:17:25 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,7 @@ void	init_compass(t_cub3D *game);
 /* raycast_calc.c */
 void	init_ray(t_cub3D *game, int x);
 void	get_delta_dist(t_cub3D *game);
-void	get_hit(t_cub3D *game, int *side);
+int		get_hit(t_cub3D *game);
 void	get_side_dist(t_cub3D *game);
 void	get_perp_wall_dist(t_cub3D *game, int side);
 

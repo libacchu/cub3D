@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_calc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:28:08 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 09:56:10 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:01:16 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ void	get_side_dist(t_cub3D *game)
 	}
 }
 
-void	get_hit(t_cub3D *game, int *side)
+int	get_hit(t_cub3D *game)
 {
 	int	hit;
+	int	side;
 
 	hit = 0;
 	game->door_hit = 0;
@@ -75,19 +76,20 @@ void	get_hit(t_cub3D *game, int *side)
 		{
 			game->ray.side_dist_x += game->ray.delta_dist_x;
 			game->ray.map_x += game->ray.step_x;
-			*side = 0;
+			side = 0;
 		}
 		else
 		{
 			game->ray.side_dist_y += game->ray.delta_dist_y;
 			game->ray.map_y += game->ray.step_y;
-			*side = 1;
+			side = 1;
 		}
 		if (game->map_arr[game->ray.map_y][game->ray.map_x] == '1' ||
 			(game->map_arr[game->ray.map_y][game->ray.map_x] == 'D'
-			&& check_door(game, *side)))
+			&& check_door(game, side)))
 			hit = 1;
 	}
+	return (side);
 }
 
 void	get_perp_wall_dist(t_cub3D *game, int side)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_cast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:46:37 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 10:22:05 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:22:09 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ int	get_sprite_dist(t_cub3D *game)
 
 void	get_sprite_coords(t_cub3D *game, t_spr_cast *info)
 {
-	info->draw_start_y = -info->s_height / 2 + game->window_height / 2;
+	info->draw_start_y = -info->s_height * 0.5 + game->half_height;
 	if (info->draw_start_y < 0)
 		info->draw_start_y = 0;
-	info->draw_end_y = info->s_height / 2 + game->window_height / 2;
+	info->draw_end_y = info->s_height * 0.5 + game->half_height;
 	if (info->draw_end_y >= game->window_height)
 		info->draw_end_y = game->window_height - 1;
-	info->draw_start_x = -info->s_width / 2 + info->s_screen_x;
+	info->draw_start_x = -info->s_width * 0.5 + info->s_screen_x;
 	if (info->draw_start_x < 0)
 		info->draw_start_x = 0;
-	info->draw_end_x = info->s_width / 2 + info->s_screen_x;
+	info->draw_end_x = info->s_width * 0.5 + info->s_screen_x;
 	if (info->draw_end_x >= game->window_width)
 		info->draw_end_x = game->window_width - 1;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_calc_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:49:36 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 10:00:02 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:57:26 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	get_draw_coords(t_cub3D *game)
 {
 	game->ray.line_height = game->window_height / game->ray.perp_wall_dist;
-	game->ray.draw_start = -game->ray.line_height / 2 + game->window_height / 2;
+	game->ray.draw_start = -game->ray.line_height * 0.5 + game->half_height;
 	if (game->ray.draw_start < 0)
 		game->ray.draw_start = 0;
-	game->ray.draw_end = game->ray.line_height / 2 + game->window_height / 2;
+	game->ray.draw_end = game->ray.line_height * 0.5 + game->half_height;
 	if (game->ray.draw_end >= game->window_height)
 		game->ray.draw_end = game->window_height - 1;
 }
@@ -40,8 +40,8 @@ void	get_tex_pos(t_cub3D *game, int side)
 	else if (side == 1 && game->ray.ray_dir_y < 0)
 		game->ray.tex_x = RESOLUTION - game->ray.tex_x - 1;
 	game->ray.step = 1.0 * RESOLUTION / game->ray.line_height;
-	game->ray.tex_pos = (game->ray.draw_start - game->window_height
-			/ 2 + game->ray.line_height / 2) * game->ray.step;
+	game->ray.tex_pos = (game->ray.draw_start - game->half_height
+		+ game->ray.line_height * 0.5) * game->ray.step;
 }
 
 void	put_compass(t_cub3D *game, int x, int y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_direction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:55:22 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 09:45:58 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:10:04 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ void	player_start_direction(int x, int y, t_cub3D *game)
 	if (game->map_arr[y][x] == 'N')
 	{
 		assign_dir(game, 0, -1);
-		assign_view(game, 0.90, 0);
+		assign_view(game, 0.60, 0);
 	}
 	if (game->map_arr[y][x] == 'E')
 	{
 		assign_dir(game, 1, 0);
-		assign_view(game, 0, 0.90);
+		assign_view(game, 0, 0.60);
 	}
 	if (game->map_arr[y][x] == 'S')
 	{
 		assign_dir(game, 0, 1);
-		assign_view(game, -0.90, 0);
+		assign_view(game, -0.60, 0);
 	}
 	if (game->map_arr[y][x] == 'W')
 	{
 		assign_dir(game, -1, 0);
-		assign_view(game, 0, -0.90);
+		assign_view(game, 0, -0.60);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 16:16:14 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/23 11:27:40 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	free_strings(t_cub3D *game)
 
 void	start_loop(t_cub3D *game)
 {
+	mlx_do_sync(game->mlx);
 	mlx_mouse_hide(game->mlx, game->window);
 	mlx_do_key_autorepeaton(game->mlx);
 	mlx_loop_hook(game->mlx, render, game);

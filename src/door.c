@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 11:42:39 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 10:17:17 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:51:07 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_door(t_cub3D *game, int side)
 			get_perp_wall_dist(game, side);
 			get_draw_coords(game);
 			get_tex_pos(game, side);
-			if (game->ray.tex_x < 130 || game->ray.tex_x > 512 - 125)
+			if (game->ray.tex_x < 130 || game->ray.tex_x > RESOLUTION - 125)
 				return (1);
 			if (!door->open)
 			{
@@ -81,10 +81,10 @@ void	get_door_colour(t_cub3D *game, t_image *img, int x, int y)
 {
 	int	colour;
 
-	game->ray.tex_y = (int)(game->ray.tex_pos) & (512 - 1);
+	game->ray.tex_y = (int)(game->ray.tex_pos) & (RESOLUTION - 1);
 	game->ray.tex_pos += game->ray.step;
-	colour = *(int *)(img->addr + game->ray.tex_y % 512 * img->line_size
-			+ (game->ray.tex_x) % 512 * (img->bpp / 8));
+	colour = *(int *)(img->addr + game->ray.tex_y % RESOLUTION * img->line_size
+			+ (game->ray.tex_x) % RESOLUTION * (img->bpp / 8));
 	my_mlx_pixel_put(&game->img, x, y, colour);
 }
 

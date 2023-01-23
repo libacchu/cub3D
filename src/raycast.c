@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/19 09:50:01 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:03:12 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	put_minimap(t_cub3D *game)
 		init_ray(game, x);
 		get_delta_dist(game);
 		get_side_dist(game);
-		get_hit(game, &side);
+		side = get_hit(game);
 		line_algo(game, game->player.pos_x * 34, game->player.pos_y * 34);
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->minimap.img,
@@ -52,7 +52,7 @@ void	raycast(t_cub3D *game)
 		init_ray(game, x);
 		get_delta_dist(game);
 		get_side_dist(game);
-		get_hit(game, &side);
+		side = get_hit(game);
 		get_perp_wall_dist(game, side);
 		get_draw_coords(game);
 		get_tex_pos(game, side);
