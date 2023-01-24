@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:15:28 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/23 11:17:25 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/24 11:42:15 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,11 @@ typedef struct s_cub3D
 	t_image		south_compass;
 	t_image		west_compass;
 
+	int			up_key;
+	int			down_key;
+	int			left_key;
+	int			right_key;
+
 	t_image		minimap;
 	t_image		minimap_wall;
 	t_image		minimap_floor;
@@ -305,7 +310,8 @@ void	pixel_put_image(t_cub3D *game, t_image *img, int x, int y);
 /* key_hook.c */
 void	toggle_shift(t_cub3D *game);
 void	toggle_tab(t_cub3D *game);
-int		ft_key(int keycode, t_cub3D *game);
+int		ft_key_press(int keycode, t_cub3D *game);
+int		ft_key_release(int keycode, t_cub3D *game);
 int		ft_mouse(t_cub3D *game);
 
 /* lines.c */

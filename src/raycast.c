@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:29:47 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/23 16:49:09 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/24 11:39:59 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	actuate_movement(t_cub3D *game)
+{
+	if (game->up_key)
+		move_player(game, game->player.dir_y, game->player.dir_x, 1);
+	if (game->down_key)
+		move_player(game, game->player.dir_y, game->player.dir_x, -1);
+	if (game->left_key)
+		move_player(game, game->player.view_y, game->player.view_x, -1);
+	if (game->right_key)
+		move_player(game, game->player.view_y, game->player.view_x, 1);
+}
 
 void	put_minimap(t_cub3D *game)
 {
@@ -65,6 +77,7 @@ void	raycast(t_cub3D *game)
 
 int	render(t_cub3D *game)
 {
+	actuate_movement(game);
 	if (!game->tab)
 		raycast(game);
 	else

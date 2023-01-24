@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:11:01 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/19 09:39:21 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:44:56 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,31 @@ void	toggle_tab(t_cub3D *game)
 		game->tab = 1;
 }
 
-int	ft_key(int keycode, t_cub3D *game)
+int	ft_key_release(int keycode, t_cub3D *game)
+{
+	if (keycode == KEY_W)
+		game->up_key = 0;
+	else if (keycode == KEY_A)
+		game->left_key = 0;
+	else if (keycode == KEY_S)
+		game->down_key = 0;
+	else if (keycode == KEY_D)
+		game->right_key = 0;
+	return (0);
+}
+
+int	ft_key_press(int keycode, t_cub3D *game)
 {
 	if (keycode == KEY_ESC)
 		ft_exit(NULL, game);
 	else if (keycode == KEY_W)
-		move_player(game, game->player.dir_y, game->player.dir_x, 1);
+		game->up_key = 1;
 	else if (keycode == KEY_A)
-		move_player(game, game->player.view_y, game->player.view_x, -1);
+		game->left_key = 1;
 	else if (keycode == KEY_S)
-		move_player(game, game->player.dir_y, game->player.dir_x, -1);
+		game->down_key = 1;
 	else if (keycode == KEY_D)
-		move_player(game, game->player.view_y, game->player.view_x, 1);
+		game->right_key = 1;
 	else if (keycode == KEY_LEFT)
 		rotate_player(game, -1);
 	else if (keycode == KEY_RIGHT)

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 22:47:07 by obibby            #+#    #+#             */
-/*   Updated: 2023/01/20 10:52:48 by libacchu         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:36:05 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	init_keys(t_cub3D *game)
+{
+	game->up_key = 0;
+	game->down_key = 0;
+	game->left_key = 0;
+	game->right_key = 0;
+	game->tab = 0;
+	game->shift = 0;
+}
 
 void	init_imgs(t_cub3D *game)
 {
@@ -36,6 +46,10 @@ void	init_game(t_cub3D *game)
 {
 	game->window = NULL;
 	init_imgs(game);
+	init_keys(game);
+	game->player.direct = 0;
+	game->player.pos_x = 0;
+	game->player.pos_y = 0;
 	game->ceiling = 0;
 	game->floor = 0;
 	game->sprite_total = 0;
@@ -49,11 +63,6 @@ void	init_game(t_cub3D *game)
 	game->minimap_size_x = 0;
 	game->minimap_size_y = 0;
 	game->once = 0;
-	game->player.direct = 0;
-	game->player.pos_x = 0;
-	game->player.pos_y = 0;
-	game->tab = 0;
-	game->shift = 0;
 	game->sprite_list = NULL;
 	game->sprite_arr = NULL;
 	game->sprite = NULL;

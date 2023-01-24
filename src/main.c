@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obibby <obibby@student.42.fr>              +#+  +:+       +#+        */
+/*   By: obibby <obibby@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:14:36 by libacchu          #+#    #+#             */
-/*   Updated: 2023/01/23 16:54:19 by obibby           ###   ########.fr       */
+/*   Updated: 2023/01/24 11:43:18 by obibby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	main(int argc, char **argv)
 	game.window = mlx_new_window(game.mlx, game.window_width,
 			game.window_height, "cub3D");
 	make_minimap(&game);
-	mlx_hook(game.window, 2, 1L << 0, ft_key, &game);
+	mlx_hook(game.window, 2, 1L << 0, ft_key_press, &game);
+	mlx_hook(game.window, 3, 1L << 1, ft_key_release, &game);
 	mlx_hook(game.window, 17, 0, ft_mouse, &game);
 	mlx_expose_hook(game.window, render, &game);
 	mlx_hook(game.window, 6, 1L << 6, mouse_move, &game);
